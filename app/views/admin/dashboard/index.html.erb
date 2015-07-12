@@ -1,1 +1,11 @@
 Admin panel index
+
+
+<h1>Categories</h1>
+<%= link_to "New", new_admin_category_path %>
+
+<ul>
+  <% @categories.each do |c| %>
+    <li><%= link_to c.name, admin_category_path(c) %> - <%= link_to "Edit", edit_admin_category_path(c) %> - <%= link_to "Delete", admin_category_path(c), method: :delete, data: { confirm: "Are you sure?" } %></li>
+  <% end %>
+</ul>

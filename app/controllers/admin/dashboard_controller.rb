@@ -3,15 +3,7 @@ class Admin::DashboardController < ApplicationController
   layout :admin_assets
 
   def index
+    @categories = Category.all
   end
-
-  private
-
-    def check_admin
-      unless current_user.is_admin?
-        redirect_to root_path
-        flash[:error] = 'You are not authorized to visit this page'
-      end
-    end
 
 end
