@@ -5,7 +5,9 @@ Rails.application.routes.draw do
   # admin
   namespace :admin do
     get 'dashboard', to: 'dashboard#index', as: 'dashboard'
-    resources :categories
+    resources :categories do
+      collection { post :sort }
+    end
   end
 
 end

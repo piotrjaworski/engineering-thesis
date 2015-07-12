@@ -4,8 +4,11 @@ Admin panel index
 <h1>Categories</h1>
 <%= link_to "New", new_admin_category_path %>
 
-<ul>
+<ul id="categories" data-update-url="<%= sort_admin_categories_url %>">
   <% @categories.each do |c| %>
-    <li><%= link_to c.name, admin_category_path(c) %> - <%= link_to "Edit", edit_admin_category_path(c) %> - <%= link_to "Delete", admin_category_path(c), method: :delete, data: { confirm: "Are you sure?" } %></li>
+    <%= content_tag_for :li, c do %>
+      <span class="handle">[drag]</span>
+      <%= link_to c.name, admin_category_path(c) %> - <%= link_to "Edit", edit_admin_category_path(c) %> - <%= link_to "Delete", admin_category_path(c), method: :delete, data: { confirm: "Are you sure?" } %>
+    <% end %>
   <% end %>
 </ul>

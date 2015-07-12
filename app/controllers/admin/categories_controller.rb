@@ -45,6 +45,11 @@ class Admin::CategoriesController < ApplicationController
   def show
   end
 
+  def sort
+    params[:category].each_with_index { |id, index| Category.update(id, { position: index + 1 }) }
+    render nothing: true
+  end
+
   private
 
     def category_attributes
