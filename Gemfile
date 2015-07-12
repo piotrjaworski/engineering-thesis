@@ -16,6 +16,7 @@ gem 'cancancan', '~> 1.10'
 
 # styles
 gem 'bootstrap-sass', '~> 3.3.5'
+gem 'adminlte-rails'
 
 group :development do
   gem 'better_errors'
