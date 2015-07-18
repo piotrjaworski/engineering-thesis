@@ -14,4 +14,8 @@ class Topic < ActiveRecord::Base
     posts.each { |p| p.user_id = user.id }
   end
 
+  def new?
+    (Time.parse(DateTime.now.to_s) - Time.parse(created_at.to_s))/3600 < 6 ? true : false
+  end
+
 end

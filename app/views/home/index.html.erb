@@ -13,8 +13,25 @@
 <%= link_to "New Topic", new_topic_path, class: 'btn btn-success', id: 'start_new_topic', remote: true %>
 
 <div id="topics_list">
-  <%= render partial: 'topics_list', locals: { topics: @topics } %>
+  <table class="table table-hover" id="topics_table">
+    <thead>
+      <tr>
+        <th>Topic</th>
+        <th>Category</th>
+        <th>Users</th>
+        <th>Posts</th>
+        <th>Views</th>
+        <th>Activity</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render partial: 'topics_list', locals: { topics: @topics } %>
+    </tbody>
+  </tbody>
+  </table>
 </div>
+
+<%= will_paginate @topics %>
 
 <div class="modal fade" id="modal">
 </div>

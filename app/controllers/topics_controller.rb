@@ -9,7 +9,7 @@ class TopicsController < ApplicationController
     @topic = current_user.topics.new(topic_params)
     @topic.assing_user(current_user)
     if @topic.save
-      @topics = Topic.all
+      @topics = Topic.page(params[:page]).per_page(30)
       flash[:success] = "Your topic has been created"
       render :hide_form
     end
