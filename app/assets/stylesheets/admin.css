@@ -1,9 +1,7 @@
 /*
- *= require bootstrap
- *= require font-awesome
- *= require ionicons
- *= require admin-lte
  *= require jquery-ui
  *= require dashboard
  *= require_self
  */
+@import "bootstrap-sprockets";
+@import "bootstrap";

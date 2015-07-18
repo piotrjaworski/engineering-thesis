@@ -1,7 +1,6 @@
 //= require jquery
 //= require jquery_ujs
-//= require jquery-ui
+//= require jquery-ui/sortable
 //= require turbolinks
-//= require bootstrap.min
+//= require bootstrap-sprockets
 //= require categories
-//= require admin-lte

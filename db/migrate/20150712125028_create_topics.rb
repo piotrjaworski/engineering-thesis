@@ -4,7 +4,7 @@ class CreateTopics < ActiveRecord::Migration
       t.string :name
       t.string :description
       t.integer :creator_id
-      t.boolean :blocked
+      t.boolean :blocked, default: false
       t.references :category, index: true
 
       t.timestamps null: false

@@ -4,6 +4,9 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  has_many :topics, class_name: 'Topic', foreign_key: 'creator_id'
+  has_many :posts
+
   def role?
     if is_admin?
       "Admin"

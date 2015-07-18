@@ -8,5 +8,13 @@
   <%= link_to "Register", new_user_registration_path %>
 <% end %>
 
-<h1>Home#index</h1>
-<p>Find me in app/views/home/index.html.erb</p>
+<br>
+
+<%= link_to "New Topic", new_topic_path, class: 'btn btn-success', id: 'start_new_topic', remote: true %>
+
+<div id="topics_list">
+  <%= render partial: 'topics_list', locals: { topics: @topics } %>
+</div>
+
+<div class="modal fade" id="modal">
+</div>
