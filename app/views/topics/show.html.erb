@@ -1,0 +1,12 @@
+<h2><%= @topic.name %></h2>
+<p><%= @topic.category.name %>
+
+<% @topic.posts.each do |post| %>
+  <%= render partial: "post", locals: { post: post } %>
+<% end %>
+
+<% if user_signed_in? %>
+  <%= link_to "Reply", new_topic_post_path(@topic), class: 'btn btn-success' %>
+<% else %>
+  <%= link_to "Login to Add Post", new_topic_post_path(@topic), class: 'btn btn-success' %>
+<% end %>

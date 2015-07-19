@@ -10,12 +10,20 @@ class Topic < ActiveRecord::Base
     posts.count
   end
 
+  def new?
+    (Time.parse(DateTime.now.to_s) - Time.parse(created_at.to_s))/3600 < 6 ? true : false
+  end
+
   def assing_user(user)
     posts.each { |p| p.user_id = user.id }
   end
 
-  def new?
-    (Time.parse(DateTime.now.to_s) - Time.parse(created_at.to_s))/3600 < 6 ? true : false
+  def self.build_new(user, params)
+    topic = user.topics.new(params)
+    topic.assing_user(user)
+    topic
   end
+
+  private
 
 end

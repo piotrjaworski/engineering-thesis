@@ -3,7 +3,9 @@ Rails.application.routes.draw do
   root 'home#index'
 
   # page
-  resources :topics
+  resources :topics do
+    resources :posts, only: [:new, :create]
+  end
 
   # admin
   namespace :admin do

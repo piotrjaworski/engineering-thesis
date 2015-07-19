@@ -1,0 +1,16 @@
+<table class="table table-hover" id="topics_table">
+  <thead>
+    <tr>
+      <th>Topic</th>
+      <th>Category</th>
+      <th>Users</th>
+      <th>Posts</th>
+      <th>Views</th>
+      <th>Activity</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= render partial: 'home/topics_list', locals: { topics: @topics } %>
+  </tbody>
+  </tbody>
+</table>

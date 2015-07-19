@@ -1,6 +1,19 @@
+<script>
+  $(document).ready(function() {
+    $("td[data-link]").click(function() {
+      window.location = $("td[data-link]").data("link");
+    })
+  });
+</script>
+
 <% topics.each do |t| %>
   <tr>
-    <td><%= t.name %></td>
+    <td data-link="<%= topic_path(t) %>" class="td_link">
+      <%= t.name %>
+      <% if t.new? %>
+        <span class="label label-primary">New</span>
+      <% end %>
+    </td>
     <td><%= t.category.name %></td>
     <td><%= t.user.email %></td>
     <td><%= t.posts_count %></td>

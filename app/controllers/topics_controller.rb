@@ -1,13 +1,19 @@
 class TopicsController < ApplicationController
+  before_action :authenticate_user!, except: [:show]
+  before_action :set_topic, only: [:show]
 
   def new
-    @topic = Topic.new
-    @topic.posts.build
+    respond_to do |format|
+      format.js do
+        @topic = Topic.new
+        @topic.posts.build
+      end
+      format.html { redirect_to root_path }
+    end
   end
 
   def create
-    @topic = current_user.topics.new(topic_params)
-    @topic.assing_user(current_user)
+    @topic = Topic.build_new(current_user, topic_params)
     if @topic.save
       @topics = Topic.page(params[:page]).per_page(30)
       flash[:success] = "Your topic has been created"
@@ -15,10 +21,17 @@ class TopicsController < ApplicationController
     end
   end
 
+  def show
+  end
+
   private
 
     def topic_params
       params.require(:topic).permit(:name, :description, :category_id, { posts_attributes: [:content] })
+    end
+
+    def set_topic
+      @topic = Topic.find(params[:id])
     end
 
 end
