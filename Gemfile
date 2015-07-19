@@ -23,6 +23,7 @@ gem 'adminlte-rails'
 # other
 gem 'simple_form'
 gem 'will_paginate'
+gem 'tinymce-rails'
 
 group :development do
   gem 'better_errors'
