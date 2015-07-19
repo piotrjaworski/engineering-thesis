@@ -1,3 +1,24 @@
+<script>
+  $(document).ready(function() {
+    $('#loading_gif').hide();
+    if ($('.pagination').length) {
+      $(window).scroll(function() {
+        var url = $('.pagination .next_page').attr('href');
+        if (url && $(window).scrollTop() > $(document).height() - $(window).height() - 50) {
+          $('.pagination').hide();
+          $('#loading_gif').show();
+          $.getScript(url);
+        }
+      });
+      $(window).scroll();
+
+      $(".clickable td[data-link]").click(function() {
+        window.location = $(".clickable td[data-link]").data("link");
+      });
+    }
+  });
+</script>
+
 <%= link_to "New Topic", new_topic_path, class: 'btn btn-success pull-right', id: 'start_new_topic', remote: true if user_signed_in? %>
 
 <div id="topics_list">

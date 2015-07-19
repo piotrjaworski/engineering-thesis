@@ -1,13 +1,5 @@
-<script>
-  $(document).ready(function() {
-    $("td[data-link]").click(function() {
-      window.location = $("td[data-link]").data("link");
-    })
-  });
-</script>
-
 <% topics.each do |t| %>
-  <tr>
+  <tr class="clickable">
     <td data-link="<%= topic_path(t) %>" class="td_link">
       <%= t.name %>
       <% if t.new? %>
