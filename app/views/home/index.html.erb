@@ -12,8 +12,8 @@
       });
       $(window).scroll();
 
-      $(".clickable td[data-link]").click(function() {
-        window.location = $(".clickable td[data-link]").data("link");
+      $('.td_link').on("click", function() {
+        document.location = $(this).attr('data-link');
       });
     }
   });

@@ -7,6 +7,11 @@ class User < ActiveRecord::Base
   has_many :topics, class_name: 'Topic', foreign_key: 'creator_id'
   has_many :posts
 
+  def image_url
+    gravatar_id = Digest::MD5::hexdigest(self.email).downcase
+    "http://gravatar.com/avatar/#{gravatar_id}.png"
+  end
+
   def role?
     if is_admin?
       "Admin"

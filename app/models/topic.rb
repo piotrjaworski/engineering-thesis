@@ -24,6 +24,12 @@ class Topic < ActiveRecord::Base
     topic
   end
 
+  def build_post(user, params)
+    post = self.posts.new(params)
+    post.user = user
+    post
+  end
+
   private
 
 end
