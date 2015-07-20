@@ -7,6 +7,9 @@ Rails.application.routes.draw do
     resources :posts, only: [:new, :create]
   end
 
+  # profile
+  resources :profiles, only: [:update]
+
   # admin
   namespace :admin do
     get 'dashboard', to: 'dashboard#index', as: 'dashboard'

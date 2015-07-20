@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
 
   def image_url
     gravatar_id = Digest::MD5::hexdigest(self.email).downcase
-    "http://gravatar.com/avatar/#{gravatar_id}.png"
+    "http://gravatar.com/avatar/#{gravatar_id}.png&?s=200"
   end
 
   def role?

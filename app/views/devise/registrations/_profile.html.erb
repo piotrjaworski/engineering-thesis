@@ -1,0 +1,10 @@
+<%= image_tag current_user.image_url %>
+
+<%= simple_form_for current_user, url: profile_path(id: current_user.id), method: :put do |f| %>
+  <%= f.input :username, required: true %>
+  <%= f.input :full_name, required: false %>
+  <%= f.input :location, required: false %>
+  <%= f.input :webpage, required: false %>
+  <%= f.input :signature, required: false %>
+  <%= f.submit "Update profile", class: 'btn btn-success' %>
+<% end %>

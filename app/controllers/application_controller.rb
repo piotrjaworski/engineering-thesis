@@ -9,9 +9,13 @@ class ApplicationController < ActionController::Base
 
   def check_admin
     unless current_user.is_admin?
-      redirect_to root_path
-      flash[:error] = 'You are not authorized to visit this page'
+      redirect_with_message(root_path, "You are not authorized to visit this page", "error")
     end
+  end
+
+  def redirect_with_message(path, message, type)
+    redirect_to path
+    flash[type] = "#{message}"
   end
 
 end

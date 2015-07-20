@@ -1,63 +1,40 @@
+<script>
+  $(document).ready(function() {
+    var link = window.location.href;
+    if (link.match(/#+\w+/) != null) {
+      var tabId = link.match(/#+\w+/)[0];
+      $("a[href=" + tabId + "]").click();
+    }
+  });
+</script>
+
+
 <div class="row">
   <div class="col-md-2 col-md-offset-1"> <!-- required for floating -->
     <!-- Nav tabs -->
     <ul class="nav nav-tabs tabs-left">
-      <li class="active"><a href="#home" data-toggle="tab">Password</a></li>
-      <li><a href="#profile" data-toggle="tab">Profile</a></li>
+      <li class="active"><a href="#profile" data-toggle="tab">Profile</a></li>
+      <li><a href="#password" data-toggle="tab">Password</a></li>
       <li><a href="#messages" data-toggle="tab">Notifications</a></li>
       <li><a href="#settings" data-toggle="tab">Delete account</a></li>
     </ul>
   </div>
 
   <div class="col-xs-8">
-      <!-- Tab panes -->
-      <div class="tab-content">
-        <div class="tab-pane active" id="home">
-          <div class="row">
-            <div class="col-md-10">
-              <h2>Change password</h2>
-
-              <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-                <%= devise_error_messages! %>
-                <%= render partial: "shared/flash_messages" %>
-
-                <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-                  <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-                <% end %>
-
-                <div class="form-group">
-                  <%= f.label :current_password %><br />
-                  <%= f.password_field :current_password, autocomplete: "off", class: 'form-control', required: true %>
-                </div>
-
-                <div class="form-group">
-                  <%= f.label "New password" %><br />
-                  <%= f.password_field :password, autocomplete: "off", class: 'form-control', required: true %>
-                </div>
-
-                <div class="form-group">
-                  <%= f.label "New password confirmation" %><br />
-                  <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control', required: true %>
-                </div>
-
-                <div class="actions">
-                  <%= f.submit "Update", class: 'btn btn-success' %>
-                </div>
-              <% end %>
-            </div>
-          </div>
-        </div>
-        <div class="tab-pane" id="profile"><%= image_tag current_user.image_url %></div>
-        <div class="tab-pane" id="messages">Messages Tab.</div>
-        <div class="tab-pane" id="settings">
-          <h3>Delete account</h3>
-          <p>Deleting your account is permanent. Sorry to see you go, if you have any feedback you can contact us.</p>
-
-          <div class="alert alert-warning" role="alert">Deleting this account will permanently remove all posts and topics created by you.</div>
-
-          <%= button_to "Delete account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: 'btn btn-danger ' %>
-        </div>
+    <%= render partial: "shared/flash_messages" %>
+    <!-- Tab panes -->
+    <div class="tab-content">
+      <div class="tab-pane active" id="profile">
+        <%= render partial: "profile" %>
       </div>
+      <div class="tab-pane" id="password">
+        <%= render partial: "password" %>
+      </div>
+      <div class="tab-pane" id="messages">Messages Tab.</div>
+      <div class="tab-pane" id="settings">
+        <%= render partial: "delete" %>
+      </div>
+    </div>
   </div>
 </div>
 
