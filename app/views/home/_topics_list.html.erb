@@ -9,7 +9,7 @@
     <td><%= t.category.name %></td>
     <td><%= t.user.email %></td>
     <td><%= t.posts_count %></td>
-    <td><%= t.posts_count %></td>
+    <td><%= t.views == nil ? 0 : t.views %></td>
     <td><%= t.created_at %></td>
   </tr>
 <% end %>

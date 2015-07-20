@@ -84,7 +84,11 @@ GEM
     execjs (2.5.2)
     globalid (0.3.5)
       activesupport (>= 4.1.0)
+    httpclient (2.6.0.1)
     i18n (0.7.0)
+    impressionist (1.5.1)
+      httpclient (~> 2.2)
+      nokogiri (~> 1.5)
     jbuilder (2.3.1)
       activesupport (>= 3.0.0, < 5)
       multi_json (~> 1.2)
@@ -221,6 +225,7 @@ DEPENDENCIES
   capybara
   coffee-rails (~> 4.1.0)
   devise
+  impressionist
   jbuilder (~> 2.0)
   jquery-easing-rails
   jquery-rails

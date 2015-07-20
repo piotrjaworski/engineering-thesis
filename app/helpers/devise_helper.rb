@@ -1,6 +1,6 @@
 module DeviseHelper
   def devise_error_messages!
-    return "<br>".html_safe if resource.errors.empty?
+    return "" if resource.errors.empty?
 
     resource.errors.full_messages.each do |msg|
       concat(content_tag(:div, msg, class: "alert alert-danger alert-dismissible", role: 'alert') do

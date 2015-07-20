@@ -7,9 +7,9 @@ class User < ActiveRecord::Base
   has_many :topics, class_name: 'Topic', foreign_key: 'creator_id'
   has_many :posts
 
-  def image_url
+  def image_url(size = 200)
     gravatar_id = Digest::MD5::hexdigest(self.email).downcase
-    "http://gravatar.com/avatar/#{gravatar_id}.png&?s=200"
+    "http://gravatar.com/avatar/#{gravatar_id}.png&?s=#{size}"
   end
 
   def role?

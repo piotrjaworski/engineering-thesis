@@ -1,6 +1,7 @@
 class TopicsController < ApplicationController
   before_action :authenticate_user!, except: [:show]
   before_action :set_topic, only: [:show]
+  impressionist actions: [:show]
 
   def new
     respond_to do |format|
@@ -22,6 +23,7 @@ class TopicsController < ApplicationController
   end
 
   def show
+    impressionist(@topic)
   end
 
   private

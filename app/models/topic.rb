@@ -1,5 +1,6 @@
 class Topic < ActiveRecord::Base
   default_scope { order("created_at DESC") }
+  is_impressionable counter_cache: true, column_name: :views
 
   belongs_to :category
   belongs_to :user, class_name: 'User', foreign_key: 'creator_id'

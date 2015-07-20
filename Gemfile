@@ -24,6 +24,7 @@ gem 'adminlte-rails'
 gem 'simple_form'
 gem 'will_paginate'
 gem 'tinymce-rails'
+gem 'impressionist'
 
 group :development do
   gem 'better_errors'
