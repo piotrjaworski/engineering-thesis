@@ -67,7 +67,7 @@ ActiveRecord::Schema.define(version: 20150720215251) do
     t.integer  "category_id"
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
-    t.integer  "views"
+    t.integer  "views",       default: 0
   end
 
   add_index "topics", ["category_id"], name: "index_topics_on_category_id", using: :btree

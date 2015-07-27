@@ -3,5 +3,4 @@ $('#topics_table tbody').append('<%= j(render partial: 'topics_list', locals: { 
   $('.pagination').replaceWith('<%= j will_paginate(@topics) %>');
 <% else %>
   $('.pagination').remove();
-  $('#loading_gif').remove();
 <% end %>

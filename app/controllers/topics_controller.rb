@@ -17,7 +17,7 @@ class TopicsController < ApplicationController
     @topic = Topic.build_new(current_user, topic_params)
     if @topic.save
       @topics = Topic.page(params[:page]).per_page(30)
-      flash[:success] = "Your topic has been created"
+      flash.now[:success] = "Your topic has been created"
       render :hide_form
     end
   end

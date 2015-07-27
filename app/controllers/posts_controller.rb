@@ -9,11 +9,10 @@ class PostsController < ApplicationController
   def create
     @post = @topic.build_post(current_user, post_params)
     if @post.save
-      redirect_to @topic
-      flash[:success] = "Your reply has been posted"
+      redirect_with_message(@topic, "Your reply has been posted.", "success")
     else
       render :new
-      flash[:error] = "Please fill all required fields"
+      flash.now[:error] = "Please fill all required fields"
     end
   end
 
