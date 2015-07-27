@@ -1,9 +1,3 @@
-$(document).ready(function() {
-  infinity_scroll();
-  clickable_link();
-});
-
-
 var infinity_scroll = function() {
   if ($('.pagination').length) {
     $(window).scroll(function() {
@@ -21,5 +15,15 @@ var infinity_scroll = function() {
 var clickable_link = function() {
   $('.td_link').on("click", function() {
     document.location = $(this).attr('data-link');
+  });
+}
+
+var header_scroll = function() {
+  $(window).scroll(function() {
+    if ($(".navbar").offset().top > 50) {
+      $(".navbar-fixed-top").addClass("top-nav-collapse");
+    } else {
+      $(".navbar-fixed-top").removeClass("top-nav-collapse");
+    }
   });
 }

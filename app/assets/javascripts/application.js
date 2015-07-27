@@ -1,9 +1,11 @@
 //= require jquery
-//= require jquery_ujs
-//= require jquery.easing
 //= require jquery.turbolinks
 //= require turbolinks
 //= require bootstrap-sprockets
-//= require tinymce
 //= require index
-//= require header
+
+$(document).ready(function() {
+  header_scroll();
+  infinity_scroll();
+  clickable_link();
+});

@@ -19,6 +19,8 @@ class TopicsController < ApplicationController
       @topics = Topic.page(params[:page]).per_page(30)
       flash.now[:success] = "Your topic has been created"
       render :hide_form
+    else
+      render :new
     end
   end
 
