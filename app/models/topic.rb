@@ -7,6 +7,8 @@ class Topic < ActiveRecord::Base
   has_many :posts, dependent: :destroy
   accepts_nested_attributes_for :posts, reject_if: proc { |attributes| attributes['content'].blank? }
 
+  validates :name, presence: true
+
   def posts_count
     posts.count
   end
