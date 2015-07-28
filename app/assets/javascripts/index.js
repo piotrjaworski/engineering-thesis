@@ -1,5 +1,5 @@
-var infinity_scroll = function() {
-  if ($('.pagination').length) {
+var infinity_scroll_main_page = function() {
+  if ($('#main-pagination .pagination').length) {
     $(window).scroll(function() {
       var url;
       url = $('.pagination .next_page').attr('href');

@@ -36,6 +36,7 @@ class TopicsController < ApplicationController
 
     def set_topic
       @topic = Topic.find(params[:id])
+      @posts = @topic.posts
     end
 
 end

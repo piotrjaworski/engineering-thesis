@@ -25,6 +25,7 @@ gem 'simple_form'
 gem 'will_paginate'
 gem 'tinymce-rails'
 gem 'impressionist'
+gem 'paperclip', '~> 4.3'
 
 group :development do
   gem 'better_errors'
@@ -33,8 +34,6 @@ end
 
 group :development, :test do
   gem 'pry-byebug'
-  gem 'web-console', '~> 2.0'
-  gem 'spring'
   gem 'rspec-rails', '~> 3.0'
   gem 'capybara'
 end

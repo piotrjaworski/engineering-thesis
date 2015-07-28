@@ -4,7 +4,9 @@
   <%= render partial: "topics_content", locals: { topics: @topics } %>
 </div>
 
-<%= will_paginate @topics %>
+<div id="main-pagination">
+  <%= will_paginate @topics %>
+</div>
 
 <div class="modal fade" id="modal">
 </div>

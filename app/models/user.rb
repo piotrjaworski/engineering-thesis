@@ -1,5 +1,4 @@
 class User < ActiveRecord::Base
-  # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
@@ -10,10 +9,10 @@ class User < ActiveRecord::Base
   validates_presence_of :full_name, :username
   validates_uniqueness_of :username
 
-  def image_url(size = 200)
-    gravatar_id = Digest::MD5::hexdigest(self.email).downcase
-    "http://gravatar.com/avatar/#{gravatar_id}.png&?s=#{size}"
-  end
+  has_attached_file :avatar, styles: { medium: "300x300>", thumb: "120x120>", small: "60x60" }, default_url: "/images/:style/missing.png"
+  validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
+
+  before_create :create_avatar
 
   def user_errors
     errors.any? ? errors.full_messages.join("<br>".html_safe) : nil
@@ -41,6 +40,11 @@ class User < ActiveRecord::Base
 
   def is_user?
     role == 3
+  end
+
+  def create_avatar
+    gravatar = Gravatar.new(email)
+    self.avatar = gravatar.get_image(400)
   end
 
 end
