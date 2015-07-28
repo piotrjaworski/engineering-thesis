@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
 
   def redirect_with_message(path, message, type)
     redirect_to path
-    flash.now[type] = "#{message}"
+    flash[type] = "#{message}"
   end
 
 end

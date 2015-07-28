@@ -6,7 +6,7 @@ class ProfilesController < ApplicationController
     if @user.update_attributes(user_params)
       redirect_with_message(edit_user_registration_path, "Your profile has been updated.", "success")
     else
-      redirect_with_message(edit_user_registration_path, "Please fill all required fields.", "error")
+      redirect_with_message(edit_user_registration_path, @user.user_errors, "error")
     end
   end
 
