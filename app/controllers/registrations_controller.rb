@@ -1,4 +1,5 @@
 class RegistrationsController < Devise::RegistrationsController
+  before_filter :configure_permitted_parameters, only: [:create]
 
   # it's just update password method in fact
   def update
@@ -12,8 +13,7 @@ class RegistrationsController < Devise::RegistrationsController
     yield resource if block_given?
     if resource_updated
       if is_flashing_format?
-        flash_key = update_needs_confirmation?(resource, prev_unconfirmed_email) ?
-          :update_needs_confirmation : :updated
+        flash_key = update_needs_confirmation?(resource, prev_unconfirmed_email) ? :update_needs_confirmation : :updated
         set_flash_message :success, flash_key
       end
       sign_in resource_name, resource, bypass: true
@@ -28,6 +28,10 @@ class RegistrationsController < Devise::RegistrationsController
 
     def after_update_path_for(resource)
       edit_user_registration_path + "#password"
+    end
+
+    def configure_permitted_parameters
+      devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:username, :full_name, :email, :password) }
     end
 
 end
