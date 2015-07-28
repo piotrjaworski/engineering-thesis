@@ -45,6 +45,7 @@ class User < ActiveRecord::Base
   def create_avatar
     gravatar = Gravatar.new(email)
     self.avatar = gravatar.get_image(400)
+    self.gravatar = true
   end
 
 end

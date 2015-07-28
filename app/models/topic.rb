@@ -33,6 +33,4 @@ class Topic < ActiveRecord::Base
     post
   end
 
-  private
-
 end
