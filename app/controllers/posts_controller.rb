@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   before_action :set_topic
+  before_action :set_post, only: [:edit, :update]
   before_action :authenticate_user!
 
   def new
@@ -16,7 +17,24 @@ class PostsController < ApplicationController
     end
   end
 
+  def edit
+  end
+
+  def update
+    binding.pry
+    if @post.update(post_params)
+      redirect_to @topic
+      flash[:success] = "Post has been successfuly updated"
+    else
+      render :edit
+    end
+  end
+
   private
+
+    def set_post
+      @post = Post.find(params[:post])
+    end
 
     def set_topic
       @topic = Topic.find(params[:topic_id])

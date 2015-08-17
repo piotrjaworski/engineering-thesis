@@ -1,0 +1,5 @@
+<%= simple_form_for @post, url: topic_posts_path(topic_id: @topic.id), method: :post do |p| %>
+  <%= p.input :content, as: :text, input_html: { class: "tinymce", rows: 20, cols: 120 }, label: false %>
+  <%= p.submit "Reply", class: 'btn btn-success' %>
+<% end %>
+<%= tinymce %>

@@ -1,9 +1,12 @@
 <div class="row single-post">
-  <div class="col-md-1"><%= image_tag post.user.image_url(50) %></div>
+  <div class="col-md-1"><%= image_tag post.user.avatar(50) %></div>
   <div class="col-md-11">
     <div class="row">
       <div class="col-md-6"><span class="pull-left"><strong><%= post.user.username %></strong></span></div>
-      <div class="col-md-6"><span class="pull-right"><%= time_ago_in_words(post.created_at) %> ago</span></div>
+      <div class="col-md-6">
+        <span class="pull-right"><%= time_ago_in_words(post.created_at) %> ago</span>
+        <%= link_to "Edit", edit_topic_post_path(topic_id: @topic.id, post: post.id) %>
+      </div>
     </div>
     <br>
     <div class="row">

@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   # page
   resources :topics do
-    resources :posts, only: [:new, :create]
+    resources :posts, only: [:new, :edit, :create, :update]
   end
 
   # profile
