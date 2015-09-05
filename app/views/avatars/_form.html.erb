@@ -1,0 +1,29 @@
+<script>
+  $("#user_avatar").change(function(){
+    $("#image_preview").show();
+    readURL(this, '#image_preview_image');
+  });
+</script>
+
+<%= form_for current_user, url: avatars_update_path, html: { multipart: true }, method: :post do |f| %>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h2 class="modal-title">Update avatar:</h4>
+      </div>
+      <div class="modal-body">
+        <%= f.file_field :avatar, as: :file %>
+        <%= f.hidden_field :gravatar, value: false %>
+      </div>
+      <div id="image_preview">
+        <h5>Image preview:</h5>
+        <img id="image_preview_image" src="#" alt="your image" />
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        <%= f.submit "Update Avatar", class: 'btn btn-success' %>
+      </div>
+    </div>
+  </div>
+<% end %>

@@ -1,7 +1,6 @@
 class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable
 
   has_many :topics, class_name: 'Topic', foreign_key: 'creator_id'
   has_many :posts
@@ -12,7 +11,7 @@ class User < ActiveRecord::Base
   has_attached_file :avatar, styles: { medium: "300x300>", thumb: "120x120>", small: "60x60" }, default_url: "/images/:style/missing.png"
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
 
-  before_create :create_avatar
+  before_create :get_avatar
 
   def user_errors
     errors.any? ? errors.full_messages.join("<br>".html_safe) : nil
@@ -42,7 +41,7 @@ class User < ActiveRecord::Base
     role == 3
   end
 
-  def create_avatar
+  def get_avatar
     gravatar = Gravatar.new(email)
     self.avatar = gravatar.get_image(400)
     self.gravatar = true

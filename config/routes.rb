@@ -9,10 +9,15 @@ Rails.application.routes.draw do
 
   # profile
   resources :profiles, only: [:update]
+  namespace :avatars do
+    post :reload
+    get :edit
+    post :update
+  end
 
   # admin
   namespace :admin do
-    get 'dashboard', to: 'dashboard#index', as: 'dashboard'
+    get :dashboard, to: 'dashboard#index', as: :dashboard
     resources :categories do
       collection { post :sort }
     end

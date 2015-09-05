@@ -1,23 +1,5 @@
-<div class="row">
-  <h2>Your avatar:</h2>
-  <div class="col-md-2">
-    <%= image_tag current_user.avatar(:thumb) %>
-  </div>
-  <div class="col-md-4">
-    <% if current_user.gravatar %>
-      We're currently using your <%= link_to "Gravatar", "http://gravatar.com", target: :blank %>.
-      <%= link_to "Reload Gravatar", "#", class: 'btn btn-primary' %>
-      <p></p>
-    <% else %>
-      Your avatar:
-      <%= link_to "Use Gravatar", "#",  class: 'btn btn-primary' %>
-    <% end %>
-    <!-- change to update avatar path - modal? -->
-    <%= simple_form_for current_user, url: profile_path(id: current_user.id), method: :put do |f| %>
-      <%= f.input :avatar, as: :file %>
-      <%= f.submit "Update Avatar", class: 'btn btn-success' %>
-    <% end %>
-  </div>
+<div class="row" id="avatar_section">
+  <%= render partial: "avatar_section" %>
 </div>
 
 <div class="row">

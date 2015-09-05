@@ -92,3 +92,14 @@
     color: #777;
     font-style: italic;
 }
+
+/* PROFILE */
+
+#image_preview {
+    display: none;
+    padding: 0px 15px 0px 15px;
+}
+
+#image_preview_image {
+    max-width: 300px;
+}
