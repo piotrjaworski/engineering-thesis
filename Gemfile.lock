@@ -65,13 +65,6 @@ GEM
     cocaine (0.5.7)
       climate_control (>= 0.0.3, < 1.0)
     coderay (1.1.0)
-    coffee-rails (4.1.0)
-      coffee-script (>= 2.2.0)
-      railties (>= 4.0.0, < 5.0)
-    coffee-script (2.4.1)
-      coffee-script-source
-      execjs
-    coffee-script-source (1.9.1.1)
     columnize (0.9.0)
     debug_inspector (0.0.2)
     devise (3.5.1)
@@ -98,9 +91,6 @@ GEM
       rails-dom-testing (~> 1.0)
       railties (>= 4.2.0)
       thor (>= 0.14, < 2.0)
-    jquery-turbolinks (2.1.0)
-      railties (>= 3.1.0)
-      turbolinks
     json (1.8.3)
     loofah (2.0.2)
       nokogiri (>= 1.5.9)
@@ -206,8 +196,6 @@ GEM
     tilt (1.4.1)
     tinymce-rails (4.1.6)
       railties (>= 3.1.1)
-    turbolinks (2.5.3)
-      coffee-rails
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
     uglifier (2.7.1)
@@ -232,7 +220,6 @@ DEPENDENCIES
   impressionist
   jbuilder (~> 2.0)
   jquery-rails
-  jquery-turbolinks
   paperclip (~> 4.3)
   pg
   pg_search
@@ -243,6 +230,5 @@ DEPENDENCIES
   sdoc (~> 0.4.0)
   simple_form
   tinymce-rails
-  turbolinks
   uglifier (>= 1.3.0)
   will_paginate

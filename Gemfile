@@ -17,8 +17,6 @@ gem 'cancancan', '~> 1.10'
 gem 'sass-rails', '~> 5.0'
 gem 'bootstrap-sass', '~> 3.3.5'
 gem 'jquery-rails'
-gem 'jquery-turbolinks'
-gem 'turbolinks'
 
 # other
 gem 'simple_form'
