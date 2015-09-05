@@ -1,13 +1,12 @@
 class Post < ActiveRecord::Base
   belongs_to :user
   belongs_to :topic
-  before_update :increase_edit_count
+  before_update :increase_edited_count
 
   default_scope { order("created_at ASC") }
 
-  def increase_edit_count
-    binding.pry
-    self.edited_count += 1
+  def increase_edited_count
+    self.edited_count = self.edited_count + 1 unless new_record?
   end
 
 end

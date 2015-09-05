@@ -1,16 +1,25 @@
 <div class="row single-post">
-  <div class="col-md-1"><%= image_tag post.user.avatar(50) %></div>
+  <div class="col-md-1"><%= image_tag post.user.avatar(:small) %></div>
   <div class="col-md-11">
     <div class="row">
       <div class="col-md-6"><span class="pull-left"><strong><%= post.user.username %></strong></span></div>
       <div class="col-md-6">
         <span class="pull-right"><%= time_ago_in_words(post.created_at) %> ago</span>
-        <%= link_to "Edit", edit_topic_post_path(topic_id: @topic.id, post: post.id) %>
+        <%= link_to "Edit", edit_topic_post_path(post, topic_id: post.topic_id) %>
       </div>
     </div>
     <br>
     <div class="row">
       <div class="col-md-12"><%=raw post.content %></div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <% if post.edited_count > 0 %>
+          <p class="edited-post-notice">
+            This post has been edited <%= post.edited_count %> <%= 'time'.pluralize(post.edited_count) %>. Last at <%= post.updated_at %>.
+          </p>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>

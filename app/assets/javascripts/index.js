@@ -1,4 +1,4 @@
-var infinity_scroll_main_page = function() {
+function infinity_scroll_main_page() {
   if ($('#main-pagination .pagination').length) {
     $(window).scroll(function() {
       var url;
@@ -12,13 +12,13 @@ var infinity_scroll_main_page = function() {
   }
 }
 
-var clickable_link = function() {
-  $('.td_link').on("click", function() {
+function clickable_link() {
+  $(document).on("click", '.td_link', function() {
     document.location = $(this).attr('data-link');
   });
 }
 
-var header_scroll = function() {
+function header_scroll() {
   $(window).scroll(function() {
     if ($(".navbar").offset().top > 50) {
       $(".navbar-fixed-top").addClass("top-nav-collapse");
