@@ -6,14 +6,11 @@
   <% if current_user.gravatar %>
     We're currently using your <%= link_to "Gravatar", "http://gravatar.com", target: :blank %>.
     <%= button_to "Reload Gravatar", avatars_reload_path, class: 'btn btn-primary', method: :post, remote: true, data: { disable_with: "Reloading..." } %>
-    <p></p>
   <% else %>
-    Your avatar:
     <%= button_to "Use Gravatar", avatars_reload_path, class: 'btn btn-primary', method: :post, remote: true, data: { disable_with: "Reloading..." } %>
   <% end %>
   <%= link_to "Update Avatar", avatars_edit_path, class: 'btn btn-success', remote: true %>
 </div>
-
 
 <div class="modal fade" id="modal">
 </div>
