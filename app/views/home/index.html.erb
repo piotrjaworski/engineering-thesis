@@ -1,11 +1,22 @@
-<%= link_to "New Topic", new_topic_path, class: 'btn btn-success pull-right', id: 'start_new_topic', remote: true if user_signed_in? %>
+<div class="row">
+  <div class="col-md-6">
+    <%= link_to "All", topic_filter_path(type: :all), class: 'btn btn-primary topics_filters', remote: true %>
+    <%= link_to "New", topic_filter_path(type: :new), class: 'btn btn-warning topics_filters', remote: true %>
+    <%= link_to "Top", topic_filter_path(type: :top), class: 'btn btn-danger topics_filters', remote: true %>
+    <%= select_tag :category, options_from_collection_for_select(Category.all, "id", "name"), class: 'form-control', id: 'category-select' %>
+  </div>
+
+  <div class="col-md-6">
+    <%= link_to "New Topic", new_topic_path, class: 'btn btn-success pull-right', id: 'start_new_topic', remote: true if user_signed_in? %>
+  </div>
+</div>
 
 <div id="topics_list">
   <%= render partial: "topics_content", locals: { topics: @topics } %>
 </div>
 
 <div id="main-pagination">
-  <%= will_paginate @topics %>
+  <%= render partial: "pagination", locals: { topics: @topics } %>
 </div>
 
 <div class="modal fade" id="modal">

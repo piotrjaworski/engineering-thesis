@@ -10,7 +10,7 @@
     <td><%= t.user.email %></td>
     <td><%= t.posts_count %></td>
     <td><%= t.views %></td>
-    <td><%= t.created_at %></td>
+    <td><%= time_ago_in_words(t.posts.first.created_at) %> ago</td>
   </tr>
 <% end %>
 

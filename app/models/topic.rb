@@ -1,5 +1,4 @@
 class Topic < ActiveRecord::Base
-  default_scope { order("created_at DESC") }
   is_impressionable counter_cache: true, column_name: :views
 
   belongs_to :category
@@ -8,6 +7,10 @@ class Topic < ActiveRecord::Base
   accepts_nested_attributes_for :posts, reject_if: proc { |attributes| attributes['content'].blank? }
 
   validates_presence_of :name
+
+  default_scope { order("updated_at DESC") }
+  scope :top_records, -> { unscope(:order).order("views DESC") }
+  scope :new_records, -> { where("created_at >= ?", Time.now - 1.minutes) }
 
   def posts_count
     posts.count

@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   root 'home#index'
 
   # page
+  get :topic_filter, to: "home#topic_filter"
+  get :category_filter, to: "home#category_filter"
   resources :topics do
     resources :posts, only: [:new, :edit, :create, :update]
   end

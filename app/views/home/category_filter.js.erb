@@ -1,0 +1,11 @@
+<% unless params[:page] %>
+  $("#topics_list").html('<%= j(render partial: 'topics_content', locals: { topics: @topics})%>');
+  $('#main-pagination').html('<%= j(render partial: 'pagination', locals: { topics: @topics})%>');
+<% else %>
+  $('#topics_table tbody').append('<%= j(render partial: 'topics_list', locals: { topics: @topics})%>');
+  <% if @topics.next_page %>
+    $('.pagination').replaceWith('<%= j will_paginate(@topics) %>');
+  <% else %>
+    $('.pagination').remove();
+  <% end %>
+<% end %>
