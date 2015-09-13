@@ -24,6 +24,7 @@ gem 'will_paginate'
 gem 'tinymce-rails'
 gem 'impressionist'
 gem 'paperclip', '~> 4.3'
+gem 'figaro'
 
 group :development do
   gem 'better_errors'
