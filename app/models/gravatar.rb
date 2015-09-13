@@ -1,3 +1,4 @@
+require 'net/http'
 class Gravatar
   attr_accessor :email, :gravatar_id
 
