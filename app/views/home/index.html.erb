@@ -1,8 +1,8 @@
 <div class="row">
   <div class="col-md-6">
-    <%= link_to "All", topic_filter_path(type: :all), class: 'btn btn-primary topics_filters', remote: true %>
-    <%= link_to "New", topic_filter_path(type: :new), class: 'btn btn-warning topics_filters', remote: true %>
-    <%= link_to "Top", topic_filter_path(type: :top), class: 'btn btn-danger topics_filters', remote: true %>
+    <%= link_to "All", topic_filter_path(type: :all), class: 'btn btn-primary topics_filters', id: "all-topics", remote: true %>
+    <%= link_to "New", topic_filter_path(type: :new), class: 'btn btn-warning topics_filters', id: "new-topics", remote: true %>
+    <%= link_to "Top", topic_filter_path(type: :top), class: 'btn btn-danger topics_filters', id: "top-topics", remote: true %>
     <%= select_tag :category, options_from_collection_for_select(Category.all, "id", "name"), class: 'form-control', id: 'category-select' %>
   </div>
 
