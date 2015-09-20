@@ -8,9 +8,4 @@ class Admin::AdminController < ApplicationController
       "admin"
     end
 
-    def check_admin
-      current_user ||= User.new
-      render_404 unless current_user.is_admin?
-    end
-
 end
