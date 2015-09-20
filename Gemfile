@@ -25,6 +25,7 @@ gem 'tinymce-rails'
 gem 'impressionist'
 gem 'paperclip', '~> 4.3'
 gem 'figaro'
+gem 'decent_exposure'
 
 group :development do
   gem 'better_errors'

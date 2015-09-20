@@ -2,6 +2,10 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   helper_method :logged_in?
 
+  decent_configuration do
+    strategy DecentExposure::StrongParametersStrategy
+  end
+
   private
 
     def logged_in?

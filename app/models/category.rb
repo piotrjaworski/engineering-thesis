@@ -1,13 +1,13 @@
 class Category < ActiveRecord::Base
   has_many :topics
-  before_create :set_position
+  before_destroy :check_topics
 
   validates :name, presence: true, uniqueness: true
 
-  default_scope { order(position: :asc) }
+  private
 
-  def set_position
-    self.position = Category.last.nil? ? 1 : Category.last.position + 1
-  end
+    def check_topics
+      return false if topics.present?
+    end
 
 end

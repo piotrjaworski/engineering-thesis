@@ -1,17 +1,11 @@
 class Admin::CategoriesController < Admin::AdminController
-  before_action :set_category, only: [:edit, :update, :destroy, :show]
-
-  def index
-    @categories = Category.all
-  end
+  expose(:category, attributes: :category_attributes)
 
   def new
-    @category = Category.new
   end
 
   def create
-    @category = Category.new(category_attributes)
-    if @category.save
+    if category.save
       redirect_to admin_dashboard_path
       flash[:success] = "New category has beed added!"
     else
@@ -22,8 +16,11 @@ class Admin::CategoriesController < Admin::AdminController
   def edit
   end
 
+  def show
+  end
+
   def update
-    if @category.update_attributes(category_attributes)
+    if category.update_attributes(category_attributes)
       redirect_to admin_dashboard_path
       flash[:success] = "Category has beed updated!"
     else
@@ -32,7 +29,7 @@ class Admin::CategoriesController < Admin::AdminController
   end
 
   def destroy
-    if @category.destroy
+    if category.destroy
       redirect_to admin_dashboard_path
       flash[:success] = "Category has beed deleted!"
     else
@@ -40,22 +37,10 @@ class Admin::CategoriesController < Admin::AdminController
     end
   end
 
-  def show
-  end
-
-  def sort
-    params[:category].each_with_index { |id, index| Category.update(id, { position: index + 1 }) }
-    render nothing: true
-  end
-
   private
 
     def category_attributes
-      params.require(:category).permit(:name, :postion)
-    end
-
-    def set_category
-      @category = Category.find(params[:id])
+      params.require(:category).permit(:name, :color)
     end
 
 end
