@@ -1,4 +1,7 @@
 class Post < ActiveRecord::Base
+  include PgSearch
+  multisearchable against: [:content]
+
   belongs_to :user
   belongs_to :topic, touch: true
   before_update :increase_edited_count

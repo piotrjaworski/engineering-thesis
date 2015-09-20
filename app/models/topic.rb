@@ -1,4 +1,7 @@
 class Topic < ActiveRecord::Base
+  include PgSearch
+  multisearchable against: [:name, :description]
+
   is_impressionable counter_cache: true, column_name: :views
 
   belongs_to :category
@@ -6,7 +9,7 @@ class Topic < ActiveRecord::Base
   has_many :posts, dependent: :destroy
   accepts_nested_attributes_for :posts, reject_if: proc { |attributes| attributes['content'].blank? }
 
-  validates_presence_of :name
+  validates_presence_of :name, :category
 
   default_scope { order("updated_at DESC") }
   scope :top_records, -> { unscope(:order).order("views DESC") }
