@@ -1,6 +1,4 @@
-class Admin::DashboardController < ApplicationController
-  before_action :check_admin
-  layout :admin_assets
+class Admin::DashboardController < Admin::AdminController
 
   def index
     @categories = Category.all

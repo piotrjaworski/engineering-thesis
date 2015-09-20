@@ -17,8 +17,12 @@ Rails.application.routes.draw do
     post :update
   end
 
+  # search
+  post :search, to: 'search#index', as: :search
+
   # admin
   namespace :admin do
+    get '/', to: 'dashboard#index'
     get :dashboard, to: 'dashboard#index', as: :dashboard
     resources :categories do
       collection { post :sort }

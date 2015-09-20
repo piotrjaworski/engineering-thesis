@@ -1,7 +1,5 @@
-class Admin::CategoriesController < ApplicationController
-  before_action :check_admin
+class Admin::CategoriesController < Admin::AdminController
   before_action :set_category, only: [:edit, :update, :destroy, :show]
-  layout :admin_assets
 
   def index
     @categories = Category.all

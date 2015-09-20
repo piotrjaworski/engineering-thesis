@@ -3,19 +3,18 @@ class ApplicationController < ActionController::Base
 
   private
 
-  def admin_assets
-    "admin"
-  end
-
-  def check_admin
-    unless current_user.is_admin?
-      redirect_with_message(root_path, "You are not authorized to visit this page", "error")
-    end
-  end
-
   def redirect_with_message(path, message, type)
     redirect_to path
     flash[type] = "#{message}"
+  end
+
+  def render_404
+    respond_to do |format|
+      format.html { render :file => "#{Rails.root}/public/404", :layout => false, :status => :not_found }
+      format.xml  { head :not_found }
+      format.json  { head :not_found }
+      format.js  { head :not_found }
+    end
   end
 
 end
