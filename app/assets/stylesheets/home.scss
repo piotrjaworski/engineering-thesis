@@ -67,6 +67,10 @@
     margin: 4px 0px 4px 0px;
 }
 
+td {
+    vertical-align: middle !important;
+}
+
 /* MAIN PAGE */
 
 .pagination {
@@ -93,6 +97,19 @@
             width: 70px;
         }
     }
+}
+
+ul.users-list {
+    list-style-type: none;
+    display: inline;
+    padding: 0px;
+    li {
+        width: 47px;
+    }
+}
+
+.creator {
+    border: 1px solid blue;
 }
 
 /* POST */

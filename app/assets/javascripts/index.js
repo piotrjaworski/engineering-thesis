@@ -36,7 +36,7 @@ function readURL(input, div_id) {
 
 function topics_filter() {
   $(document).on("click", ".topics_filters", function() {
-    show_loading()
+    show_loading();
   });
 }
 
@@ -46,7 +46,7 @@ function show_loading() {
 
 function category_change() {
   $(document).on('change', '#category-select', function() {
-    show_loading()
+    show_loading();
     var value = $('#category-select').val();
     $.ajax({
       url: 'category_filter',

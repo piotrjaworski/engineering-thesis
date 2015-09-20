@@ -36,4 +36,18 @@ class Topic < ActiveRecord::Base
     post
   end
 
+  def users
+    User.find(users_ids)
+  end
+
+  def users_ids
+    User.find_by_sql("SELECT DISTINCT u.id, p.created_at FROM users u
+                     INNER JOIN posts p ON p.user_id = u.id
+                     JOIN topics t ON t.id = p.topic_id
+                     WHERE t.id = #{self.id}
+                     GROUP BY u.id, p.id, t.id
+                     ORDER BY p.created_at DESC
+                     LIMIT 5").map { |u| u.id }
+  end
+
 end

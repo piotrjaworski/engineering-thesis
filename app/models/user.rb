@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   validates_presence_of :full_name, :username
   validates_uniqueness_of :username
 
-  has_attached_file :avatar, styles: { medium: "300x300>", thumb: "120x120>", small: "60x60" }, default_url: "/images/:style/missing.png"
+  has_attached_file :avatar, styles: { medium: "300x300>", thumb: "120x120>", small: "70x70", mini: "45x45" }, default_url: "/images/:style/missing.png"
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
 
   before_create :get_avatar
