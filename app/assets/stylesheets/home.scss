@@ -1,143 +1,144 @@
 #page-content {
-    margin-top: 100px;
-}
-
-#main_header {
-    // /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#d2ebf9+0,feffff+56 */
-    // background: rgb(210,235,249); /* Old browsers */
-    // background: -moz-linear-gradient(top,  rgba(210,235,249,1) 0%, rgba(254,255,255,1) 56%); /* FF3.6+ */
-    // background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(210,235,249,1)), color-stop(56%,rgba(254,255,255,1))); /* Chrome,Safari4+ */
-    // background: -webkit-linear-gradient(top,  rgba(210,235,249,1) 0%,rgba(254,255,255,1) 56%); /* Chrome10+,Safari5.1+ */
-    // background: -o-linear-gradient(top,  rgba(210,235,249,1) 0%,rgba(254,255,255,1) 56%); /* Opera 11.10+ */
-    // background: -ms-linear-gradient(top,  rgba(210,235,249,1) 0%,rgba(254,255,255,1) 56%); /* IE10+ */
-    // background: linear-gradient(to bottom,  rgba(210,235,249,1) 0%,rgba(254,255,255,1) 56%); /* W3C */
-    // filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d2ebf9', endColorstr='#feffff',GradientType=0 ); /* IE6-9 */
+  margin-top: 100px;
 }
 
 .td_link {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 @media(min-width:767px) {
-    .navbar {
-        padding: 20px 0;
-        -webkit-transition: background .5s ease-in-out,padding .5s ease-in-out;
-        -moz-transition: background .5s ease-in-out,padding .5s ease-in-out;
-        transition: background .5s ease-in-out,padding .5s ease-in-out;
-    }
-
-    .top-nav-collapse {
-        padding: 0;
-    }
+  .navbar {
+    padding: 20px 0;
+    -webkit-transition: background .5s ease-in-out,padding .5s ease-in-out;
+    -moz-transition: background .5s ease-in-out,padding .5s ease-in-out;
+    transition: background .5s ease-in-out,padding .5s ease-in-out;
+  }
+  .top-nav-collapse {
+    padding: 0;
+  }
 }
 
 .intro-section {
-    height: 100%;
-    padding-top: 150px;
-    text-align: center;
-    background: #fff;
+  height: 100%;
+  padding-top: 150px;
+  text-align: center;
+  background: #fff;
 }
 
 .about-section {
-    height: 100%;
-    padding-top: 150px;
-    text-align: center;
-    background: #eee;
+  height: 100%;
+  padding-top: 150px;
+  text-align: center;
+  background: #eee;
 }
 
 .services-section {
-    height: 100%;
-    padding-top: 150px;
-    text-align: center;
-    background: #fff;
+  height: 100%;
+  padding-top: 150px;
+  text-align: center;
+  background: #fff;
 }
 
 .contact-section {
-    height: 100%;
-    padding-top: 150px;
-    text-align: center;
-    background: #eee;
+  height: 100%;
+  padding-top: 150px;
+  text-align: center;
+  background: #eee;
 }
 
 .modal-lg {
-    width: 1100px;
+  width: 1100px;
 }
 
 .btn {
-    margin: 4px 0px 4px 0px;
+  margin: 4px 0px 4px 0px;
 }
 
 td {
-    vertical-align: middle !important;
+  vertical-align: middle !important;
 }
 
 /* MAIN PAGE */
 
 .pagination {
+  width: 50px;
+  margin: 0 auto !important;
+  display: block !important;
+  img {
     width: 50px;
-    margin: 0 auto !important;
-    display: block !important;
-    img {
-        width: 50px;
-    }
-    // hide pagination
-    span, a, em {
-        display: none;
-    }
+  }
+  // hide pagination
+  span, a, em {
+    display: none;
+  }
 }
 
 #category-select {
-    display: inline !important;
-    width: auto;
+  display: inline !important;
+  width: auto;
 }
 
 #topics_list {
-    p {
-        img {
-            width: 70px;
-        }
+  p {
+    img {
+      width: 70px;
     }
+  }
 }
 
 ul.users-list {
-    list-style-type: none;
-    display: inline;
-    padding: 0px;
-    li {
-        width: 47px;
-    }
+  list-style-type: none;
+  display: inline;
+  padding: 0px;
+  li {
+    width: 47px;
+  }
 }
 
 .creator {
-    border: 1px solid blue;
+  border: 1px solid blue;
 }
 
 .flash-messages {
-    margin-top: 12px;
+  margin-top: 12px;
 }
 
 /* POST */
 
 .edited-post-notice {
-    margin-top: 15px;
-    margin-bottom: 0px;
-    color: #777;
-    font-style: italic;
+  margin-top: 15px;
+  margin-bottom: 0px;
+  color: #777;
+  font-style: italic;
 }
 
 .single-post {
-    border-top: 1px solid;
-    padding-top: 10px;
-    padding-bottom: 10px;
+  border-top: 1px solid;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 /* PROFILE */
 
 #image_preview {
-    display: none;
-    padding: 0px 15px 0px 15px;
+  display: none;
+  padding: 0px 15px 0px 15px;
 }
 
 #image_preview_image {
-    max-width: 300px;
+  max-width: 300px;
+}
+
+.profile-page {
+  margin-top: 15px;
+}
+
+.tab-content {
+  h2 {
+    margin-top: 10px;
+  }
+}
+
+#avatar_section {
+  margin-left: 0px;
 }

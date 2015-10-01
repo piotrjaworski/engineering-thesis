@@ -9,7 +9,7 @@ class Gravatar
 
   def get_image(size = 200)
     if gravatar?
-      URI.parse(image_url(size)).open
+      open(image_url(size))
     else
       false
     end
@@ -27,7 +27,7 @@ class Gravatar
       http = Net::HTTP.new(uri.host, uri.port)
       request = Net::HTTP::Get.new(uri.request_uri)
       response = http.request(request)
-      response.code.to_i == 404 ? false : true
+      response.code.to_i == 200 ? true : false
     end
 
 end
