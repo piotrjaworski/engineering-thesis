@@ -1,4 +1,5 @@
 class HomeController < ApplicationController
+  protect_from_forgery except: [:index]
 
   def index
     @topics = Topic.page(params[:page]).per_page(30)
