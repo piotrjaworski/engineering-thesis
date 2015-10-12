@@ -44,9 +44,9 @@ class User < ActiveRecord::Base
 
   def get_avatar
     gravatar = Gravatar.new(email)
-    avatar = gravatar.get_image(400)
-    gravatar = true
-    save
+    self.avatar = gravatar.get_image(400)
+    self.gravatar = true
+    self.save
     "Gravatar has been reloaded"
   end
 
