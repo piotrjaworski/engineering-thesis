@@ -1,0 +1,20 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  # For details on connection pooling, see rails configuration guide
+  # http://guides.rubyonrails.org/configuring.html#database-pooling
+  pool: 5
+
+development:
+  <<: *default
+  database: forum_development
+
+test:
+  <<: *default
+  database: forum_test
+
+production:
+  <<: *default
+  database: forum_production
+  username: forum
+  password: <%= ENV['FORUM_DATABASE_PASSWORD'] %>

@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
                              path: ":rails_root/public/system/:class/:attachment/:id/:style/:basename.:extension"
   validates_attachment_content_type :avatar, content_type: ['image/gif', 'image/jpeg', 'image/png', 'image/x-ms-bmp']
 
-  before_create :get_avatar
+  after_create :get_avatar
 
   def user_errors
     errors.any? ? errors.full_messages.join("<br>".html_safe) : nil
@@ -27,8 +27,6 @@ class User < ActiveRecord::Base
       "Moderator"
     elsif is_user?
       "User"
-    else
-      "Undefinied role"
     end
   end
 
@@ -46,10 +44,9 @@ class User < ActiveRecord::Base
 
   def get_avatar
     gravatar = Gravatar.new(email)
-    self.avatar = gravatar.get_image(400)
-    self.avatar_file_name = "gravatar-#{self.id}"
-    self.gravatar = true
-    self.save
+    avatar = gravatar.get_image(400)
+    gravatar = true
+    save
     "Gravatar has been reloaded"
   end
 
