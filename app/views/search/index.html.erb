@@ -1,11 +1,10 @@
-<div class="row">
-  <div class="col-md-3">
+<div class="row search">
+  <div class="col-md-3 facets">
     <%= form_tag search_path, method: :get, id: "search_form_filter" do %>
       <%= hidden_field_tag :query, params[:query] %>
       <%= hidden_field_tag :filtering, true %>
       <h4>Filters:</h4>
       <% if @type_filter.present? %>
-        <p>Filter by type</p>
         <ul>
           <% @type_filter.each do |filter| %>
             <li>
@@ -15,7 +14,6 @@
           <% end %>
         </ul>
       <% end %>
-      <p>Filter by date</p>
     <% end %>
   </div>
 
@@ -38,9 +36,14 @@
           </div>
         <% end %>
 
-        <% @results.each do |result| %>
-          <h3><%= result.inspect %></h3>
-        <% end %>
+        <div id="search-results">
+          <% @results.each do |result| %>
+            <h3>Type: <%= result.searchable_type %></h3>
+            <h5><%= result.content %></h5>
+            <p><%= link_to "...more", "#" %></p>
+            <hr>
+          <% end %>
+        </div>
 
         <% if @results.present? %>
           <%= will_paginate @results, renderer: BootstrapPagination::Rails %>

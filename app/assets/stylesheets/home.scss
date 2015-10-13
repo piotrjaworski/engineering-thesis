@@ -139,4 +139,25 @@ ul.users-list {
 
 #avatar_section {
   margin-left: 0px;
+  .btn {
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
 }
+
+/* SEARCH */
+
+.search {
+  .facets {
+    ul {
+      list-style: none;
+      padding-left: 10px;
+    }
+  }
+  #search-results {
+    .seaching-phrase {
+      background-color: yellow;
+    }
+  }
+}
+
