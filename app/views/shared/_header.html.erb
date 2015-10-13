@@ -26,7 +26,7 @@
         </li>
       </ul>
 
-      <%= form_tag "/search", class: 'navbar-form navbar-left', role: "Search" do %>
+      <%= form_tag "/search", class: 'navbar-form navbar-left', role: "Search", method: :get do %>
         <div class="form-group">
           <%= text_field_tag :query, params[:query], placeholder: "Search", class: 'form-control' %>
         </div>

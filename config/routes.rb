@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   end
 
   # search
-  post :search, to: 'search#index', as: :search
+  get :search, to: 'search#index', as: :search
 
   # admin
   namespace :admin do

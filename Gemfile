@@ -21,6 +21,7 @@ gem 'jquery-rails'
 # other
 gem 'simple_form'
 gem 'will_paginate'
+gem 'will_paginate-bootstrap'
 gem 'tinymce-rails'
 gem 'impressionist'
 gem 'paperclip', '~> 4.3'

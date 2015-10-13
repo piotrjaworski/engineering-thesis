@@ -9,4 +9,5 @@ $(document).ready(function() {
   clickable_link();
   topics_filter();
   category_change();
+  facets();
 });

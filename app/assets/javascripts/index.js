@@ -58,3 +58,9 @@ function category_change() {
     });
   });
 }
+
+function facets() {
+  $(".search_form_filter").change(function(){
+    $("#search_form_filter").submit();
+  });
+}
