@@ -1,3 +1,5 @@
+<%= tinymce_assets %>
+<%= tinymce %>
 <%= simple_form_for topic, remote: true do |f| %>
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
@@ -6,11 +8,11 @@
         <h2 class="modal-title">Create a New Topic:</h4>
       </div>
       <div class="modal-body">
-        <%= f.input :name, required: true %>
+        <%= f.input :name, input_html: { required: true } %>
         <%= f.input :category_id, collection: Category.all, prompt: "Select a category...", required: true %>
         <%= f.input :description %>
         <%= f.fields_for :posts do |p| %>
-
+          <%= p.input :content, as: :text, input_html: { class: "tinymce" } %>
         <% end %>
       </div>
       <div class="modal-footer">
@@ -20,3 +22,4 @@
     </div>
   </div>
 <% end %>
+

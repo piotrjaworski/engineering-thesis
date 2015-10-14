@@ -1,3 +1,1 @@
-$('#all-topics').click();
-$('#topics_list').html('<%= j(render partial: 'home/topics_content', locals: { topics: @topics }) %>');
-$('#modal').modal('hide');
+window.location = "<%= topic_path(@topic) %>";

@@ -1,6 +1,10 @@
 toolbar:
   - styleselect | bold italic | undo redo
-  - image | link
+  - image | link | emoticons | code
 plugins:
   - image
   - link
+  - emoticons
+  - lists
+  - textcolor
+  - code

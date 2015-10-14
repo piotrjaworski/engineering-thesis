@@ -16,8 +16,7 @@ class TopicsController < ApplicationController
   def create
     @topic = Topic.build_new(current_user, topic_params)
     if @topic.save
-      redirect_to @topic
-      flash.now[:success] = "Your topic has been created"
+      render :hide_form
     else
       render :new
     end
