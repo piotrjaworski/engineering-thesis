@@ -36,4 +36,8 @@ module ApplicationHelper
     end
   end
 
+  def user_image_class(user, topic)
+    user.id == topic.creator_id ? "round-image-creator" : "round-image"
+  end
+
 end

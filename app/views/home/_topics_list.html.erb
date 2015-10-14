@@ -1,22 +1,22 @@
 <% topics.each do |t| %>
   <tr class="clickable">
-    <td data-link="<%= topic_path(t) %>" class="td_link">
+    <td data-link="<%= topic_path(t) %>" class="td_link col-md-5">
       <%= t.name %>
       <% if t.new? %>
         <span class="label label-primary">New</span>
       <% end %>
     </td>
-    <td><%= t.category.name %></td>
-    <td>
+    <td class="col-md-2"><%= t.category.name %></td>
+    <td class="col-md-2">
       <ul class="users-list">
         <% t.users.each do |user| %>
-          <li class="<%= 'creator' if user.id == t.creator_id %>"><%= image_tag user.avatar(:mini) %></li>
+          <li><%= image_tag user.avatar(:mini), class: user_image_class(user, t) %></li>
         <% end %>
       </ul>
     </td>
-    <td><%= t.posts_count %></td>
-    <td><%= t.views %></td>
-    <td><%= time_ago_in_words(t.posts.first.created_at) %> ago</td>
+    <td class="col-md-1"><%= t.posts_count %></td>
+    <td class="col-md-1"><%= t.views %></td>
+    <td class="col-md-2"><%= time_ago_in_words(t.posts.first.created_at) %> ago</td>
   </tr>
 <% end %>
 
