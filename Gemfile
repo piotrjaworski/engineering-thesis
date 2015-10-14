@@ -38,6 +38,7 @@ group :development, :test do
   gem 'pry'
   gem 'rspec-rails', '~> 3.0'
   gem 'capybara'
+  gem 'faker'
 end
 
 # gem 'unicorn'

@@ -20,6 +20,9 @@ Rails.application.routes.draw do
   # search
   get :search, to: 'search#index', as: :search
 
+  # users
+  resources :users, only: [:index, :show]
+
   # admin
   namespace :admin do
     get '/', to: 'dashboard#index'

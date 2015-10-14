@@ -1,0 +1,17 @@
+<% @users.each do |user| %>
+  <div class="row">
+    <div class="col-md-2">
+      <%= image_tag user.avatar(:small), class: 'round-image' %>
+    </div>
+    <div class="col-md-10">
+      <strong>Username: </strong><%= user.username %>
+      <strong>Email: </strong><%= user.email %>
+      <strong>Joined: </strong><%= user.created_at.strftime("%d %B %Y at %H:%M") %>
+      <strong>Topics started: </strong><%= user.topics.count %>
+    </div>
+  </div>
+  <hr>
+<% end %>
+<p class="text-center">
+  <%= will_paginate @users, renderer: BootstrapPagination::Rails %>
+</p>
