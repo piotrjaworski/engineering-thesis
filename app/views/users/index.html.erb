@@ -1,13 +1,29 @@
 <% @users.each do |user| %>
   <div class="row">
     <div class="col-md-2">
-      <%= image_tag user.avatar(:small), class: 'round-image' %>
+      <%= link_to image_tag(user.avatar(:small), class: 'round-image', alt: "Show profile", title: "Show profile"), user_path(user.slug) %>
     </div>
-    <div class="col-md-10">
-      <strong>Username: </strong><%= user.username %>
-      <strong>Email: </strong><%= user.email %>
-      <strong>Joined: </strong><%= user.created_at.strftime("%d %B %Y at %H:%M") %>
-      <strong>Topics started: </strong><%= user.topics.count %>
+    <div class="col-md-5">
+      <p>
+        <strong>Username: </strong><%= user.username %>
+      </p>
+      <p>
+        <strong>Email: </strong><%= user.email %>
+      </p>
+      <p>
+        <strong>Joined: </strong><%= user.created_at.strftime("%d %B %Y at %H:%M") %>
+      </p>
+    </div>
+    <div class="col-md-5">
+      <p>
+        <strong>Topics started: </strong><%= user.topics.count %>
+      </p>
+      <p>
+        <strong>Replies: </strong><%= user.posts.count %>
+      </p>
+      <p>
+        <strong>Times logged: </strong><%= user.sign_in_count.to_i %>
+      </p>
     </div>
   </div>
   <hr>

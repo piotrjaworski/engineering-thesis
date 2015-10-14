@@ -1,4 +1,7 @@
 class User < ActiveRecord::Base
+  extend FriendlyId
+  friendly_id :username, use: :slugged
+
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable
 
@@ -14,11 +17,13 @@ class User < ActiveRecord::Base
                              path: ":rails_root/public/system/:class/:attachment/:id/:style/:basename.:extension"
   validates_attachment_content_type :avatar, content_type: ['image/gif', 'image/jpeg', 'image/png', 'image/x-ms-bmp']
 
+  default_scope { order("created_at") }
+
   after_create :get_avatar
 
-  def to_param
-    [id, username.parameterize].join("-")
-  end
+  # def to_param
+  #   [id, username.parameterize].join("-")
+  # end
 
   def user_errors
     errors.any? ? errors.full_messages.join("<br>".html_safe) : nil

@@ -28,6 +28,7 @@ gem 'paperclip', '~> 4.3'
 gem 'figaro'
 gem 'decent_exposure'
 gem 'newrelic_rpm'
+gem 'friendly_id', '~> 5.1.0'
 
 group :development do
   gem 'better_errors'
