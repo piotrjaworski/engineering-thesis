@@ -1,11 +1,13 @@
 <div class="row single-post">
-  <div class="col-md-1"><%= image_tag post.user.avatar(:small) %></div>
+  <div class="col-md-1"><%= image_tag post.user.avatar(:small), class: "round-image" %></div>
   <div class="col-md-11">
     <div class="row">
       <div class="col-md-6"><span class="pull-left"><strong><%= post.user.username %></strong></span></div>
       <div class="col-md-6">
         <span class="pull-right"><%= time_ago_in_words(post.created_at) %> ago</span>
-        <%= link_to "Edit", edit_topic_post_path(post, topic_id: post.topic_id) %>
+        <% if can? :edit, post %>
+          <%= link_to "Edit", edit_topic_post_path(post, topic_id: post.topic_id) %>
+        <% end %>
       </div>
     </div>
     <br>

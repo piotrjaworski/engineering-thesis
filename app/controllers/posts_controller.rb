@@ -18,9 +18,11 @@ class PostsController < ApplicationController
   end
 
   def edit
+    authorize! :edit, @post
   end
 
   def update
+    authorize! :update, @post
     if @post.update(post_params)
       redirect_to @topic
       flash[:success] = "Post has been successfuly updated"

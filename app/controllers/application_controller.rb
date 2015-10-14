@@ -6,6 +6,16 @@ class ApplicationController < ActionController::Base
     strategy DecentExposure::StrongParametersStrategy
   end
 
+  rescue_from CanCan::AccessDenied do |exception|
+    if !!@topic
+      redirect_to topic_path(@topic)
+      flash[:error] = "You can't edit edit this post"
+    else
+      redirect_to root_path
+      flash.now[:error] = "You are not authorized to access this page"
+    end
+  end
+
   private
 
     def logged_in?
