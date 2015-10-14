@@ -15,6 +15,10 @@ class Topic < ActiveRecord::Base
   scope :top_records, -> { unscope(:order).order("views DESC") }
   scope :new_records, -> { where("created_at >= ?", Time.now - 1.minutes) }
 
+  def to_param
+    [id, name.parameterize].join("-")
+  end
+
   def posts_count
     posts.count
   end
