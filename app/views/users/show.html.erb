@@ -1,0 +1,57 @@
+<div class="row">
+  <div class="col-md-4">
+    <div class="row">
+      <div class="col-md-12">
+        <p class="text-center">
+          <%= image_tag(@user.avatar(:medium), class: 'round-image profile-image') %>
+        </p>
+        <p>
+          <hr>
+          <strong>Username: </strong><%= @user.username %>
+        </p>
+        <p>
+          <hr>
+          <strong>Full name: </strong><%= @user.full_name %>
+        </p>
+        <p>
+          <hr>
+          <strong>Email: </strong><%= @user.email %>
+        </p>
+        <p>
+          <hr>
+          <strong>Joined: </strong><%= @user.created_at.strftime("%d %B %Y at %H:%M") %>
+        </p>
+        <p>
+          <hr>
+          <strong>Last post: </strong><%= @user.posts.last.created_at.strftime("%d %B %Y at %H:%M") rescue "Not posted yet" %>
+        </p>
+        <p>
+          <hr>
+          <strong>Seen: </strong><%= @user.last_sign_in_at.strftime("%d %B %Y at %H:%M") rescue "Not logged yet" %>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-8">
+    <ul id="myTabs" class="nav nav-tabs" role="tablist">
+      <li role="presentation" class="active"><a href="#all" id="all-tab" role="tab" data-toggle="tab" aria-controls="all" aria-expanded="true">All</a></li>
+      <li role="presentation" class=""><a href="#topics" role="tab" id="topics-tab" data-toggle="tab" aria-controls="topics" aria-expanded="false">Topics</a></li>
+      <li role="presentation" class=""><a href="#posts" role="tab" id="posts-tab" data-toggle="tab" aria-controls="posts" aria-expanded="false">Posts</a></li>
+    </ul>
+
+     <div class="tab-content">
+      <div role="tabpanel" class="tab-pane active" id="all">
+
+      </div>
+
+      <div role="tabpanel" class="tab-pane" id="topics">
+
+      </div>
+
+      <div role="tabpanel" class="tab-pane" id="posts">
+
+      </div>
+    </div>
+  </div>
+</div>

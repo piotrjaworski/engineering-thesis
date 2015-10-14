@@ -5,7 +5,7 @@ abbr {
 }
 
 .round-image {
-  border-radius: 50px;
+  border-radius: 150px;
 }
 
 .round-image-creator {
@@ -160,6 +160,10 @@ ul.users-list {
     margin-top: 5px;
     margin-bottom: 5px;
   }
+}
+
+.profile-image {
+  height: 200px;
 }
 
 /* SEARCH */
