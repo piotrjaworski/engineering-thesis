@@ -30,7 +30,10 @@ Rails.application.routes.draw do
     get '/', to: 'dashboard#index'
     get :dashboard, to: 'dashboard#index', as: :dashboard
     resources :categories
-    mount Sidekiq::Web, at: '/sidekiq'
+
+    authenticate :user, lambda { |u| u.is_admin? } do
+      mount Sidekiq::Web => '/sidekiq'
+    end
   end
 
 end

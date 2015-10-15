@@ -21,12 +21,14 @@ class User < ActiveRecord::Base
 
   after_create :add_avatar_to_queue
 
-  # def to_param
-  #   [id, username.parameterize].join("-")
-  # end
+  ROLES = {1 => :admin, 2 => :moderator, 3 => :user}
 
   def user_errors
     errors.any? ? errors.full_messages.join("<br>".html_safe) : nil
+  end
+
+  def is?(role)
+    ROLES[self.role] == role
   end
 
   def role?
