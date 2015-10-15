@@ -18,6 +18,10 @@ gem 'sass-rails', '~> 5.0'
 gem 'bootstrap-sass', '~> 3.3.5'
 gem 'jquery-rails'
 
+# queue system
+gem 'sidekiq'
+gem 'sinatra', require: false
+
 # other
 gem 'simple_form'
 gem 'will_paginate'

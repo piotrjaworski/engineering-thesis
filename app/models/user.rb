@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
 
   default_scope { order("created_at") }
 
-  after_create :get_avatar
+  after_create :add_avatar_to_queue
 
   # def to_param
   #   [id, username.parameterize].join("-")
@@ -49,6 +49,10 @@ class User < ActiveRecord::Base
 
   def is_user?
     role == 3
+  end
+
+  def add_avatar_to_queue
+    AvatarsWorker.perform_async(self.id)
   end
 
   def get_avatar

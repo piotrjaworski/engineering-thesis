@@ -35,14 +35,20 @@
 
   <div class="col-md-8">
     <ul id="myTabs" class="nav nav-tabs" role="tablist">
-      <li role="presentation" class="active"><a href="#all" id="all-tab" role="tab" data-toggle="tab" aria-controls="all" aria-expanded="true">All</a></li>
-      <li role="presentation" class=""><a href="#topics" role="tab" id="topics-tab" data-toggle="tab" aria-controls="topics" aria-expanded="false">Topics</a></li>
-      <li role="presentation" class=""><a href="#posts" role="tab" id="posts-tab" data-toggle="tab" aria-controls="posts" aria-expanded="false">Posts</a></li>
+      <li role="presentation" class="active"><a href="#all" id="all-tab" role="tab" data-toggle="tab" aria-controls="all" aria-expanded="true">All (<%= @topics_count + @posts_count %>)</a></li>
+      <li role="presentation" class=""><a href="#topics" role="tab" id="topics-tab" data-toggle="tab" aria-controls="topics" aria-expanded="false">Topics (<%= @topics_count %>)</a></li>
+      <li role="presentation" class=""><a href="#posts" role="tab" id="posts-tab" data-toggle="tab" aria-controls="posts" aria-expanded="false">Posts (<%= @posts_count %>)</a></li>
     </ul>
 
      <div class="tab-content">
       <div role="tabpanel" class="tab-pane active" id="all">
-
+      <% @all.each do |element| %>
+        <% if element.is_a?(Post) %>
+          Post
+        <% else %>
+          Topic
+        <% end %>
+      <% end %>
       </div>
 
       <div role="tabpanel" class="tab-pane" id="topics">

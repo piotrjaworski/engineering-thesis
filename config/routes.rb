@@ -1,3 +1,5 @@
+require 'sidekiq/web'
+
 Rails.application.routes.draw do
   devise_for :users, path: '', path_names: { sign_in: 'login', sign_out: 'logout', sign_up: 'register', edit: 'profile/edit' }, controllers: { registrations: :registrations }
   root 'home#index'
@@ -28,6 +30,7 @@ Rails.application.routes.draw do
     get '/', to: 'dashboard#index'
     get :dashboard, to: 'dashboard#index', as: :dashboard
     resources :categories
+    mount Sidekiq::Web, at: '/sidekiq'
   end
 
 end
