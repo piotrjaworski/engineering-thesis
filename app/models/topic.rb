@@ -43,6 +43,10 @@ class Topic < ActiveRecord::Base
     post
   end
 
+  def creator
+    User.find(self.creator_id)
+  end
+
   def users
     User.find(users_ids)
   end

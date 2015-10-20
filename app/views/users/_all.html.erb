@@ -1,0 +1,8 @@
+<% @all.each do |element| %>
+  <% if element.is_a?(Post) %>
+    <%= render partial: "post", locals: { post: element } %>
+  <% else %>
+    <%= render partial: "topic", locals: { topic: element } %>
+  <% end %>
+  <hr>
+<% end %>

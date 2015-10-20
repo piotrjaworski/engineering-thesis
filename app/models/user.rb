@@ -23,6 +23,14 @@ class User < ActiveRecord::Base
 
   ROLES = {1 => :admin, 2 => :moderator, 3 => :user}
 
+  def latest_posts
+    posts.order(created_at: :desc)
+  end
+
+  def latest_topics
+    topics.order(created_at: :desc)
+  end
+
   def user_errors
     errors.any? ? errors.full_messages.join("<br>".html_safe) : nil
   end

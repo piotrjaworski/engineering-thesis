@@ -1,5 +1,5 @@
-function infinity_scroll_main_page() {
-  if ($('#main-pagination .pagination').length) {
+function infinity_scroll_main_page(selector) {
+  if ($(selector + ' .pagination').length) {
     $(window).scroll(function() {
       var url = $('.pagination .next_page').attr('href');
       if (url && $(window).scrollTop() > $(document).height() - $(window).height() - 50) {

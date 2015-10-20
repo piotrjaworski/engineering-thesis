@@ -42,21 +42,32 @@
 
      <div class="tab-content">
       <div role="tabpanel" class="tab-pane active" id="all">
-      <% @all.each do |element| %>
-        <% if element.is_a?(Post) %>
-          Post
-        <% else %>
-          Topic
-        <% end %>
-      <% end %>
+        <div id="user-all-content">
+          <%= render partial: "all" %>
+        </div>
+        <div id="user-all-pagination">
+          <%= render partial: "pagination", locals: { object: @all } %>
+        </div>
       </div>
 
       <div role="tabpanel" class="tab-pane" id="topics">
-
+        <% @topics.each do |topic| %>
+            <%= render partial: "topic", locals: { topic: topic } %>
+          <hr>
+        <% end %>
+        <div id="user-topics-pagination">
+          <%= render partial: "pagination", locals: { object: @topics } %>
+        </div>
       </div>
 
       <div role="tabpanel" class="tab-pane" id="posts">
-
+        <% @posts.each do |post| %>
+            <%= render partial: "post", locals: { post: post } %>
+          <hr>
+        <% end %>
+        <div id="user-posts-pagination">
+          <%= render partial: "pagination", locals: { object: @posts } %>
+        </div>
       </div>
     </div>
   </div>

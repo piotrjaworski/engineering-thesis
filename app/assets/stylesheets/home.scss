@@ -40,6 +40,11 @@ abbr {
   margin: 0 auto;
 }
 
+.topic-user-content {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
 @media(min-width:767px) {
   .navbar {
     padding: 20px 0;
@@ -90,7 +95,7 @@ td {
 
 /* MAIN PAGE */
 
-#main-pagination {
+#main-pagination, #user-all-pagination, #user-posts-pagination, #user-topics-pagination {
   .pagination {
     width: 50px;
     margin: 0 auto !important;
