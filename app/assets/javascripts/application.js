@@ -10,4 +10,5 @@ $(document).ready(function() {
   topics_filter();
   category_change();
   facets();
+  search_form();
 });

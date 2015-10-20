@@ -54,7 +54,7 @@ class Topic < ActiveRecord::Base
                      WHERE t.id = #{self.id}
                      GROUP BY u.id, p.id, t.id
                      ORDER BY p.created_at DESC
-                     LIMIT 3").map { |u| u.id }
+                     LIMIT 4").map { |u| u.id }
   end
 
 end

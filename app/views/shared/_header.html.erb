@@ -16,17 +16,14 @@
           <a class="page-scroll" href="#page-top"></a>
         </li>
         <li>
-          <%= link_to "Members", users_path, class: "page-scroll" %>
+          <%= link_to "Users", users_path %>
         </li>
         <li>
-          <a class="page-scroll" href="#services">Services</a>
-        </li>
-        <li>
-          <a class="page-scroll" href="#contact">Contact</a>
+          <a id="search_link">Search <%= fa_icon "search" %></a>
         </li>
       </ul>
 
-      <%= form_tag "/search", class: 'navbar-form navbar-left', role: "Search", method: :get do %>
+      <%= form_tag "/search", class: 'navbar-form navbar-left', id: "search_form", role: "Search", method: :get do %>
         <div class="form-group">
           <%= text_field_tag :query, params[:query], placeholder: "Search", class: 'form-control' %>
         </div>

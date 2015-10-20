@@ -64,3 +64,10 @@ function facets() {
     $("#search_form_filter").submit();
   });
 }
+
+function search_form() {
+  $(document).on('click', '#search_link', function() {
+    $("#search_link").hide();
+    $("#search_form").show();
+  });
+}
