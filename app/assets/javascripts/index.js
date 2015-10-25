@@ -3,7 +3,6 @@ function infinity_scroll_main_page(selector) {
     $(window).scroll(function() {
       var url = $('.pagination .next_page').attr('href');
       if (url && $(window).scrollTop() > $(document).height() - $(window).height() - 50) {
-        console.log(url);
         $('.pagination').html('<img src="/assets/loading.gif" alt="Loading..." title="Loading..." />');
         return $.getScript(url);
       }

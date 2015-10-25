@@ -1,7 +1,6 @@
-<% @posts.each do |post| %>
-  <%= render partial: "posts", locals: { post: post } %>
-  <hr>
-<% end %>
+<div id="user-posts-content">
+  <%= render partial: "posts" %>
+</div>
 <div id="user-posts-pagination">
   <%= render partial: "pagination", locals: { object: @posts } %>
 </div>

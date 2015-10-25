@@ -1,7 +1,6 @@
-<% @topics.each do |topic| %>
-    <%= render partial: "topics", locals: { topic: topic } %>
-  <hr>
-<% end %>
+<div id="user-topics-content">
+  <%= render partial: "topics" %>
+</div>
 <div id="user-topics-pagination">
   <%= render partial: "pagination", locals: { object: @topics } %>
 </div>

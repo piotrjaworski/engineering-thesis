@@ -13,7 +13,7 @@
 
   function ajaxTab(type) {
     resetPagination();
-    $('#' + type).html('<img src="/assets/loading.gif" alt="Loading..." title="Loading..." />');
+    $('#' + type).html('<p class="ajax-spinner">Getting data for you... <br><img src="/assets/loading.gif" alt="Loading..." title="Loading..." /></p>');
     $.ajax({
       type: 'GET',
       url: '/users/tab',
