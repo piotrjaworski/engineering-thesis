@@ -1,0 +1,10 @@
+<% if @tab == "all" %>
+  $("#all").html("<%= j(render partial: 'all_content') %>");
+  console.log('all');
+<% elsif @tab == "posts" %>
+  $("#posts").html("<%= j(render partial: 'posts_content') %>");
+  console.log('posts');
+<% elsif @tab == "topics" %>
+  $("#topics").html("<%= j(render partial: 'topics_content') %>");
+  console.log('topics');
+<% end %>

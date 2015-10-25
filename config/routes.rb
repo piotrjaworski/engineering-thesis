@@ -23,7 +23,11 @@ Rails.application.routes.draw do
   get :search, to: 'search#index', as: :search
 
   # users
-  resources :users, only: [:index, :show]
+  resources :users, only: [:index, :show] do
+    collection do
+      get :tab
+    end
+  end
 
   # admin
   namespace :admin do

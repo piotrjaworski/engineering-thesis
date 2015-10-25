@@ -1,3 +1,37 @@
+<script>
+  $(document).ready(function(){
+    $(document).on('click', '.ajax-tab', function() {
+      var type = $(this).attr('data-tab');
+      ajaxTab(type);
+    });
+    checkActiveTab();
+  });
+
+  function ajaxTab(type) {
+    $('#' + type).html('<img src="/assets/loading.gif" alt="Loading..." title="Loading..." />');
+    $.ajax({
+      type: 'GET',
+      url: '/users/tab',
+      data: { tab: type, id: "<%= @user.id %>" },
+      success: function() {
+        console.log('ok');
+      }
+    });
+  }
+
+  function checkActiveTab() {
+    if ($('#myTabs').length > 0) {
+      var type;
+      $('.ajax-header-tab').each(function(i) {
+        if ($(this).hasClass('active'))
+          type = $(this).attr('data-tab');
+      });
+      ajaxTab(type)
+    }
+  }
+</script>
+
+
 <div class="row">
   <div class="col-md-4">
     <div class="row">
@@ -35,39 +69,19 @@
 
   <div class="col-md-8">
     <ul id="myTabs" class="nav nav-tabs" role="tablist">
-      <li role="presentation" class="active"><a href="#all" id="all-tab" role="tab" data-toggle="tab" aria-controls="all" aria-expanded="true">All (<%= @topics_count + @posts_count %>)</a></li>
-      <li role="presentation" class=""><a href="#topics" role="tab" id="topics-tab" data-toggle="tab" aria-controls="topics" aria-expanded="false">Topics (<%= @topics_count %>)</a></li>
-      <li role="presentation" class=""><a href="#posts" role="tab" id="posts-tab" data-toggle="tab" aria-controls="posts" aria-expanded="false">Posts (<%= @posts_count %>)</a></li>
+      <li role="presentation" class="ajax-header-tab active" data-tab="all"><a href="#all" data-tab="all" class="ajax-tab" id="all-tab" role="tab" data-remote="true" data-toggle="tab" aria-controls="all" aria-expanded="true">All (<%= @topics_count + @posts_count %>)</a></li>
+      <li role="presentation" class="ajax-header-tab" data-tab="topics"><a href="#topics" data-tab="topics" class="ajax-tab" role="tab" id="topics-tab" data-remote="true" data-toggle="tab" aria-controls="topics" aria-expanded="false">Topics (<%= @topics_count %>)</a></li>
+      <li role="presentation" class="ajax-header-tab" data-tab="posts"><a href="#posts" data-tab="posts" class="ajax-tab" role="tab" id="posts-tab" data-remote="true" data-toggle="tab" aria-controls="posts" aria-expanded="false">Posts (<%= @posts_count %>)</a></li>
     </ul>
 
      <div class="tab-content">
       <div role="tabpanel" class="tab-pane active" id="all">
-        <div id="user-all-content">
-          <%= render partial: "all" %>
-        </div>
-        <div id="user-all-pagination">
-          <%= render partial: "pagination", locals: { object: @all } %>
-        </div>
       </div>
 
       <div role="tabpanel" class="tab-pane" id="topics">
-        <% @topics.each do |topic| %>
-            <%= render partial: "topic", locals: { topic: topic } %>
-          <hr>
-        <% end %>
-        <div id="user-topics-pagination">
-          <%= render partial: "pagination", locals: { object: @topics } %>
-        </div>
       </div>
 
       <div role="tabpanel" class="tab-pane" id="posts">
-        <% @posts.each do |post| %>
-            <%= render partial: "post", locals: { post: post } %>
-          <hr>
-        <% end %>
-        <div id="user-posts-pagination">
-          <%= render partial: "pagination", locals: { object: @posts } %>
-        </div>
       </div>
     </div>
   </div>

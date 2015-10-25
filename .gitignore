@@ -21,3 +21,5 @@
 /config/database.yml
 .ruby-gemset
 .ruby-version
+
+dump.rdb
