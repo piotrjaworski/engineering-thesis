@@ -1,10 +1,38 @@
 <% if @tab == "all" %>
-  $("#all").html("<%= j(render partial: 'all_content') %>");
-  console.log('all');
+  <% if params[:page] %>
+    $('#user-all-content').append('<%= j(render partial: 'all')%>');
+    <% if @all.next_page %>
+      $('.pagination').replaceWith('<%= j will_paginate(@all) %>');
+    <% else %>
+      $('.pagination').remove();
+    <% end %>
+  <% else %>
+    $("#all").html("<%= j(render partial: 'all_content') %>");
+  <% end %>
+
 <% elsif @tab == "posts" %>
-  $("#posts").html("<%= j(render partial: 'posts_content') %>");
-  console.log('posts');
+  <% if params[:page] %>
+    $('#user-posts-content').append('<%= j(render partial: 'posts')%>');
+    <% if @posts.next_page %>
+      $('.pagination').replaceWith('<%= j will_paginate(@posts) %>');
+    <% else %>
+      $('.pagination').remove();
+    <% end %>
+  <% else %>
+    $("#posts").html("<%= j(render partial: 'posts_content') %>");
+  <% end %>
+
 <% elsif @tab == "topics" %>
-  $("#topics").html("<%= j(render partial: 'topics_content') %>");
-  console.log('topics');
+  <% if params[:page] %>
+    $('#user-topics-content').append('<%= j(render partial: 'topics')%>');
+    <% if @topics.next_page %>
+      $('.pagination').replaceWith('<%= j will_paginate(@topics) %>');
+    <% else %>
+      $('.pagination').remove();
+    <% end %>
+  <% else %>
+    $("#topics").html("<%= j(render partial: 'topics_content') %>");
+  <% end %>
 <% end %>
+
+

@@ -1,20 +1,25 @@
 <script>
   $(document).ready(function(){
+    changeAjaxTab();
+  });
+
+  function changeAjaxTab() {
     $(document).on('click', '.ajax-tab', function() {
       var type = $(this).attr('data-tab');
       ajaxTab(type);
     });
     checkActiveTab();
-  });
+  }
 
   function ajaxTab(type) {
+    resetPagination();
     $('#' + type).html('<img src="/assets/loading.gif" alt="Loading..." title="Loading..." />');
     $.ajax({
       type: 'GET',
       url: '/users/tab',
       data: { tab: type, id: "<%= @user.id %>" },
       success: function() {
-        console.log('ok');
+        infinity_scroll_main_page("#user-" + type + "-pagination");
       }
     });
   }
@@ -26,8 +31,14 @@
         if ($(this).hasClass('active'))
           type = $(this).attr('data-tab');
       });
-      ajaxTab(type)
+      ajaxTab(type);
     }
+  }
+
+  function resetPagination() {
+    var ids = ["user-topics-pagination", "user-posts-pagination", "user-all-pagination"];
+    for(i = 0; i < ids.length; i++)
+      $('#' + ids[i]).html("");
   }
 </script>
 
