@@ -24,10 +24,13 @@ Rails.application.routes.draw do
 
   # users
   resources :users, only: [:index, :show] do
+    resources :message_threads, path: :messages
     collection do
       get :tab
     end
   end
+
+  #resources :message_threads
 
   # admin
   namespace :admin do

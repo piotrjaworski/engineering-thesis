@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151014150702) do
+ActiveRecord::Schema.define(version: 20151025155507) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,6 +60,31 @@ ActiveRecord::Schema.define(version: 20151014150702) do
   add_index "impressions", ["impressionable_type", "impressionable_id", "session_hash"], name: "poly_session_index", using: :btree
   add_index "impressions", ["impressionable_type", "message", "impressionable_id"], name: "impressionable_type_message_index", using: :btree
   add_index "impressions", ["user_id"], name: "index_impressions_on_user_id", using: :btree
+
+  create_table "message_threads", force: :cascade do |t|
+    t.integer  "sender_id"
+    t.integer  "addressee_id"
+    t.string   "topic"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "message_threads", ["addressee_id"], name: "index_message_threads_on_addressee_id", using: :btree
+  add_index "message_threads", ["sender_id"], name: "index_message_threads_on_sender_id", using: :btree
+
+  create_table "messages", force: :cascade do |t|
+    t.text     "content"
+    t.integer  "addressee_id"
+    t.integer  "sender_id"
+    t.integer  "message_thread_id"
+    t.boolean  "read"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
+
+  add_index "messages", ["addressee_id"], name: "index_messages_on_addressee_id", using: :btree
+  add_index "messages", ["message_thread_id"], name: "index_messages_on_message_thread_id", using: :btree
+  add_index "messages", ["sender_id"], name: "index_messages_on_sender_id", using: :btree
 
   create_table "pg_search_documents", force: :cascade do |t|
     t.text     "content"
@@ -127,6 +152,11 @@ ActiveRecord::Schema.define(version: 20151014150702) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["slug"], name: "index_users_on_slug", unique: true, using: :btree
 
+  add_foreign_key "message_threads", "users", column: "sender_id"
+  add_foreign_key "message_threads", "users", column: "sender_id"
+  add_foreign_key "messages", "message_threads"
+  add_foreign_key "messages", "users", column: "addressee_id"
+  add_foreign_key "messages", "users", column: "sender_id"
   add_foreign_key "posts", "topics"
   add_foreign_key "posts", "users"
   add_foreign_key "topics", "categories"

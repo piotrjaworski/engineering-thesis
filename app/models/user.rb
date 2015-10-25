@@ -5,8 +5,10 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :topics, class_name: 'Topic', foreign_key: 'creator_id'
+  has_many :topics, class_name: "Topic", foreign_key: "creator_id"
   has_many :posts
+  has_many :message_threads_received, class_name: "MessageThread", foreign_key: :addressee_id
+  has_many :message_threads_sent, class_name: "MessageThread", foreign_key: :sender_id
 
   validates_presence_of :full_name, :username
   validates_uniqueness_of :username

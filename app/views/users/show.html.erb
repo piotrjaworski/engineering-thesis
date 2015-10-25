@@ -79,6 +79,9 @@
   </div>
 
   <div class="col-md-8">
+    <% if user_signed_in? %>
+      <%= link_to "Send message", new_user_message_thread_path(user_id: params[:id]), class: "btn btn-success" %>
+    <% end %>
     <ul id="myTabs" class="nav nav-tabs" role="tablist">
       <li role="presentation" class="ajax-header-tab active" data-tab="all"><a href="#all" data-tab="all" class="ajax-tab" id="all-tab" role="tab" data-remote="true" data-toggle="tab" aria-controls="all" aria-expanded="true">All (<%= @topics_count + @posts_count %>)</a></li>
       <li role="presentation" class="ajax-header-tab" data-tab="topics"><a href="#topics" data-tab="topics" class="ajax-tab" role="tab" id="topics-tab" data-remote="true" data-toggle="tab" aria-controls="topics" aria-expanded="false">Topics (<%= @topics_count %>)</a></li>
