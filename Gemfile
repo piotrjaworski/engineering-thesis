@@ -33,6 +33,7 @@ gem 'figaro'
 gem 'decent_exposure'
 gem 'newrelic_rpm'
 gem 'friendly_id', '~> 5.1.0'
+gem 'bootstrap3_autocomplete_input'
 
 group :development do
   gem 'better_errors'

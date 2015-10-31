@@ -1,2 +1,2 @@
-<h1>Send a new private message to <%= @addressee.full_name %></h1>
+<h1>Send a new private message <%= "to #{@addressee.full_name}" unless params[:new] %></h1>
 <%= render partial: "form" %>

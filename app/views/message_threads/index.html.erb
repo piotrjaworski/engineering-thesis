@@ -13,11 +13,15 @@
     </table>
   </div>
   <div class="col-md-9 messages-list">
-    <%= link_to "New message", "#", class: "btn btn-primary pull-right" %>
+    <div class="flash-messages">
+      <%= flash_messages %>
+    </div>
+    <%= link_to "New message", new_user_message_thread_path(new: true), class: "btn btn-primary pull-right" %>
     <table class="table table-hover">
       <thead>
         <tr>
-          <th class="col-md-8">Topic</th>
+          <th class="col-md-6">Topic</th>
+          <th class="col-md-2">User</th>
           <th class="col-md-2">Messages</th>
           <th class="col-md-2">Last Activity</th>
         </tr>
@@ -25,7 +29,8 @@
       <tbody>
         <% @message_threads.each do |mt| %>
           <tr>
-            <td class="col-md-8"><%= link_to mt.topic, user_message_thread_path(id: mt, user_id: current_user) %></td>
+            <td class="col-md-6"><%= link_to mt.topic, user_message_thread_path(id: mt, user_id: current_user) %></td>
+            <td class="col-md-2"><%= link_to (image_tag mt.exclude_user(current_user).avatar(:mini), class: "round-image"), user_path(mt.exclude_user(current_user)) %></td>
             <td class="col-md-2"><%= mt.messages.count %></td>
             <td class="col-md-2"><%= time_ago_in_words(mt.updated_at) %></td>
           </tr>

@@ -84,4 +84,8 @@ class User < ActiveRecord::Base
     MessageThread.includes(:messages).where("addressee_id = ? or sender_id = ?", self.id, self.id).order(created_at: :desc)
   end
 
+  def name_with_email
+    "#{self.full_name} #{@addressee.email}"
+  end
+
 end

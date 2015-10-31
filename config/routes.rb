@@ -26,6 +26,7 @@ Rails.application.routes.draw do
   resources :users, only: [:index, :show] do
     resources :message_threads, path: :messages do
       post :reply, on: :collection
+      get :autocomplete_user_username, on: :collection
     end
     collection do
       get :tab

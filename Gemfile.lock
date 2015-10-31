@@ -50,6 +50,7 @@ GEM
     bootstrap-sass (3.3.5.1)
       autoprefixer-rails (>= 5.0.0.1)
       sass (>= 3.3.0)
+    bootstrap3_autocomplete_input (0.1.9)
     builder (3.2.2)
     cancancan (1.12.0)
     capybara (2.4.4)
@@ -264,6 +265,7 @@ DEPENDENCIES
   better_errors
   binding_of_caller
   bootstrap-sass (~> 3.3.5)
+  bootstrap3_autocomplete_input
   cancancan (~> 1.10)
   capybara
   codeclimate-test-reporter
