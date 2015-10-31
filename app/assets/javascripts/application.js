@@ -11,4 +11,5 @@ $(document).ready(function() {
   category_change();
   facets();
   search_form();
+  post_reply();
 });

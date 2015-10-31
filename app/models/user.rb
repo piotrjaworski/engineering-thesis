@@ -80,4 +80,8 @@ class User < ActiveRecord::Base
     end
   end
 
+  def message_threads
+    MessageThread.includes(:messages).where("addressee_id = ? or sender_id = ?", self.id, self.id).order(created_at: :desc)
+  end
+
 end

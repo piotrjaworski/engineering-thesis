@@ -21,5 +21,6 @@
 /config/database.yml
 .ruby-gemset
 .ruby-version
+/coverage
 
 dump.rdb

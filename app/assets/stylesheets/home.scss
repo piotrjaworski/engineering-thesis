@@ -215,3 +215,30 @@ ul.users-list {
   }
 }
 
+/* MESSAGES */
+.messages-list {
+  .table {
+    margin-top: 50px;
+  }
+}
+
+.messages-table {
+  margin-top: 60px;
+  font-weight: 500;
+}
+.show-message {
+  a {
+    margin-top: 30px;
+  }
+}
+
+#new-reply {
+  position: fixed;
+  bottom: 0;
+  margin-bottom: 10px;
+  background-color: white;
+}
+
+.hidden-reply {
+  width: 750px;
+}

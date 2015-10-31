@@ -27,13 +27,13 @@ class Topic < ActiveRecord::Base
     (Time.parse(DateTime.now.to_s) - Time.parse(created_at.to_s))/3600 < 6 ? true : false
   end
 
-  def assing_user(user)
+  def assign_user(user)
     posts.each { |p| p.user_id = user.id }
   end
 
   def self.build_new(user, params)
     topic = user.topics.new(params)
-    topic.assing_user(user)
+    topic.assign_user(user)
     topic
   end
 

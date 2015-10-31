@@ -1,0 +1,16 @@
+<div class="row">
+  <div class="col-md-8 show-message">
+    <%= link_to "#{fa_icon 'angle-left'} Back to inbox".html_safe, user_message_threads_path(current_user), class: "btn btn-primary" %>
+    <div class="flash-messages">
+      <%= flash_messages %>
+    </div>
+    <h1><%= fa_icon "envelope-o" %> <%= @message_thread.topic %></h1>
+    <% @message_thread.messages.each do |message| %>
+      <%= render partial: "message", locals: { message: message } %>
+    <% end %>
+    <a class="btn btn-primary" id="add-reply">Add reply</a>
+    <div id="new-reply" style="display: none;">
+      <%= render partial: "new_reply" %>
+    </div>
+  </div>
+</div>

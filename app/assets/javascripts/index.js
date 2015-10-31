@@ -71,3 +71,14 @@ function search_form() {
     $("#search_form").show();
   });
 }
+
+function post_reply() {
+  $(document).on('click', '#add-reply', function() {
+    if ($('#new-reply').is(':hidden')) {
+      $('#new-reply').slideDown() ;
+    }
+    else {
+      $('#new-reply').slideUp();
+    }
+  });
+}

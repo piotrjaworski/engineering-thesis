@@ -46,6 +46,8 @@ group :development, :test do
   gem 'faker'
 end
 
+gem 'codeclimate-test-reporter', group: :test, require: nil
+
 # gem 'unicorn'
 # gem 'capistrano-rails', group: :development
 # gem 'therubyracer', platforms: :ruby

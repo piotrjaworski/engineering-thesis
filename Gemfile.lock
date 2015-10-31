@@ -79,6 +79,8 @@ GEM
       activesupport (>= 3.0)
     cocaine (0.5.7)
       climate_control (>= 0.0.3, < 1.0)
+    codeclimate-test-reporter (0.4.8)
+      simplecov (>= 0.7.1, < 1.0.0)
     coderay (1.1.0)
     connection_pool (2.2.0)
     debug_inspector (0.0.2)
@@ -91,6 +93,7 @@ GEM
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
     diff-lcs (1.2.5)
+    docile (1.1.5)
     erubis (2.7.0)
     execjs (2.5.2)
     faker (1.5.0)
@@ -218,6 +221,11 @@ GEM
     simple_form (3.1.0)
       actionpack (~> 4.0)
       activemodel (~> 4.0)
+    simplecov (0.10.0)
+      docile (~> 1.1.0)
+      json (~> 1.8)
+      simplecov-html (~> 0.10.0)
+    simplecov-html (0.10.0)
     sinatra (1.4.6)
       rack (~> 1.4)
       rack-protection (~> 1.4)
@@ -258,6 +266,7 @@ DEPENDENCIES
   bootstrap-sass (~> 3.3.5)
   cancancan (~> 1.10)
   capybara
+  codeclimate-test-reporter
   decent_exposure
   devise
   faker

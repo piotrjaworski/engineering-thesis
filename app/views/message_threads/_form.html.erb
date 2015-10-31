@@ -1,6 +1,6 @@
 <%= tinymce_assets %>
 <%= tinymce %>
-<%= simple_form_for @message_thread, html: { novalidate: true } do |f| %>
+<%= simple_form_for [:user, @message_thread], html: { novalidate: true } do |f| %>
   <%= label_tag :addressee, "User" %>
   <%= text_field_tag :addressee, "#{@addressee.full_name} <#{@addressee.email}>", class: "form-control", readonly: true %>
   <%= f.input :addressee_id, as: :hidden %>
