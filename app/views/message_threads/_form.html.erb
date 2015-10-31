@@ -10,7 +10,7 @@
   <%= f.input :addressee_id, as: :hidden %>
   <%= f.input :topic, class: "form-control", input_html: { required: true } %>
   <%= f.simple_fields_for :message do | mf| %>
-    <%= mf.input :content, as: :text, input_html: { class: "tinymce", rows: 20, cols: 120 } %>
+    <%= mf.input :content, as: :text, input_html: { class: "tinymce", rows: 12, cols: 120 } %>
   <% end %>
   <%= f.submit "Send", class: "btn btn-primary" %>
 <% end %>

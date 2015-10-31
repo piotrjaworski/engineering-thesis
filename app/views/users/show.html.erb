@@ -1,16 +1,4 @@
 <script>
-  $(document).ready(function(){
-    changeAjaxTab();
-  });
-
-  function changeAjaxTab() {
-    $(document).on('click', '.ajax-tab', function() {
-      var type = $(this).attr('data-tab');
-      ajaxTab(type);
-    });
-    checkActiveTab();
-  }
-
   function ajaxTab(type) {
     resetPagination();
     $('#' + type).html('<p class="ajax-spinner">Getting data for you... <br><img src="/assets/loading.gif" alt="Loading..." title="Loading..." /></p>');
@@ -23,25 +11,7 @@
       }
     });
   }
-
-  function checkActiveTab() {
-    if ($('#myTabs').length > 0) {
-      var type;
-      $('.ajax-header-tab').each(function(i) {
-        if ($(this).hasClass('active'))
-          type = $(this).attr('data-tab');
-      });
-      ajaxTab(type);
-    }
-  }
-
-  function resetPagination() {
-    var ids = ["user-topics-pagination", "user-posts-pagination", "user-all-pagination"];
-    for(i = 0; i < ids.length; i++)
-      $('#' + ids[i]).html("");
-  }
 </script>
-
 
 <div class="row">
   <div class="col-md-4">
@@ -50,37 +20,31 @@
         <p class="text-center">
           <%= image_tag(@user.avatar(:medium), class: 'round-image profile-image') %>
         </p>
-        <p>
-          <hr>
-          <strong>Username: </strong><%= @user.username %>
-        </p>
-        <p>
-          <hr>
-          <strong>Full name: </strong><%= @user.full_name %>
-        </p>
-        <p>
-          <hr>
-          <strong>Email: </strong><%= @user.email %>
-        </p>
-        <p>
-          <hr>
-          <strong>Joined: </strong><%= @user.created_at.strftime("%d %B %Y at %H:%M") %>
-        </p>
-        <p>
-          <hr>
-          <strong>Last post: </strong><%= @user.posts.last.created_at.strftime("%d %B %Y at %H:%M") rescue "Not posted yet" %>
-        </p>
-        <p>
-          <hr>
-          <strong>Seen: </strong><%= @user.last_sign_in_at.strftime("%d %B %Y at %H:%M") rescue "Not logged yet" %>
-        </p>
+        <hr>
+        <strong>Username: </strong><%= @user.username %>
+        <br>
+        <hr>
+        <strong>Full name: </strong><%= @user.full_name %>
+        <br>
+        <hr>
+        <strong>Email: </strong><%= @user.email %>
+        <br>
+        <hr>
+        <strong>Joined: </strong><%= @user.created_at.strftime("%d %B %Y at %H:%M") %>
+        <br>
+        <hr>
+        <strong>Last post: </strong><%= @user.posts.last.created_at.strftime("%d %B %Y at %H:%M") rescue "Not posted yet" %>
+        <br>
+        <hr>
+        <strong>Seen: </strong><%= @user.last_sign_in_at.strftime("%d %B %Y at %H:%M") rescue "Not logged yet" %>
+        <br>
       </div>
     </div>
   </div>
 
   <div class="col-md-8">
-    <% if user_signed_in? %>
-      <%= link_to "Send message", new_user_message_thread_path(user_id: params[:id]), class: "btn btn-success" %>
+    <% if user_signed_in? && current_user != @user %>
+      <%= link_to "Send message", new_user_message_thread_path(user_id: params[:id]), class: "btn btn-success pull-right" %>
     <% end %>
     <ul id="myTabs" class="nav nav-tabs" role="tablist">
       <li role="presentation" class="ajax-header-tab active" data-tab="all"><a href="#all" data-tab="all" class="ajax-tab" id="all-tab" role="tab" data-remote="true" data-toggle="tab" aria-controls="all" aria-expanded="true">All (<%= @topics_count + @posts_count %>)</a></li>

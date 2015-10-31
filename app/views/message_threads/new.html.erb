@@ -1,2 +1,3 @@
+<%= link_to "#{fa_icon 'angle-left'} Back to inbox".html_safe, user_message_threads_path(current_user), class: "btn btn-primary" %>
 <h1>Send a new private message <%= "to #{@addressee.full_name}" unless params[:new] %></h1>
 <%= render partial: "form" %>

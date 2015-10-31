@@ -6,6 +6,7 @@ class Post < ActiveRecord::Base
   belongs_to :topic, touch: true
   before_update :increase_edited_count
   before_save :check_emoticons_path
+  before_save :set_post_number
 
   default_scope { order("created_at ASC") }
 
@@ -16,6 +17,10 @@ class Post < ActiveRecord::Base
   def check_emoticons_path
     # tinymce issue
     self.content = self.content.gsub("assets", "/assets")
+  end
+
+  def set_post_number
+    self.number = self.topic.posts.count + 1
   end
 
 end

@@ -14,4 +14,5 @@ $(document).ready(function() {
   facets();
   search_form();
   post_reply();
+  changeAjaxTab();
 });

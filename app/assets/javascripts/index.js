@@ -82,3 +82,28 @@ function post_reply() {
     }
   });
 }
+
+function checkActiveTab() {
+  if ($('#myTabs').length > 0) {
+    var type;
+    $('.ajax-header-tab').each(function(i) {
+      if ($(this).hasClass('active'))
+        type = $(this).attr('data-tab');
+    });
+    ajaxTab(type);
+  }
+}
+
+function resetPagination() {
+  var ids = ["user-topics-pagination", "user-posts-pagination", "user-all-pagination"];
+  for(i = 0; i < ids.length; i++)
+    $('#' + ids[i]).html("");
+}
+
+function changeAjaxTab() {
+  $(document).on('click', '.ajax-tab', function() {
+    var type = $(this).attr('data-tab');
+    ajaxTab(type);
+  });
+  checkActiveTab();
+}
