@@ -9,7 +9,6 @@ class TopicsController < ApplicationController
         @topic = Topic.new
         @topic.posts.build
       end
-      format.html { redirect_to root_path }
     end
   end
 
@@ -18,7 +17,7 @@ class TopicsController < ApplicationController
     if @topic.save
       render :hide_form
     else
-      render :new
+      redirect_to root_path, alert: "Please fill all required fields"
     end
   end
 

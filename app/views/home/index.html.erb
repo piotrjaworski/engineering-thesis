@@ -1,3 +1,14 @@
+<script>
+  window.onload = function() {
+    $.ajax({
+      url: "/topic_filter",
+      method: "GET",
+      success: function(data, status, xhr) { infinity_scroll_main_page("#main-pagination"); },
+      error: function(xhr, status, error) { alert(error); }
+    })
+  }
+</script>
+
 <div class="row">
   <div class="col-md-12 flash-messages">
     <%= render partial: "shared/flash_messages" %>
@@ -18,12 +29,12 @@
 </div>
 
 <div id="topics_list">
-  <%= render partial: "topics_content", locals: { topics: @topics } %>
+  <p class="text-center"><img src="/assets/loading.gif" alt="Loading..." title="Loading..." /></p>
 </div>
 
 <div id="main-pagination">
-  <%= render partial: "pagination", locals: { topics: @topics } %>
+  <%#= render partial: "pagination", locals: { topics: @topics } %>
 </div>
 
-<div class="modal fade" id="modal">
+<div id="new-topic">
 </div>

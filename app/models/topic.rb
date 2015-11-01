@@ -13,7 +13,7 @@ class Topic < ActiveRecord::Base
 
   default_scope { order("updated_at DESC") }
   scope :top_records, -> { unscope(:order).order("views DESC") }
-  scope :new_records, -> { where("created_at >= ?", Time.now - 1.minutes) }
+  scope :new_records, -> { where("created_at >= ?", Time.now - 6.hours) }
 
   def to_param
     [id, name.parameterize].join("-")
@@ -52,13 +52,7 @@ class Topic < ActiveRecord::Base
   end
 
   def users_ids
-    User.find_by_sql("SELECT DISTINCT u.id, p.created_at FROM users u
-                     INNER JOIN posts p ON p.user_id = u.id
-                     JOIN topics t ON t.id = p.topic_id
-                     WHERE t.id = #{self.id}
-                     GROUP BY u.id, p.id, t.id
-                     ORDER BY p.created_at DESC
-                     LIMIT 4").map { |u| u.id }
+    posts.pluck(:user_id).reverse.uniq.take(4)
   end
 
 end

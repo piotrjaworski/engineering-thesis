@@ -1,3 +1,2 @@
-m = $('#modal');
-m.html('<%= j(render partial: 'form', locals: { topic: @topic }) %>');
-m.modal('show');
+$("#new-topic").html('<%= j(render partial: 'form', locals: { topic: @topic }) %>');
+$("#new-topic").slideDown();

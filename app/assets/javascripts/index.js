@@ -99,6 +99,9 @@ function post_reply() {
     if ($("#edit-post").is(':visible')) {
       $("#edit-post").slideUp();
     }
+    if ($("#new-topic").is(':visible')) {
+      $("#new-topic").slideUp();
+    }
   });
 }
 
