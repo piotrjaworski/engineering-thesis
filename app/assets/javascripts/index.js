@@ -78,7 +78,18 @@ function message_reply() {
       $('#new-reply').slideDown();
     }
     else {
-      $('#new-reply').slideUp();
+      $("#new-reply").slideUp();
+    }
+  });
+}
+
+function new_topic() {
+  $(document).on('click', "#start_new_topic", function() {
+    if ($("new-topic").is(':hidden')) {
+      $("#new-topic").slideDown();
+    }
+    else {
+      $("#new-topic").slideUp();
     }
   });
 }
@@ -92,6 +103,9 @@ function post_reply() {
       $('#new-post-reply').slideUp();
     }
   });
+}
+
+function close_form() {
   $(document).on('click', '.close-button', function() {
     if ($("#new-post-reply").is(':visible')) {
       $("#new-post-reply").slideUp();

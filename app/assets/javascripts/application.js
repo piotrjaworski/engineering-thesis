@@ -15,5 +15,7 @@ $(document).ready(function() {
   search_form();
   message_reply();
   post_reply();
+  new_topic();
+  close_form();
   changeAjaxTab();
 });

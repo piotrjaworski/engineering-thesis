@@ -13,9 +13,8 @@
 
 <div id="post-reply-box">
   <% if user_signed_in? %>
-    <a class="btn btn-success" id="add-post-reply">Add reply</a>
+    <%= link_to "Add reply", new_topic_post_path(@topic), class: "btn btn-primary", id: "add-post-reply", remote: true %>
     <div id="new-post-reply" style="display: none;">
-      <%= render partial: "new_reply" %>
     </div>
     <div id="edit-post" style="display: none;">
     </div>
