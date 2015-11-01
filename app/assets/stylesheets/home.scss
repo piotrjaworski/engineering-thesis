@@ -158,6 +158,22 @@ ul.users-list {
   padding-bottom: 10px;
 }
 
+#new-post-reply, #edit-post {
+  width: 100%;
+  margin-left: -15px;
+  padding-left: 15px;
+  padding-top: 20px;
+}
+
+#post-reply-box {
+  margin-bottom: 20px;
+}
+
+.edit-post {
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
 /* PROFILE */
 
 #image_preview {
@@ -232,15 +248,21 @@ ul.users-list {
   }
 }
 
-#new-reply {
+#new-reply, #new-post-reply, #edit-post {
   position: fixed;
   bottom: 0;
-  margin-bottom: 10px;
+  padding-bottom: 10px;
   background-color: white;
 }
 
 .hidden-reply {
   width: 750px;
+  .close-button {
+    text-decoration: none;
+    font-weight: 500;
+    cursor: pointer;
+    color: black;
+  }
 }
 
 #user-all-content, #user-topics-content, #user-posts-content {

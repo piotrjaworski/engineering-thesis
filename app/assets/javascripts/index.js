@@ -72,13 +72,32 @@ function search_form() {
   });
 }
 
-function post_reply() {
+function message_reply() {
   $(document).on('click', '#add-reply', function() {
     if ($('#new-reply').is(':hidden')) {
-      $('#new-reply').slideDown() ;
+      $('#new-reply').slideDown();
     }
     else {
       $('#new-reply').slideUp();
+    }
+  });
+}
+
+function post_reply() {
+  $(document).on('click', '#add-post-reply', function() {
+    if ($('#new-post-reply').is(':hidden')) {
+      $('#new-post-reply').slideDown();
+    }
+    else {
+      $('#new-post-reply').slideUp();
+    }
+  });
+  $(document).on('click', '.close-button', function() {
+    if ($("#new-post-reply").is(':visible')) {
+      $("#new-post-reply").slideUp();
+    }
+    if ($("#edit-post").is(':visible')) {
+      $("#edit-post").slideUp();
     }
   });
 }

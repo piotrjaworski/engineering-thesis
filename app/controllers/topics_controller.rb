@@ -24,6 +24,7 @@ class TopicsController < ApplicationController
 
   def show
     impressionist(@topic)
+    @post = Post.new
   end
 
   private

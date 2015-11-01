@@ -12,13 +12,14 @@ class PostsController < ApplicationController
     if @post.save
       redirect_with_message(@topic, "Your reply has been posted.", "success")
     else
-      render :new
-      flash.now[:error] = "Please fill all required fields"
+      redirect_with_message(@topic, @post.errors.messages.map { |k, v| "#{k.to_s.capitalize} #{v.join('')}" }.join(''), "error")
     end
   end
 
   def edit
-    authorize! :edit, @post
+    respond_to do |format|
+      format.js { authorize! :edit, @post }
+    end
   end
 
   def update
@@ -27,7 +28,7 @@ class PostsController < ApplicationController
       redirect_to @topic
       flash[:success] = "Post has been successfuly updated"
     else
-      render :edit
+      redirect_to @topic, alert: "@post.errors.messages.map { |k, v| '#{k.to_s.capitalize} #{v.join('')}' }.join('')"
     end
   end
 

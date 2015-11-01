@@ -13,6 +13,7 @@ $(document).ready(function() {
   category_change();
   facets();
   search_form();
+  message_reply();
   post_reply();
   changeAjaxTab();
 });

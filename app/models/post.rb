@@ -7,6 +7,7 @@ class Post < ActiveRecord::Base
   before_update :increase_edited_count
   before_save :check_emoticons_path
   before_save :set_post_number
+  validates_length_of :content, minimum: 4, allow_blank: false
 
   default_scope { order("created_at ASC") }
 
