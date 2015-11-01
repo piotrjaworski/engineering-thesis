@@ -18,7 +18,7 @@
             This post has been edited <%= post.edited_count %> <%= 'time'.pluralize(post.edited_count) %>. Last at <%= post.updated_at %>.
           </p>
         <% end %>
-        <% if can? :edit, post %>
+        <% if can?(:edit, post) && !@topic.blocked %>
           <%= link_to fa_icon("edit"), edit_topic_post_path(post, topic_id: post.topic_id), class: "pull-right edit-post", remote: true %>
         <% end %>
       </div>

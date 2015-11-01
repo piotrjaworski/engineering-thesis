@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   get :category_filter, to: "home#category_filter"
   resources :topics do
     resources :posts, only: [:new, :edit, :create, :update]
+    post :close
+    post :open
   end
 
   # profile

@@ -8,6 +8,7 @@ class Post < ActiveRecord::Base
   before_save :check_emoticons_path
   before_save :set_post_number
   validates_length_of :content, minimum: 4, allow_blank: false
+  validate :closed_topic
 
   default_scope { order("created_at ASC") }
 
@@ -23,5 +24,13 @@ class Post < ActiveRecord::Base
   def set_post_number
     self.number = self.topic.posts.count + 1
   end
+
+  private
+
+    def closed_topic
+      if self.topic.blocked
+        return errors.add(:topic, "is blocked. Cannot edit/update post.")
+      end
+    end
 
 end

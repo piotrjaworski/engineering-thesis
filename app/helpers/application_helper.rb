@@ -40,4 +40,8 @@ module ApplicationHelper
     user.id == topic.creator_id ? "round-image-creator main-page-image" : "round-image main-page-image"
   end
 
+  def fa_icon_with_text(text, icon)
+    "#{text} #{fa_icon icon}".html_safe
+  end
+
 end

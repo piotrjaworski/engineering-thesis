@@ -26,6 +26,20 @@ class TopicsController < ApplicationController
     @post = Post.new
   end
 
+  def close
+    @topic = Topic.find(params[:topic_id])
+    authorize! :close, @topic
+    @topic.close
+    redirect_to @topic, notice: "Topic has been successfully closed"
+  end
+
+  def open
+    @topic = Topic.find(params[:topic_id])
+    authorize! :open, @topic
+    @topic.open
+    redirect_to @topic, notice: "Topic has been successfully opened"
+  end
+
   private
 
     def topic_params

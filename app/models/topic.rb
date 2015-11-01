@@ -43,6 +43,22 @@ class Topic < ActiveRecord::Base
     post
   end
 
+  def close
+    self.update_column(:blocked, true)
+  end
+
+  def closed?
+    blocked
+  end
+
+  def opened?
+    !blocked
+  end
+
+  def open
+    self.update_column(:blocked, false)
+  end
+
   def creator
     User.find(self.creator_id)
   end

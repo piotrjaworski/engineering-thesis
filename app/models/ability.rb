@@ -18,6 +18,8 @@ class Ability
       can :show, MessageThread, sender_id: user.id
       can :reply, MessageThread, addressee_id: user.id
       can :reply, MessageThread, sender_id: user.id
+      can :close, Topic
+      can :open, Topic
     elsif user.is_admin?
       can :edit, Post
       can :update, Post
@@ -25,6 +27,8 @@ class Ability
       can :show, MessageThread, sender_id: user.id
       can :reply, MessageThread, addressee_id: user.id
       can :reply, MessageThread, sender_id: user.id
+      can :close, Topic
+      can :open, Topic
     end
   end
 end

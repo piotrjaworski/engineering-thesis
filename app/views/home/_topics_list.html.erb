@@ -5,6 +5,7 @@
       <% if t.new? %>
         <span class="label label-primary">New</span>
       <% end %>
+      <%= fa_icon("lock", class: "pull-right") if t.closed? %>
     </td>
     <td class="col-md-2"><%= t.category.name %></td>
     <td class="col-md-2">

@@ -13,7 +13,18 @@
 
 <div id="post-reply-box">
   <% if user_signed_in? %>
-    <%= link_to "Add reply", new_topic_post_path(@topic), class: "btn btn-primary", id: "add-post-reply", remote: true %>
+    <% unless @topic.blocked %>
+      <%= link_to fa_icon_with_text("Add reply", "reply"), new_topic_post_path(@topic), class: "btn btn-primary", id: "add-post-reply", remote: true %>
+    <% end %>
+
+    <% if @topic.blocked && can?(:open, @topic) %>
+      <%= link_to fa_icon_with_text("Open", "unlock"), topic_open_path(@topic), method: :post, class: "btn btn-warning" %>
+    <% end %>
+
+    <% unless @topic.blocked && can?(:close, @topic) %>
+      <%= link_to fa_icon_with_text("Close", "lock"), topic_close_path(@topic), method: :post, class: "btn btn-warning" %>
+    <% end %>
+
     <div id="new-post-reply" style="display: none;">
     </div>
     <div id="edit-post" style="display: none;">
