@@ -18,5 +18,6 @@ $(document).ready(function() {
   new_topic();
   close_form();
   changeAjaxTab();
+  getNotificationsData();
   notificationsBar();
 });

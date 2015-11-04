@@ -35,6 +35,13 @@ Rails.application.routes.draw do
     end
   end
 
+  # notifications
+  resources :notifications, only: [:index] do
+    collection do
+      get :new_notifications
+    end
+  end
+
   # admin
   namespace :admin do
     get '/', to: 'dashboard#index'

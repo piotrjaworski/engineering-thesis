@@ -146,11 +146,24 @@ function changeAjaxTab() {
 
 function notificationsBar() {
   setInterval(function() {
-      if ($('#notifications').length > 0) {
-        $('#notifications').html("Notifications (2)");
-        console.log("refreshed");
-        //add ajax request to get new notifications count
-      }
+    getNotificationsData();
     }, 20000
   );
+}
+
+function getNotificationsData() {
+  if ($('#notifications').length > 0) {
+    $.ajax({
+      method: "GET",
+      url: "/notifications/new_notifications",
+      dataType: "JSON",
+      success: function(data, text, xhr) {
+        if (data == 0) {
+          $('#notifications').html("Notifications <span class='badge'>" + data + "</span>");
+        } else {
+          $('#notifications').html("Notifications <span class='badge badge-success'>" + data + "</span>");
+        }
+      }
+    });
+  }
 }
