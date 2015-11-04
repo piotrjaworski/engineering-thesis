@@ -3,7 +3,7 @@
 //= require bootstrap-sprockets
 //= require bootstrap3-typeahead.min
 //= require bootstrap3-autocomplete-input.min
-//= require index
+//= require functions
 
 $(document).ready(function() {
   header_scroll();
@@ -18,4 +18,5 @@ $(document).ready(function() {
   new_topic();
   close_form();
   changeAjaxTab();
+  notificationsBar();
 });

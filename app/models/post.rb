@@ -4,9 +4,12 @@ class Post < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :topic, touch: true
+  has_one :notification, as: :notificationable
+
   before_update :increase_edited_count
   before_save :check_emoticons_path
   before_save :set_post_number
+
   validates_length_of :content, minimum: 4, allow_blank: false
   validate :closed_topic
 

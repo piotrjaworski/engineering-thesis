@@ -143,3 +143,14 @@ function changeAjaxTab() {
   });
   checkActiveTab();
 }
+
+function notificationsBar() {
+  setInterval(function() {
+      if ($('#notifications').length > 0) {
+        $('#notifications').html("Notifications (2)");
+        console.log("refreshed");
+        //add ajax request to get new notifications count
+      }
+    }, 20000
+  );
+}

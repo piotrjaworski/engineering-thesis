@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
   has_many :posts
   has_many :message_threads_received, class_name: "MessageThread", foreign_key: :addressee_id
   has_many :message_threads_sent, class_name: "MessageThread", foreign_key: :sender_id
+  has_many :notifications
 
   validates_presence_of :full_name, :username
   validates_uniqueness_of :username
@@ -82,6 +83,10 @@ class User < ActiveRecord::Base
 
   def message_threads
     MessageThread.includes(:messages).where("addressee_id = ? or sender_id = ?", self.id, self.id).order(created_at: :desc)
+  end
+
+  def unread_message_threads
+    message_threads_received.includes(:messages).where("messages.unread = ?", true).references(:messages)
   end
 
   def name_with_email

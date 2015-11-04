@@ -4,6 +4,8 @@ class MessageThread < ActiveRecord::Base
   has_many :messages, dependent: :destroy
   accepts_nested_attributes_for :messages, reject_if: proc { |attributes| attributes['content'].blank? }
 
+  scope :unread, -> { includes(:messages).where("messages.unread = ?", true).references(:messages) }
+
   self.per_page = 15
 
   def to_param

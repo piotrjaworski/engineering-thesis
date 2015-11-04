@@ -6,8 +6,9 @@ class MessageThreadsController < ApplicationController
 
   def index
     @message_threads = current_user.message_threads.paginate(page: params[:page])
-    @message_thread_count = current_user.message_threads.count
-    @started_threds_count = current_user.message_threads_sent.count
+    @message_threads_count = current_user.message_threads.count
+    @started_threads_count = current_user.message_threads_sent.count
+    @unread_threads_count = current_user.unread_message_threads.count
   end
 
   def new
