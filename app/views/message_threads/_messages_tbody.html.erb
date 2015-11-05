@@ -1,0 +1,8 @@
+<% @message_threads.each do |mt| %>
+  <tr class="<%= mt.unread?(current_user) ? 'alert-info' : '' %>">
+    <td class="col-md-6"><%= link_to mt.topic, user_message_thread_path(id: mt, user_id: current_user) %></td>
+    <td class="col-md-2"><%= link_to (image_tag mt.exclude_user(current_user).avatar(:mini), class: "round-image"), user_path(mt.exclude_user(current_user)) %></td>
+    <td class="col-md-2"><%= mt.messages.count %></td>
+    <td class="col-md-2"><%= time_ago_in_words(mt.updated_at) %></td>
+  </tr>
+<% end %>

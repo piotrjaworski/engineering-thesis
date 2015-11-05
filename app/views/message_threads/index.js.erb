@@ -7,4 +7,14 @@ for(var i = 0; i < labels.length; i++) { labels[i].classList.remove("active"); }
 <% elsif params[:type] == "unread" %>
   $("#unread-messages").addClass("active");
 <% end %>
-$("#messages_table").html("<%= j(render partial: 'messages') %>");
+
+<% if params[:page] %>
+  $('#messages_table table tbody').append('<%= j(render partial: 'messages_tbody') %>');
+  <% if @message_threads.next_page %>
+    $('.pagination').replaceWith('<%= j will_paginate(@message_threads) %>');
+  <% else %>
+    $('.pagination').remove();
+  <% end %>
+<% else %>
+  $("#messages_table").html("<%= j(render partial: 'messages') %>");
+<% end %>

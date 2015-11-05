@@ -7,7 +7,7 @@ class MessageThread < ActiveRecord::Base
   default_scope { order(updated_at: :desc) }
   scope :unread, -> { includes(:messages).where("messages.unread = ?", true).references(:messages) }
 
-  self.per_page = 15
+  self.per_page = 12
 
   def to_param
     [id, topic.parameterize].join('-')

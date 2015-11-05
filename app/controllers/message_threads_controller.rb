@@ -91,7 +91,7 @@ class MessageThreadsController < ApplicationController
     end
 
     def send_notification(user_id, message_id)
-      NotificationsWorker.perform_async(user_id, params[:action], { :class => "Message", :id => object_id})
+      NotificationsWorker.perform_async(user_id, params[:action], { :class => "Message", :id => message_id })
     end
 
 end
