@@ -173,3 +173,9 @@ function showLoadingData(clicked, id) {
     $("#" + id).html('<p class="text-center"><img src="/assets/loading.gif" alt="Loading..." title="Loading..." /></p>');
   });
 }
+
+function resetNotifications() {
+  $(document).on('click', '#notifications', function() {
+    $('#notifications-list').empty();
+  });
+}

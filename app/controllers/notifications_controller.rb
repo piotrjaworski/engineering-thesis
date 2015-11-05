@@ -3,6 +3,10 @@ class NotificationsController < ApplicationController
 
   def index
     @notifications = current_user.notifications.paginate(page: params[:page])
+    respond_to do |format|
+      format.js
+      format.html
+    end
   end
 
   def new_notifications

@@ -22,4 +22,5 @@ $(document).ready(function() {
   getNotificationsData();
   notificationsBar();
   showLoadingData('.messages-label', 'messages_table');
+  resetNotifications();
 });
