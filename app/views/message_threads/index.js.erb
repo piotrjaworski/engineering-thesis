@@ -1,0 +1,10 @@
+var labels = $(".messages-label");
+for(var i = 0; i < labels.length; i++) { labels[i].classList.remove("active"); }
+<% if params[:type] == "all" %>
+  $("#all-messages").addClass("active");
+<% elsif params[:type] == "mine" %>
+  $("#mine-messages").addClass("active");
+<% elsif params[:type] == "unread" %>
+  $("#unread-messages").addClass("active");
+<% end %>
+$("#messages_table").html("<%= j(render partial: 'messages') %>");

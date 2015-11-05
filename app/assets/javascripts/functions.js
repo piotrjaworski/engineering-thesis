@@ -167,3 +167,9 @@ function getNotificationsData() {
     });
   }
 }
+
+function showLoadingData(clicked, id) {
+  $(document).on('click', clicked, function() {
+    $("#" + id).html('<p class="text-center"><img src="/assets/loading.gif" alt="Loading..." title="Loading..." /></p>');
+  });
+}

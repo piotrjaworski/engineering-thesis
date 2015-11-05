@@ -120,13 +120,16 @@ td {
 }
 
 #topics_list {
+  .category-info {
+    padding: 10px 10px 10px 10px;
+  }
+}
+
+#messages_table, #topics_list {
   p {
     img {
       width: 70px;
     }
-  }
-  .category-info {
-    padding: 10px 10px 10px 10px;
   }
 }
 

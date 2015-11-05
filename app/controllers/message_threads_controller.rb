@@ -1,14 +1,29 @@
 class MessageThreadsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_message_thread, only: [:show, :respond, :reply]
+  before_action :mark_as_read, only: [:show]
 
   autocomplete :user, :username
 
   def index
-    @message_threads = current_user.message_threads.paginate(page: params[:page])
+    @message_threads = if params[:type].nil? or params[:type] == "all"
+      current_user.message_threads.paginate(page: params[:page])
+    elsif params[:type] == "mine"
+      current_user.message_threads_sent.paginate(page: params[:page])
+    elsif params[:type] == "unread"
+      current_user.unread_message_threads.paginate(page: params[:page])
+    else
+      redirect_to user_message_threads_path(current_user) and return
+      flash[:error] = "Wrong message sort type"
+    end
     @message_threads_count = current_user.message_threads.count
     @started_threads_count = current_user.message_threads_sent.count
     @unread_threads_count = current_user.unread_message_threads.count
+
+    respond_to do |format|
+      format.js
+      format.html
+    end
   end
 
   def new
@@ -31,6 +46,7 @@ class MessageThreadsController < ApplicationController
 
     return redirect_to user_message_threads_path(current_user), alert: "You cannot send message to yourself" if addressee_id == current_user.id
     if @message_thread.save
+      send_notification(@message_thread.addressee_id, @message_thread.messages.first.id)
       redirect_to user_message_thread_path(current_user, @message_thread), notice: "Your message has been submitted successfully"
     else
       render :new, alert: "Cannot submit this message, #{@message_thread.errors}"
@@ -45,6 +61,7 @@ class MessageThreadsController < ApplicationController
     @message = @message_thread.messages.new(content: params[:message][:content], sender_id: current_user.id)
     @message.addressee = @message.exclude_user(current_user)
     if @message.save
+      send_notification(@message.addressee_id, @message.id)
       redirect_to user_message_thread_path(current_user, @message_thread), notice: "Your message has been sent successfully"
     else
       redirect_to user_message_thread_path(current_user, @message_thread), alert: "Cannot send message, please try again"
@@ -67,6 +84,14 @@ class MessageThreadsController < ApplicationController
       else
         message_thread_params.delete(:addressee_id)
       end
+    end
+
+    def mark_as_read
+      @message_thread.messages.where(unread: true).each { |message| message.mark_as_read if message.addressee_id == current_user.id }
+    end
+
+    def send_notification(user_id, message_id)
+      NotificationsWorker.perform_async(user_id, params[:action], { :class => "Message", :id => object_id})
     end
 
 end

@@ -13,4 +13,8 @@ class Message < ActiveRecord::Base
     User.find(user_id)
   end
 
+  def mark_as_read
+    self.update_attribute(:unread, false) if unread
+  end
+
 end

@@ -20,4 +20,5 @@ $(document).ready(function() {
   changeAjaxTab();
   getNotificationsData();
   notificationsBar();
+  showLoadingData('.messages-label', 'messages_table');
 });
