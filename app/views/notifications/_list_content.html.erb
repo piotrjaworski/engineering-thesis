@@ -1,0 +1,10 @@
+<div class="<%= notification.read ? '' : 'alert-info' %>">
+  <% if notification.object_class_name == "Message" %>
+    <%= notification.object.sender.full_name %> <%= notification.name %> to you.
+    <% if notification.unread? %>
+      <%= link_to fa_icon("circle"), notification_read_path(notification), method: :post, remote: true, class: "pull-right" %>
+    <% else %>
+      <%= fa_icon "circle-o", class: "pull-right" %>
+    <% end %>
+  <% end %>
+</div>

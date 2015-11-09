@@ -1,0 +1,1 @@
+$("#notification-" + "<%= @notification.id %>").html("<%= j(render partial: 'list_content', locals: { notification: @notification }) %>")

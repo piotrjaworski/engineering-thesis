@@ -39,6 +39,7 @@ Rails.application.routes.draw do
 
   # notifications
   resources :notifications, only: [:index] do
+    post :read
     collection do
       get :new_notifications
     end

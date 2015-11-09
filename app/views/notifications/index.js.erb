@@ -1,1 +1,5 @@
-$("#notifications-list").html("<%= j(render partial: 'list') %>");
+<% unless @notifications_count > 1 %>
+  $("#notifications-list").html("<p><span class='text-warning'>You dont have any notifiactions yet!</span></p>")
+<% else %>
+  $("#notifications-list").html("<%= j(render partial: 'list') %>");
+<% end %>
