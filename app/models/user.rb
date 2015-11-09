@@ -2,8 +2,7 @@ class User < ActiveRecord::Base
   extend FriendlyId
   friendly_id :username, use: :slugged
 
-  # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable
+  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable, :omniauthable, omniauth_providers: [:google_oauth2]
 
   has_many :topics, class_name: "Topic", foreign_key: "creator_id"
   has_many :posts
@@ -25,6 +24,24 @@ class User < ActiveRecord::Base
   after_create :add_avatar_to_queue
 
   ROLES = {1 => :admin, 2 => :moderator, 3 => :user}
+
+  def self.from_omniauth(response)
+    data = response.info
+    user = User.where(email: response.info[:email]).first
+    unless user
+      password = Devise.friendly_token[0,20]
+      user = User.new(email: response.info[:email], password: password, password_confirmation: password,
+                      uid: response[:uid], provider: "google", full_name: response.info[:name], username: response.info[:email])
+      user.avatar_from_url(response[:info][:image])
+      user.save
+    end
+    user.update_attributes(provider: "google", uid: response[:uid]) if user.provider != "google"
+    user
+  end
+
+  def avatar_from_url(url)
+    self.avatar = open(url)
+  end
 
   def latest_posts
     posts.order(created_at: :desc)

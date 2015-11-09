@@ -38,6 +38,10 @@
       </div>
     <% end %>
 
+    <p>
+      <%= link_to image_tag("google.png", class: "google-button"), user_omniauth_authorize_path(:google_oauth2) %>
+    </p>
+
     <%= render "devise/shared/links" %>
   </div>
 </div>

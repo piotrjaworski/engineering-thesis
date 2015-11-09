@@ -12,6 +12,7 @@ gem 'pg_search'
 # user authentication
 gem 'devise'
 gem 'cancancan', '~> 1.10'
+gem 'omniauth-google-oauth2'
 
 # styles & javascript
 gem 'sass-rails', '~> 5.0'

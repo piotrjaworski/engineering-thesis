@@ -1,6 +1,12 @@
 development:
   SECRET_KEY_BASE: key
+  GOOGLE_CLIENT_ID: key
+  GOOGLE_CLIENT_SECRET: key
 test:
   SECRET_KEY_BASE: key
+  GOOGLE_CLIENT_ID: key
+  GOOGLE_CLIENT_SECRET: key
 production:
   SECRET_KEY_BASE: key
+  GOOGLE_CLIENT_ID: key
+  GOOGLE_CLIENT_SECRET: key
