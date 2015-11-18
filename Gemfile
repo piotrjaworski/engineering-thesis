@@ -35,6 +35,7 @@ gem 'newrelic_rpm'
 gem 'friendly_id', '~> 5.1.0'
 gem 'bootstrap3_autocomplete_input'
 gem 'therubyracer', platforms: :ruby
+gem 'faker'
 
 group :development do
   gem 'better_errors'
@@ -46,7 +47,6 @@ group :development, :test do
   gem 'pry'
   gem 'rspec-rails', '~> 3.0'
   gem 'capybara'
-  gem 'faker'
 end
 
 gem 'codeclimate-test-reporter', group: :test, require: nil
