@@ -27,7 +27,7 @@ class User < ActiveRecord::Base
 
   def self.from_omniauth(response)
     data = response.info
-    user = User.find_by_email(email: data[:email])
+    user = User.find_by_email(data[:email])
     unless user
       password = Devise.friendly_token[0, 20]
       user = User.new(email: data[:email], password: password, password_confirmation: password,

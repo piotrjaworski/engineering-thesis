@@ -2,3 +2,4 @@
 
 {<img src="https://codeclimate.com/github/piotrjaworski/engineering-thesis/badges/gpa.svg" />}[https://codeclimate.com/github/piotrjaworski/engineering-thesis]
 {<img src="https://codeclimate.com/github/piotrjaworski/engineering-thesis/badges/coverage.svg" />}[https://codeclimate.com/github/piotrjaworski/engineering-thesis/coverage]
+{<img src="https://travis-ci.org/piotrjaworski/engineering-thesis.svg?branch=master" alt="Build Status" />}[https://travis-ci.org/piotrjaworski/engineering-thesis]
