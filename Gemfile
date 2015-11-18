@@ -34,6 +34,7 @@ gem 'decent_exposure'
 gem 'newrelic_rpm'
 gem 'friendly_id', '~> 5.1.0'
 gem 'bootstrap3_autocomplete_input'
+gem 'therubyracer', platforms: :ruby
 
 group :development do
   gem 'better_errors'
@@ -52,4 +53,3 @@ gem 'codeclimate-test-reporter', group: :test, require: nil
 
 # gem 'unicorn'
 # gem 'capistrano-rails', group: :development
-# gem 'therubyracer', platforms: :ruby
