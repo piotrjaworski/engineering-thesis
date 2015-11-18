@@ -14,7 +14,6 @@ class Message < ActiveRecord::Base
   end
 
   def mark_as_read
-    self.update_column(:unread, false) if unread
+    update_column(:unread, false) if unread
   end
-
 end

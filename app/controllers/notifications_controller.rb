@@ -20,7 +20,7 @@ class NotificationsController < ApplicationController
     @notification.mark_as_read
     respond_to do |format|
       format.js
+      format.json { head :ok }
     end
   end
-
 end

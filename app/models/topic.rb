@@ -13,7 +13,7 @@ class Topic < ActiveRecord::Base
 
   default_scope { order("updated_at DESC") }
   scope :top_records, -> { unscope(:order).order("views DESC") }
-  scope :new_records, -> { where("created_at >= ?", Time.now - 6.hours) }
+  scope :new_records, -> { where("created_at >= ?", Time.zone.now - 6.hours) }
 
   def to_param
     [id, name.parameterize].join("-")
@@ -24,7 +24,7 @@ class Topic < ActiveRecord::Base
   end
 
   def new?
-    (Time.parse(DateTime.now.to_s) - Time.parse(created_at.to_s))/3600 < 6 ? true : false
+    (Time.zone.parse(DateTime.now.to_s) - Time.zone.parse(created_at.to_s)) / 3600 < 6 ? true : false
   end
 
   def assign_user(user)
@@ -38,13 +38,13 @@ class Topic < ActiveRecord::Base
   end
 
   def build_post(user, params)
-    post = self.posts.new(params)
+    post = posts.new(params)
     post.user = user
     post
   end
 
   def close
-    self.update_column(:blocked, true)
+    update_column(:blocked, true)
   end
 
   def closed?
@@ -56,11 +56,11 @@ class Topic < ActiveRecord::Base
   end
 
   def open
-    self.update_column(:blocked, false)
+    update_column(:blocked, false)
   end
 
   def creator
-    User.find(self.creator_id)
+    User.find(creator_id)
   end
 
   def users
@@ -71,4 +71,11 @@ class Topic < ActiveRecord::Base
     posts.pluck(:user_id).reverse.uniq.take(4)
   end
 
+  def last_page
+    last_post = Post.unscoped do
+      posts.order(number: :desc).limit(1).first
+    end
+    page = last_post.number.to_f / Post.per_page
+    page > page.to_i ? page.to_i + 1 : page.to_i
+  end
 end

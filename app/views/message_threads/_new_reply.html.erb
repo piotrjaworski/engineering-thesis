@@ -1,10 +1,7 @@
-<%= tinymce_assets %>
-<%= tinymce %>
-
 <hr>
 <%= simple_form_for @new_message, url: reply_user_message_threads_path(current_user, id: @message_thread.id) do |f| %>
   <div class="hidden-reply">
-    <%= f.input :content, as: :text, input_html: { class: "tinymce", rows: 8, cols: 150 } %>
+    <%= f.input :content, as: :text, input_html: { rows: 8, cols: 150 } %>
   </div>
   <%= f.submit "Reply", class: "btn btn-primary" %>
 <% end %>

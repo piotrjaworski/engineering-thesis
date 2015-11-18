@@ -10,7 +10,7 @@ class PostsController < ApplicationController
   def create
     @post = @topic.build_post(current_user, post_params)
     if @post.save
-      redirect_with_message(@topic, "Your reply has been posted.", "success")
+      redirect_with_message(topic_path(@topic, page: @topic.last_page), "Your reply has been posted.", "success")
     else
       redirect_with_message(@topic, @post.errors.messages.map { |k, v| "#{k.to_s.capitalize} #{v.join('')}" }.join(''), "error")
     end
@@ -34,16 +34,15 @@ class PostsController < ApplicationController
 
   private
 
-    def set_post
-      @post = Post.find(params[:id])
-    end
+  def set_post
+    @post = Post.find(params[:id])
+  end
 
-    def set_topic
-      @topic = Topic.find(params[:topic_id])
-    end
+  def set_topic
+    @topic = Topic.find(params[:topic_id])
+  end
 
-    def post_params
-      params.require(:post).permit(:content)
-    end
-
+  def post_params
+    params.require(:post).permit(:content)
+  end
 end

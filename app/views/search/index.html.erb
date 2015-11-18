@@ -40,7 +40,15 @@
           <% @results.each do |result| %>
             <h3>Type: <%= result.searchable_type %></h3>
             <h5><%= result.content %></h5>
-            <p><%= link_to "...more", "#" %></p>
+            <p>
+              <% if result.searchable_type == "Topic" %>
+                <% topic = Topic.find(result.searchable_id) %>
+                <%= link_to "...more", topic_path(topic) %>
+              <% elsif result.searchable_type == "Post" %>
+                <% post = Post.find(result.searchable_id) %>
+                <%= link_to "...more", topic_path(post.topic, page: post.page) %>
+              <% end %>
+            </p>
             <hr>
           <% end %>
         </div>

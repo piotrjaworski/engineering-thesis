@@ -1,1 +1,6 @@
-$("#new-post-reply").html("<%= j(render partial: "topics/new_reply") %>");
+if($("#new-post-reply").is(":visible")) {
+  $("#new-post-reply").slideUp();
+} else {
+  $("#new-post-reply").html("<%= j(render partial: "topics/new_reply") %>");
+  $("#new-post-reply").slideDown();
+}

@@ -10,9 +10,34 @@ function infinity_scroll_main_page(selector) {
   }
 }
 
+function infinity_scroll_notifiaction(selector) {
+  if ($(selector + ' .pagination').length) {
+    $("#notifications-list").scroll(function() {
+      var url = $('.pagination .next_page').attr('href');
+      if (url && $("#notifications-list").scrollTop() > $("#notifiactions-list").height() - $("#notifications-list").height() - 50) {
+        $('.pagination').html('<img src="/assets/loading.gif" alt="Loading..." title="Loading..." />');
+        return $.getScript(url);
+      }
+    });
+  }
+}
+
 function clickable_link() {
   $(document).on("click", '.td_link', function() {
     document.location = $(this).attr('data-link');
+  });
+}
+
+function redirectToNotification() {
+  $(document).on("click", ".notification-box", function() {
+    var url = $(this).attr('data-link');
+    document.location = url;
+    var notification = $(this).attr('data-notification-id');
+    $.ajax({
+      dataType: "JSON",
+      url: "/notifications/" + notification + "/read",
+      type: "POST"
+    });
   });
 }
 
@@ -94,17 +119,6 @@ function new_topic() {
   });
 }
 
-function post_reply() {
-  $(document).on('click', '#add-post-reply', function() {
-    if ($('#new-post-reply').is(':hidden')) {
-      $('#new-post-reply').slideDown();
-    }
-    else {
-      $('#new-post-reply').slideUp();
-    }
-  });
-}
-
 function close_form() {
   $(document).on('click', '.close-button', function() {
     if ($("#new-post-reply").is(':visible')) {
@@ -147,7 +161,7 @@ function changeAjaxTab() {
 function notificationsBar() {
   setInterval(function() {
     getNotificationsData();
-    }, 20000
+    }, 5000
   );
 }
 

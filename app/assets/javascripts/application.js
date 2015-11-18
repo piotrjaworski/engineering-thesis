@@ -10,12 +10,12 @@ $(document).ready(function() {
   infinity_scroll_main_page("#main-pagination");
   infinity_scroll_main_page("#messages-pagination");
   clickable_link();
+  redirectToNotification();
   topics_filter();
   category_change();
   facets();
   search_form();
   message_reply();
-  post_reply();
   new_topic();
   close_form();
   changeAjaxTab();

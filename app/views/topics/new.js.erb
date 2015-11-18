@@ -1,2 +1,4 @@
-$("#new-topic").html('<%= j(render partial: 'form', locals: { topic: @topic }) %>');
-$("#new-topic").slideDown();
+if($("#new-topic").is(':visible') == false) {
+  $("#new-topic").html('<%= j(render partial: 'form', locals: { topic: @topic }) %>');
+  $("#new-topic").slideDown();
+}

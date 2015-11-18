@@ -4,21 +4,22 @@ class Notification < ActiveRecord::Base
   belongs_to :user
   belongs_to :notificationable, polymorphic: true
 
+  default_scope { order(updated_at: :desc) }
   scope :unread,    -> { where(read: false) }
   scope :read,      -> { where(read: true) }
   scope :opened,    -> { where(opened: true) }
   scope :unopened,  -> { where(opened: false) }
 
   def object
-    self.notificationable_type.constantize.find(self.notificationable_id)
+    notificationable_type.constantize.find(notificationable_id)
   end
 
   def unread?
-    !self.read
+    !read
   end
 
   def read?
-    !!self.read
+    read == true
   end
 
   def object_class_name
@@ -26,7 +27,6 @@ class Notification < ActiveRecord::Base
   end
 
   def mark_as_read
-    self.update_attribute(:read, true)
+    update_attribute(:read, true)
   end
-
 end

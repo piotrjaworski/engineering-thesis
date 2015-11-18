@@ -11,6 +11,14 @@
   <%= render partial: "post", locals: { post: post } %>
 <% end %>
 
+<div class="row">
+  <div class="col-md-12">
+    <div class="pagination-center">
+      <%= will_paginate @posts, renderer: BootstrapPagination::Rails %>
+    </div>
+  </div>
+</div>
+
 <div id="post-reply-box">
   <% if user_signed_in? %>
     <% unless @topic.blocked %>
@@ -21,7 +29,7 @@
       <%= link_to fa_icon_with_text("Open", "unlock"), topic_open_path(@topic), method: :post, class: "btn btn-warning" %>
     <% end %>
 
-    <% unless @topic.blocked && can?(:close, @topic) %>
+    <% if @topic.blocked && can?(:close, @topic) %>
       <%= link_to fa_icon_with_text("Close", "lock"), topic_close_path(@topic), method: :post, class: "btn btn-warning" %>
     <% end %>
 

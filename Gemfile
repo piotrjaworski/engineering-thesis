@@ -27,7 +27,6 @@ gem 'sinatra', require: false
 gem 'simple_form'
 gem 'will_paginate-bootstrap'
 gem 'font-awesome-rails'
-gem 'tinymce-rails'
 gem 'impressionist'
 gem 'paperclip', '~> 4.3'
 gem 'figaro'
@@ -39,6 +38,7 @@ gem 'bootstrap3_autocomplete_input'
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
+  gem 'rubocop', require: false
 end
 
 group :development, :test do

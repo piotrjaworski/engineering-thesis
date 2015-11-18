@@ -1,6 +1,8 @@
-<div class="<%= notification.read ? '' : 'alert-info' %>">
+<div class="<%= notification.read ? 'alert-success' : 'alert-info' %> notification-box" data-link="<%= notifiaction_link(notification) %>" data-notification-id="<%= notification.id %>">
   <% if notification.object_class_name == "Message" %>
     <%= notification.object.sender.full_name %> <%= notification.name %> to you.
+    <br>
+    About <%= time_ago_in_words(notification.created_at) %>.
     <% if notification.unread? %>
       <%= link_to fa_icon("circle"), notification_read_path(notification), method: :post, remote: true, class: "pull-right" %>
     <% else %>

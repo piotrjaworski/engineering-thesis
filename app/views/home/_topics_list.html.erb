@@ -1,6 +1,6 @@
 <% topics.each do |t| %>
   <tr class="clickable">
-    <td data-link="<%= topic_path(t) %>" class="td_link col-md-5">
+    <td data-link="<%= topic_path(t, page: t.last_page) %>" class="td_link col-md-5">
       <%= t.name %>
       <% if t.new? %>
         <span class="label label-primary">New</span>

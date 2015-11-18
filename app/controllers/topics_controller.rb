@@ -4,10 +4,12 @@ class TopicsController < ApplicationController
   impressionist actions: [:show]
 
   def new
+    @topic = Topic.new
+    @topic.posts.build
+
     respond_to do |format|
       format.js do
-        @topic = Topic.new
-        @topic.posts.build
+        render :new, layout: false
       end
     end
   end
@@ -42,13 +44,12 @@ class TopicsController < ApplicationController
 
   private
 
-    def topic_params
-      params.require(:topic).permit(:name, :description, :category_id, { posts_attributes: [:content] })
-    end
+  def topic_params
+    params.require(:topic).permit(:name, :description, :category_id, { posts_attributes: [:content] })
+  end
 
-    def set_topic
-      @topic = Topic.find(params[:id])
-      @posts = @topic.posts
-    end
-
+  def set_topic
+    @topic = Topic.find(params[:id])
+    @posts = @topic.posts.paginate(page: params[:page])
+  end
 end

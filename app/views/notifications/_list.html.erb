@@ -1,7 +1,10 @@
 <div class="row">
-  <% @notifications.each do |notification| %>
+  <% notifications.each do |notification| %>
     <div class="col-md-12 notification-row" id="notification-<%= notification.id %>">
       <%= render partial: "list_content", locals: { notification: notification } %>
     </div>
   <% end %>
+  <div id="notifications-pagination">
+    <%= render partial: "pagination" %>
+  </div>
 </div>

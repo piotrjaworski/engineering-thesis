@@ -1,0 +1,79 @@
+###########################
+# Configuration for rubocop
+# in .rubocop.yml
+# Most of these are disabling existing cops, primarily
+# due to a smattering of different styles and loose
+# guidlines for contributions.
+#
+# Any of these may be changed.
+
+AllCops:
+  RunRailsCops: true
+  Exclude:
+    - bin/**/*
+    - config/**/*
+    - db/**/*
+    - app/models/kickstarter.rb
+    - app/models/capacity/builder.rb
+    - lib/gitconf/**/*
+    - lib/date_range.rb
+    - Gemfile
+    - Rakefile
+    - spec/support/*
+
+StringLiterals:
+  Enabled: false
+
+Metrics/LineLength:
+  Enabled: false
+
+Documentation:
+  Enabled: false
+
+Style/SingleLineBlockParams:
+  Enabled: false
+
+Style/AccessorMethodName:
+  Enabled: false
+
+Metrics/AbcSize:
+  Enabled: false
+
+Metrics/ClassLength:
+  Enabled: false
+
+Metrics/MethodLength:
+  CountComments: false
+  Max: 50
+
+Metrics/PerceivedComplexity:
+  Enabled: false
+
+Metrics/CyclomaticComplexity:
+  Enabled: false
+
+Lint/HandleExceptions:
+  Enabled: false
+
+Style/GuardClause:
+  MinBodyLength: 5
+
+Style/MultilineOperationIndentation:
+  Enabled: false
+
+Style/ClassVars:
+  Enabled: false
+
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+Style/Semicolon:
+  AllowAsExpressionSeparator: true
+
+Style/AndOr:
+  Enabled: false
+
+Style/BlockDelimiters:
+  # Enabled: true
+  Exclude:
+    - spec/**/*

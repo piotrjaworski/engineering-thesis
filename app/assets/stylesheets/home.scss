@@ -99,7 +99,7 @@ td {
 
 #notifications-list {
   width: 350px;
-  padding: 10px 10px 10px 10px;
+  padding: 5px 10px 5px 10px;
   max-height: 300px;
   overflow-y: auto;
   overflow-x: hidden;
@@ -112,17 +112,31 @@ td {
   margin-left: -2px;
 }
 
+/* NOTIFICATIONS */
+
 .notification-row {
-  margin: 10px 10px 10px 10px;
+  max-width: 370px;
+  margin-top: 5px;
+  margin-bottom: 5px;
   .alert-info {
-    padding-bottom: 10px;
-    padding-top: 10px;
+    border-radius: 10px;
+    padding: 14px 10px 14px 10px;
   }
+  .alert-success {
+    border-radius: 10px;
+    padding: 14px 10px 14px 10px;
+    background-color: #faf9f9 !important;
+    color: #a19e9f;
+  }
+}
+
+.notification-box {
+  cursor: pointer;
 }
 
 /* MAIN PAGE */
 
-#main-pagination, #user-all-pagination, #user-posts-pagination, #user-topics-pagination {
+#main-pagination, #user-all-pagination, #user-posts-pagination, #user-topics-pagination, #notifications-pagination {
   .pagination {
     width: 50px;
     margin: 0 auto !important;
@@ -302,4 +316,18 @@ ul.users-list {
 
 #user-all-content, #user-topics-content, #user-posts-content {
   margin-top: 20px;
+}
+
+#add-reply {
+  margin-bottom: 25px;
+}
+
+/* PAGINATION */
+
+ul.pagination {
+ li {
+  span {
+    z-index: auto !important;
+  }
+ }
 }

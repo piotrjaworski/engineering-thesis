@@ -1,5 +1,16 @@
-<% unless @notifications_count > 1 %>
+<% unless @notifications_count > 0 %>
   $("#notifications-list").html("<p><span class='text-warning'>You dont have any notifiactions yet!</span></p>")
 <% else %>
-  $("#notifications-list").html("<%= j(render partial: 'list') %>");
+  <% if params[:page] && params[:page].to_i > 1 %>
+    $("#notifications-list").append("<%= j(render partial: 'list', locals: { notifications: @notifications }) %>");
+    <% if @notifications.next_page %>
+      $("#notifications-list .pagination").replaceWith('<%= j will_paginate(@notifications) %>');
+    <% else %>
+      $("#notifications-list .pagination").remove();
+    <% end %>
+  <% else %>
+    $("#notifications-list").html("<%= j(render partial: 'list', locals: { notifications: @notifications }) %>");
+  <% end %>
 <% end %>
+
+infinity_scroll_notifiaction("#notifications-pagination");
