@@ -19,7 +19,6 @@ class MessageThread < ActiveRecord::Base
   end
 
   def unread?(user)
-    self.messages.where(unread: true, addressee_id: user.id).present?
+    messages.where(unread: true, addressee_id: user.id).present?
   end
-
 end

@@ -6,8 +6,7 @@ class Category < ActiveRecord::Base
 
   private
 
-    def check_topics
-      return false if topics.present?
-    end
-
+  def check_topics
+    return false if topics.present?
+  end
 end

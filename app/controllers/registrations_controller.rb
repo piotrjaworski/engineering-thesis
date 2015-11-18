@@ -1,5 +1,5 @@
 class RegistrationsController < Devise::RegistrationsController
-  before_filter :configure_permitted_parameters, only: [:create]
+  before_action :configure_permitted_parameters, only: [:create]
 
   # it's just update password method in fact
   def update
@@ -26,12 +26,11 @@ class RegistrationsController < Devise::RegistrationsController
 
   protected
 
-    def after_update_path_for(resource)
-      edit_user_registration_path + "#password"
-    end
+  def after_update_path_for(resource)
+    edit_user_registration_path + "#password"
+  end
 
-    def configure_permitted_parameters
-      devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:username, :full_name, :email, :password) }
-    end
-
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:username, :full_name, :email, :password) }
+  end
 end

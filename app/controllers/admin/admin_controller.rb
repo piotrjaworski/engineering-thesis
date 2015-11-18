@@ -4,8 +4,7 @@ class Admin::AdminController < ApplicationController
 
   private
 
-    def admin_assets
-      "admin"
-    end
-
+  def admin_assets
+    "admin"
+  end
 end

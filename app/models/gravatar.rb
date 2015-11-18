@@ -17,17 +17,16 @@ class Gravatar
 
   private
 
-    def image_url(size)
-      "http://gravatar.com/avatar/#{@gravatar_id}.png&?s=#{size}"
-    end
+  def image_url(size)
+    "http://gravatar.com/avatar/#{@gravatar_id}.png&?s=#{size}"
+  end
 
-    def gravatar?
-      gravatar_check = "http://gravatar.com/avatar/#{@gravatar_id}.png?d=404"
-      uri = URI.parse(gravatar_check)
-      http = Net::HTTP.new(uri.host, uri.port)
-      request = Net::HTTP::Get.new(uri.request_uri)
-      response = http.request(request)
-      response.code.to_i == 200 ? true : false
-    end
-
+  def gravatar?
+    gravatar_check = "http://gravatar.com/avatar/#{@gravatar_id}.png?d=404"
+    uri = URI.parse(gravatar_check)
+    http = Net::HTTP.new(uri.host, uri.port)
+    request = Net::HTTP::Get.new(uri.request_uri)
+    response = http.request(request)
+    response.code.to_i == 200 ? true : false
+  end
 end

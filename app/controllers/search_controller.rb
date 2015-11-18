@@ -1,5 +1,4 @@
 class SearchController < ApplicationController
-
   def index
     query = params[:query]
     unless query.present?
@@ -15,5 +14,4 @@ class SearchController < ApplicationController
       @results = @results.paginate(page: params[:page], per_page: 20) if @results.present?
     end
   end
-
 end

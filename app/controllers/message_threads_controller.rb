@@ -7,15 +7,15 @@ class MessageThreadsController < ApplicationController
 
   def index
     @message_threads = if params[:type].nil? or params[:type] == "all"
-      current_user.message_threads.paginate(page: params[:page])
-    elsif params[:type] == "mine"
-      current_user.message_threads_sent.paginate(page: params[:page])
-    elsif params[:type] == "unread"
-      current_user.unread_message_threads.paginate(page: params[:page])
-    else
-      redirect_to user_message_threads_path(current_user) and return
-      flash[:error] = "Wrong message sort type"
-    end
+                         current_user.message_threads.paginate(page: params[:page])
+                       elsif params[:type] == "mine"
+                         current_user.message_threads_sent.paginate(page: params[:page])
+                       elsif params[:type] == "unread"
+                         current_user.unread_message_threads.paginate(page: params[:page])
+                       else
+                         redirect_to user_message_threads_path(current_user) and return
+                         flash[:error] = "Wrong message sort type"
+                       end
     @message_threads_count = current_user.message_threads.count
     @started_threads_count = current_user.message_threads_sent.count
     @unread_threads_count = current_user.unread_message_threads.count
@@ -70,28 +70,27 @@ class MessageThreadsController < ApplicationController
 
   private
 
-    def message_thread_params
-      params.require(:message_thread).permit(:addressee_id, :topic, { message: [:content] })
-    end
+  def message_thread_params
+    params.require(:message_thread).permit(:addressee_id, :topic, { message: [:content] })
+  end
 
-    def set_message_thread
-      @message_thread = MessageThread.includes(:messages).find(params[:id])
-    end
+  def set_message_thread
+    @message_thread = MessageThread.includes(:messages).find(params[:id])
+  end
 
-    def check_user_params
-      if params["message_thread"]["addressee"]
-        User.find_by_username(params["message_thread"]["addressee"]).try(:id)
-      else
-        message_thread_params.delete(:addressee_id)
-      end
+  def check_user_params
+    if params["message_thread"]["addressee"]
+      User.find_by_username(params["message_thread"]["addressee"]).try(:id)
+    else
+      message_thread_params.delete(:addressee_id)
     end
+  end
 
-    def mark_as_read
-      @message_thread.messages.where(unread: true).each { |message| message.mark_as_read if message.addressee_id == current_user.id }
-    end
+  def mark_as_read
+    @message_thread.messages.where(unread: true).each { |message| message.mark_as_read if message.addressee_id == current_user.id }
+  end
 
-    def send_notification(user_id, message_id)
-      NotificationsWorker.perform_async(user_id, params[:action], { :class => "Message", :id => message_id })
-    end
-
+  def send_notification(user_id, message_id)
+    NotificationsWorker.perform_async(user_id, params[:action], { class: "Message", id: message_id })
+  end
 end

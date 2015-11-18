@@ -5,5 +5,4 @@ class AvatarsWorker
     user = User.find(user_id)
     user.get_avatar
   end
-
 end

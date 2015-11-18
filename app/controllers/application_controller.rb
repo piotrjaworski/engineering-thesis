@@ -6,8 +6,8 @@ class ApplicationController < ActionController::Base
     strategy DecentExposure::StrongParametersStrategy
   end
 
-  rescue_from CanCan::AccessDenied do |exception|
-    if !!@topic
+  rescue_from CanCan::AccessDenied do
+    if @topic.present?
       redirect_to topic_path(@topic)
       flash[:error] = "You can't edit edit this post"
     else
@@ -18,26 +18,25 @@ class ApplicationController < ActionController::Base
 
   private
 
-    def logged_in?
-      current_user
-    end
+  def logged_in?
+    current_user
+  end
 
-    def redirect_with_message(path, message, type)
-      redirect_to path
-      flash[type] = "#{message}"
-    end
+  def redirect_with_message(path, message, type)
+    redirect_to path
+    flash[type] = "#{message}"
+  end
 
-    def check_admin
-      render_404 if logged_in?.nil? || !logged_in?.is_admin?
-    end
+  def check_admin
+    render_404 if logged_in?.nil? || !logged_in?.admin?
+  end
 
-    def render_404
-      respond_to do |format|
-        format.html { render :file => "#{Rails.root}/public/404", :layout => false, :status => :not_found }
-        format.xml  { head :not_found }
-        format.json  { head :not_found }
-        format.js  { head :not_found }
-      end
+  def render_404
+    respond_to do |format|
+      format.html { render file: "#{Rails.root}/public/404", layout: false, status: :not_found }
+      format.xml  { head :not_found }
+      format.json { head :not_found }
+      format.js { head :not_found }
     end
-
+  end
 end

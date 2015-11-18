@@ -12,12 +12,12 @@ class HomeController < ApplicationController
   def topic_filter
     type = params[:type]
     @topics = if type == "top"
-      Topic.top_records.page(params[:page]).per_page(30)
-    elsif type == "new"
-      Topic.new_records.page(params[:page]).per_page(30)
-    else
-      Topic.page(params[:page]).per_page(30)
-    end
+                Topic.top_records.page(params[:page]).per_page(30)
+              elsif type == "new"
+                Topic.new_records.page(params[:page]).per_page(30)
+              else
+                Topic.page(params[:page]).per_page(30)
+              end
   end
 
   def category_filter
@@ -27,5 +27,4 @@ class HomeController < ApplicationController
       format.js
     end
   end
-
 end

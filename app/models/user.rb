@@ -23,15 +23,15 @@ class User < ActiveRecord::Base
 
   after_create :add_avatar_to_queue
 
-  ROLES = {1 => :admin, 2 => :moderator, 3 => :user}
+  ROLES = { 1 => :admin, 2 => :moderator, 3 => :user }
 
   def self.from_omniauth(response)
     data = response.info
-    user = User.where(email: response.info[:email]).first
+    user = User.find_by_email(email: data[:email])
     unless user
-      password = Devise.friendly_token[0,20]
-      user = User.new(email: response.info[:email], password: password, password_confirmation: password,
-                      uid: response[:uid], provider: "google", full_name: response.info[:name], username: response.info[:email])
+      password = Devise.friendly_token[0, 20]
+      user = User.new(email: data[:email], password: password, password_confirmation: password,
+                      uid: response[:uid], provider: "google", full_name: data[:name], username: data[:email])
       user.avatar_from_url(response[:info][:image])
       user.save
     end
@@ -60,38 +60,38 @@ class User < ActiveRecord::Base
   end
 
   def role?
-    if is_admin?
+    if admin?
       "Admin"
-    elsif is_moderator?
+    elsif moderator?
       "Moderator"
-    elsif is_user?
+    elsif user?
       "User"
     end
   end
 
-  def is_admin?
+  def admin?
     role == 1
   end
 
-  def is_moderator?
+  def moderator?
     role == 2
   end
 
-  def is_user?
+  def user?
     role == 3
   end
 
   def add_avatar_to_queue
-    AvatarsWorker.perform_async(self.id)
+    AvatarsWorker.perform_async(id)
   end
 
   def get_avatar
     gravatar = Gravatar.new(email)
     image = gravatar.get_image(400)
-    if !!image
+    if image.present?
       self.avatar = image
       self.gravatar = true
-      self.save
+      save
       "Gravatar has been reloaded"
     else
       "Please set your gravatar"
@@ -99,7 +99,7 @@ class User < ActiveRecord::Base
   end
 
   def message_threads
-    MessageThread.includes(:messages).where("addressee_id = ? or sender_id = ?", self.id, self.id).order(created_at: :desc)
+    MessageThread.includes(:messages).where("addressee_id = ? or sender_id = ?", id, id).order(created_at: :desc)
   end
 
   def unread_message_threads
@@ -107,7 +107,6 @@ class User < ActiveRecord::Base
   end
 
   def name_with_email
-    "#{self.full_name} #{@addressee.email}"
+    "#{full_name} #{@addressee.email}"
   end
-
 end

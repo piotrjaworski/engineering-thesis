@@ -1,6 +1,5 @@
 module ApplicationHelper
-
-  def bootstrap_class_for flash_type
+  def bootstrap_class_for(flash_type)
     { success: "alert-success", error: "alert-danger", alert: "alert-danger", notice: "alert-success" }[flash_type.to_sym] || flash_type.to_s
   end
 
@@ -18,21 +17,20 @@ module ApplicationHelper
   end
 
   def errors_for(object)
-    if object.errors.any?
-      content_tag(:div, class: "panel panel-danger") do
-        concat(content_tag(:div, class: "panel-heading") do
-          concat(content_tag(:h4, class: "panel-title") do
-            concat "#{pluralize(object.errors.count, "error")} prohibited this #{object.class.name.downcase} from being saved:"
-          end)
+    return unless object.errors.any?
+    content_tag(:div, class: "panel panel-danger") do
+      concat(content_tag(:div, class: "panel-heading") do
+        concat(content_tag(:h4, class: "panel-title") do
+          concat "#{pluralize(object.errors.count, 'error')} prohibited this #{object.class.name.downcase} from being saved:"
         end)
-        concat(content_tag(:div, class: "panel-body") do
-          concat(content_tag(:ul) do
-            object.errors.full_messages.each do |msg|
-              concat content_tag(:li, msg)
-            end
-          end)
+      end)
+      concat(content_tag(:div, class: "panel-body") do
+        concat(content_tag(:ul) do
+          object.errors.full_messages.each do |msg|
+            concat content_tag(:li, msg)
+          end
         end)
-      end
+      end)
     end
   end
 
@@ -43,5 +41,4 @@ module ApplicationHelper
   def fa_icon_with_text(text, icon)
     "#{text} #{fa_icon icon}".html_safe
   end
-
 end

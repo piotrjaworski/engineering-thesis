@@ -51,10 +51,9 @@ Rails.application.routes.draw do
     get :dashboard, to: 'dashboard#index', as: :dashboard
     resources :categories
 
-    check_admin = lambda { |request| request.env["warden"].authenticate? and (request.env['warden'].user.is_admin?) }
+    check_admin = lambda { |request| request.env["warden"].authenticate? and (request.env['warden'].user.admin?) }
     constraints check_admin do
       mount Sidekiq::Web => '/sidekiq'
     end
   end
-
 end
