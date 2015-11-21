@@ -67,6 +67,14 @@ class User < ActiveRecord::Base
     errors.any? ? errors.full_messages.join("<br>".html_safe) : nil
   end
 
+  def want_message_notifications?
+    profile.message_notifications
+  end
+
+  def want_post_notifications?
+    profile.post_notifications
+  end
+
   def is?(role)
     ROLES[self.role] == role
   end

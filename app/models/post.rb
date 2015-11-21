@@ -10,8 +10,8 @@ class Post < ActiveRecord::Base
   has_one :notification, as: :notificationable
 
   before_update :increase_edited_count
-  # before_save :check_emoticons_path
   before_save :set_post_number
+  after_create :notify_users
 
   validates_length_of :content, minimum: 4, allow_blank: false
   validate :closed_topic
@@ -20,10 +20,6 @@ class Post < ActiveRecord::Base
 
   def increase_edited_count
     self.edited_count += 1 unless new_record?
-  end
-
-  def check_emoticons_path
-    self.content = content.gsub("assets", "/assets")
   end
 
   def set_post_number
@@ -44,6 +40,14 @@ class Post < ActiveRecord::Base
   def closed_topic
     if topic && topic.blocked
       return errors.add(:topic, "is blocked. Cannot edit/update post.")
+    end
+  end
+
+  def notify_users
+    topic.all_users.each do |u|
+      if u.want_post_notifications? and u != self.user
+        NotificationsWorker.perform_async(u.id, "posted", { class: "Post", id: self.id })
+      end
     end
   end
 end

@@ -67,6 +67,10 @@ class Topic < ActiveRecord::Base
     User.find(users_ids)
   end
 
+  def all_users
+    User.where(id: posts.pluck(:user_id).uniq)
+  end
+
   def users_ids
     posts.pluck(:user_id).reverse.uniq.take(4)
   end

@@ -8,5 +8,14 @@
     <% else %>
       <%= fa_icon "circle-o", class: "pull-right" %>
     <% end %>
+  <% elsif notification.object_class_name == "Post" %>
+    <%= notification.object.user.full_name %> added a new reply in the <%= notification.object.topic.name %> topic.
+    <br>
+    About <%= time_ago_in_words(notification.created_at) %>.
+    <% if notification.unread? %>
+      <%= link_to fa_icon("circle"), notification_read_path(notification), method: :post, remote: true, class: "pull-right" %>
+    <% else %>
+      <%= fa_icon "circle-o", class: "pull-right" %>
+    <% end %>
   <% end %>
 </div>

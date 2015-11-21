@@ -1,5 +1,5 @@
 <% unless @notifications_count > 0 %>
-  $("#notifications-list").html("<p><span class='text-warning'>You dont have any notifiactions yet!</span></p>")
+  $("#notifications-list").html("<p class='empty-notifications'><span class='text-warning'>You dont have any notifiactions yet!</span></p>")
 <% else %>
   <% if params[:page] && params[:page].to_i > 1 %>
     $("#notifications-list").append("<%= j(render partial: 'list', locals: { notifications: @notifications }) %>");
