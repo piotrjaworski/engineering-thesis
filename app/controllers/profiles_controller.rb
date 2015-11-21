@@ -1,22 +1,27 @@
 class ProfilesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_user
 
   def update
-    if @user.update_attributes(user_params)
-      redirect_with_message(edit_user_registration_path, "Your profile has been updated.", "success")
+    if current_user.update_attributes(user_params.except(:webpage, :signature, :location)) &&
+       current_user.profile.update_attributes(user_params.except(:full_name, :username))
+      redirect_to edit_user_registration_path, notice: "Your profile has been updated"
     else
-      redirect_with_message(edit_user_registration_path, @user.user_errors, "error")
+      redirect_to edit_user_registration_path, alert: current_user.user_errors
+    end
+  end
+
+  def preferences
+    if current_user.profile.update_attributes(user_params)
+      redirect_to edit_user_registration_path + "#info", notice: "Preferences updated"
+    else
+      redirect_to edit_user_registration_path + "#info", alert: "Cannot update preferences"
     end
   end
 
   private
 
-  def set_user
-    @user = User.find(params[:id])
-  end
-
   def user_params
-    params.require(:user).permit(:username, :full_name, :webpage, :signature, :location, :avatar)
+    params.require(:user).permit(:username, :full_name, :webpage, :signature, :location, :avatar,
+                                 :post_notifications, :message_notifications)
   end
 end

@@ -2,6 +2,8 @@ class User < ActiveRecord::Base
   extend FriendlyId
   friendly_id :username, use: :slugged
 
+  delegate :location, :about_me, :signature, :webpage, :post_notifications, :message_notifications, to: :profile
+
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable, :omniauthable, omniauth_providers: [:google_oauth2]
 
   has_many :topics, class_name: "Topic", foreign_key: "creator_id"
@@ -9,6 +11,7 @@ class User < ActiveRecord::Base
   has_many :message_threads_received, class_name: "MessageThread", foreign_key: :addressee_id
   has_many :message_threads_sent, class_name: "MessageThread", foreign_key: :sender_id
   has_many :notifications
+  has_one :profile
 
   validates_presence_of :full_name, :username
   validates_uniqueness_of :username
@@ -22,6 +25,7 @@ class User < ActiveRecord::Base
   default_scope { order("created_at") }
 
   after_create :add_avatar_to_queue
+  after_create :create_profile
 
   ROLES = { 1 => :admin, 2 => :moderator, 3 => :user }
 
@@ -49,6 +53,14 @@ class User < ActiveRecord::Base
 
   def latest_topics
     topics.order(created_at: :desc)
+  end
+
+  def message_threads
+    MessageThread.includes(:messages).where("addressee_id = ? or sender_id = ?", id, id).order(created_at: :desc)
+  end
+
+  def unread_message_threads
+    message_threads_received.includes(:messages).where("messages.unread = ?", true).references(:messages)
   end
 
   def user_errors
@@ -81,10 +93,6 @@ class User < ActiveRecord::Base
     role == 3
   end
 
-  def add_avatar_to_queue
-    AvatarsWorker.perform_async(id)
-  end
-
   def get_avatar
     gravatar = Gravatar.new(email)
     image = gravatar.get_image(400)
@@ -98,15 +106,17 @@ class User < ActiveRecord::Base
     end
   end
 
-  def message_threads
-    MessageThread.includes(:messages).where("addressee_id = ? or sender_id = ?", id, id).order(created_at: :desc)
-  end
-
-  def unread_message_threads
-    message_threads_received.includes(:messages).where("messages.unread = ?", true).references(:messages)
-  end
-
   def name_with_email
     "#{full_name} #{@addressee.email}"
+  end
+
+  private
+
+  def create_profile
+    self.build_profile.save
+  end
+
+  def add_avatar_to_queue
+    AvatarsWorker.perform_async(id)
   end
 end

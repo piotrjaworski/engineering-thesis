@@ -9,12 +9,11 @@
 </script>
 
 <div class="row profile-page">
-  <div class="col-md-2 col-md-offset-1"> <!-- required for floating -->
-    <!-- Nav tabs -->
+  <div class="col-md-2 col-md-offset-1">
     <ul class="nav nav-tabs tabs-left">
       <li class="active"><a href="#profile" data-toggle="tab">Profile</a></li>
       <li><a href="#password" data-toggle="tab">Password</a></li>
-      <li><a href="#messages" data-toggle="tab">Notifications</a></li>
+      <li><a href="#info" data-toggle="tab">Notifications</a></li>
       <li><a href="#settings" data-toggle="tab">Delete account</a></li>
     </ul>
   </div>
@@ -23,7 +22,6 @@
     <div id="flash_messages_profile">
       <%= render partial: "shared/flash_messages" %>
     </div>
-    <!-- Tab panes -->
     <div class="tab-content">
       <div class="tab-pane active" id="profile">
         <%= render partial: "profile" %>
@@ -31,7 +29,9 @@
       <div class="tab-pane" id="password">
         <%= render partial: "password" %>
       </div>
-      <div class="tab-pane" id="messages">Messages Tab.</div>
+      <div class="tab-pane" id="info">
+        <%= render partial: "notifications" %>
+      </div>
       <div class="tab-pane" id="settings">
         <%= render partial: "delete" %>
       </div>

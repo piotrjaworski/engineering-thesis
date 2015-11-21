@@ -16,7 +16,9 @@ Rails.application.routes.draw do
   end
 
   # profile
-  resources :profiles, only: [:update]
+  resource :profiles, only: [:update] do
+    post :preferences
+  end
   namespace :avatars do
     post :reload
     get :edit

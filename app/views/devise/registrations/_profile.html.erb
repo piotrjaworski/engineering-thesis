@@ -5,7 +5,7 @@
 <div class="row">
   <div class="col-md-12">
     <h2>Account informations:</h2>
-    <%= simple_form_for current_user, url: profile_path(id: current_user.id), method: :put do |f| %>
+    <%= simple_form_for current_user, url: profiles_path, method: :put do |f| %>
       <%= f.input :username, required: true %>
       <%= f.input :full_name, required: false %>
       <%= f.input :location, required: false %>

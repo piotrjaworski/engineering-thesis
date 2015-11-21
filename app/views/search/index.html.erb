@@ -1,18 +1,20 @@
 <div class="row search">
   <div class="col-md-3 facets">
-    <%= form_tag search_path, method: :get, id: "search_form_filter" do %>
-      <%= hidden_field_tag :query, params[:query] %>
-      <%= hidden_field_tag :filtering, true %>
-      <h4>Filters:</h4>
-      <% if @type_filter.present? %>
-        <ul>
-          <% @type_filter.each do |filter| %>
-            <li>
-              <%= check_box_tag "filters[]", filter, facet_helper(params, filter), { id: "filters_#{filter}", class: "search_form_filter" } %>
-              <%= filter %>
-            </li>
-          <% end %>
-        </ul>
+    <% if @results.present? %>
+      <%= form_tag search_path, method: :get, id: "search_form_filter" do %>
+        <%= hidden_field_tag :query, params[:query] %>
+        <%= hidden_field_tag :filtering, true %>
+        <h4>Filters:</h4>
+        <% if @type_filter.present? %>
+          <ul>
+            <% @type_filter.each do |filter| %>
+              <li>
+                <%= check_box_tag "filters[]", filter, facet_helper(params, filter), { id: "filters_#{filter}", class: "search_form_filter" } %>
+                <%= filter %>
+              </li>
+            <% end %>
+          </ul>
+        <% end %>
       <% end %>
     <% end %>
   </div>
