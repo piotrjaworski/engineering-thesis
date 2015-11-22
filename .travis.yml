@@ -9,5 +9,6 @@ gemfile:
 before_script:
   - export SECRET_KEY_BASE="$(bundle exec rake secret)"
   - psql -c 'create database forum_test;' -U postgres
+  - cp config/database.yml.example config/database.yml
 addons:
   postgresql: 9.2
