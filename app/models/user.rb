@@ -11,21 +11,21 @@ class User < ActiveRecord::Base
   has_many :message_threads_received, class_name: "MessageThread", foreign_key: :addressee_id
   has_many :message_threads_sent, class_name: "MessageThread", foreign_key: :sender_id
   has_many :notifications
-  has_one :profile
+  has_one :profile, dependent: :destroy
 
-  validates_presence_of :full_name, :username
-  validates_uniqueness_of :username
+  before_create :create_profile
+  after_create :add_avatar_to_queue
+
+  validates :full_name, :username, presence: true
+  validates :username, uniqueness: true
+
+  default_scope { order("created_at") }
 
   has_attached_file :avatar, styles: { medium: "300x300>", thumb: "120x120>", small: "70x70", mini: "45x45" },
                              default_url: "/images/missing/:style.png",
                              url: "/system/:class/:attachment/:id/:style/:basename.:extension",
                              path: ":rails_root/public/system/:class/:attachment/:id/:style/:basename.:extension"
   validates_attachment_content_type :avatar, content_type: ['image/gif', 'image/jpeg', 'image/png', 'image/x-ms-bmp']
-
-  default_scope { order("created_at") }
-
-  after_create :add_avatar_to_queue
-  after_create :create_profile
 
   ROLES = { 1 => :admin, 2 => :moderator, 3 => :user }
 
@@ -121,7 +121,7 @@ class User < ActiveRecord::Base
   private
 
   def create_profile
-    self.build_profile.save
+    build_profile
   end
 
   def add_avatar_to_queue

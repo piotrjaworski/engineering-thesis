@@ -4,15 +4,12 @@ class Gravatar
 
   def initialize(email)
     @email = email
-    @gravatar_id = Digest::MD5::hexdigest(@email).downcase
+    @gravatar_id = Digest::MD5.hexdigest(@email).downcase
   end
 
   def get_image(size = 200)
-    if gravatar?
-      open(image_url(size))
-    else
-      false
-    end
+    return false unless gravatar?
+    open(image_url(size))
   end
 
   private

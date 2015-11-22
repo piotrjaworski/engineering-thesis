@@ -4,6 +4,8 @@ class Message < ActiveRecord::Base
   belongs_to :message_thread, touch: true
   has_one :notification, as: :notificationable
 
+  after_create :send_notification
+
   def users
     User.find([addressee_id, sender_id])
   end
@@ -15,5 +17,11 @@ class Message < ActiveRecord::Base
 
   def mark_as_read
     update_column(:unread, false) if unread
+  end
+
+  private
+
+  def send_notification
+    NotificationsWorker.perform_async(addressee.id, class: "Message", id: id) if addressee.want_message_notifications?
   end
 end

@@ -9,7 +9,7 @@ class Topic < ActiveRecord::Base
   has_many :posts, dependent: :destroy
   accepts_nested_attributes_for :posts, reject_if: proc { |attributes| attributes['content'].blank? }
 
-  validates_presence_of :name, :category
+  validates :name, :category, presence: true
 
   default_scope { order("updated_at DESC") }
   scope :top_records, -> { unscope(:order).order("views DESC") }
@@ -19,12 +19,8 @@ class Topic < ActiveRecord::Base
     [id, name.parameterize].join("-")
   end
 
-  def posts_count
-    posts.count
-  end
-
   def new?
-    (Time.zone.parse(DateTime.now.to_s) - Time.zone.parse(created_at.to_s)) / 3600 < 6 ? true : false
+    (Time.zone.parse(DateTime.now.in_time_zone.to_s) - Time.zone.parse(created_at.to_s)) / 3600 < 6 ? true : false
   end
 
   def assign_user(user)
@@ -72,7 +68,7 @@ class Topic < ActiveRecord::Base
   end
 
   def users_ids
-    posts.pluck(:user_id).reverse.uniq.take(4)
+    posts.pluck(:user_id).uniq.reverse.take(4)
   end
 
   def last_page

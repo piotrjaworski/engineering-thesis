@@ -15,7 +15,7 @@
         <% end %>
       </ul>
     </td>
-    <td class="col-md-1"><%= t.posts_count %></td>
+    <td class="col-md-1"><%= t.posts.count %></td>
     <td class="col-md-1"><%= t.views %></td>
     <td class="col-md-2"><%= time_ago_in_words(t.posts.first.created_at) %> ago</td>
   </tr>

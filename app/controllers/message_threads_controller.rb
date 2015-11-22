@@ -27,11 +27,11 @@ class MessageThreadsController < ApplicationController
   end
 
   def new
-    unless params[:new]
+    if params[:new].present?
+      @message_thread = current_user.message_threads_sent.new
+    else
       @addressee = User.friendly.find(params[:user_id])
       @message_thread = current_user.message_threads_sent.new(addressee_id: @addressee.id)
-    else
-      @message_thread = current_user.message_threads_sent.new
     end
     @message_thread.messages.build
   end
@@ -46,7 +46,6 @@ class MessageThreadsController < ApplicationController
 
     return redirect_to user_message_threads_path(current_user), alert: "You cannot send message to yourself" if addressee_id == current_user.id
     if @message_thread.save
-      send_notification(@message_thread.addressee_id, @message_thread.messages.first.id)
       redirect_to user_message_thread_path(current_user, @message_thread), notice: "Your message has been submitted successfully"
     else
       render :new, alert: "Cannot submit this message, #{@message_thread.errors}"
@@ -61,7 +60,6 @@ class MessageThreadsController < ApplicationController
     @message = @message_thread.messages.new(content: params[:message][:content], sender_id: current_user.id)
     @message.addressee = @message.exclude_user(current_user)
     if @message.save
-      send_notification(@message.addressee_id, @message.id)
       redirect_to user_message_thread_path(current_user, @message_thread), notice: "Your message has been sent successfully"
     else
       redirect_to user_message_thread_path(current_user, @message_thread), alert: "Cannot send message, please try again"
@@ -71,7 +69,7 @@ class MessageThreadsController < ApplicationController
   private
 
   def message_thread_params
-    params.require(:message_thread).permit(:addressee_id, :topic, { message: [:content] })
+    params.require(:message_thread).permit(:addressee_id, :topic, message: [:content])
   end
 
   def set_message_thread
@@ -88,10 +86,5 @@ class MessageThreadsController < ApplicationController
 
   def mark_as_read
     @message_thread.messages.where(unread: true).each { |message| message.mark_as_read if message.addressee_id == current_user.id }
-  end
-
-  def send_notification(user_id, message_id)
-    user = User.find(user_id)
-    NotificationsWorker.perform_async(user_id, params[:action], { class: "Message", id: message_id }) if user.want_message_notifications?
   end
 end

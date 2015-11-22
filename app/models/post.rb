@@ -13,7 +13,7 @@ class Post < ActiveRecord::Base
   before_save :set_post_number
   after_create :notify_users
 
-  validates_length_of :content, minimum: 4, allow_blank: false
+  validates :content, length: { minimum: 4, allow_blank: false }
   validate :closed_topic
 
   default_scope { order("created_at ASC") }
@@ -45,8 +45,8 @@ class Post < ActiveRecord::Base
 
   def notify_users
     topic.all_users.each do |u|
-      if u.want_post_notifications? and u != self.user
-        NotificationsWorker.perform_async(u.id, "posted", { class: "Post", id: self.id })
+      if u.want_post_notifications? and u != user
+        NotificationsWorker.perform_async(u.id, class: "Post", id: id)
       end
     end
   end
