@@ -2,17 +2,11 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   helper_method :logged_in?
 
-  decent_configuration do
-    strategy DecentExposure::StrongParametersStrategy
-  end
-
   rescue_from CanCan::AccessDenied do
     if @topic.present?
-      redirect_to topic_path(@topic)
-      flash[:error] = "You can't edit edit this post"
+      redirect_to topic_path(@topic), alert: "You can't edit edit this post"
     else
-      redirect_to root_path
-      flash.now[:error] = "You are not authorized to access this page"
+      redirect_to root_path, alert: "You are not authorized to access this page"
     end
   end
 
@@ -20,11 +14,6 @@ class ApplicationController < ActionController::Base
 
   def logged_in?
     current_user
-  end
-
-  def redirect_with_message(path, message, type)
-    redirect_to path
-    flash[type] = "#{message}"
   end
 
   def check_admin

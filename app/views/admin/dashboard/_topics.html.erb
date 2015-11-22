@@ -1,0 +1,21 @@
+<div class="col-md-6">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Topics</h3>
+    </div>
+    <div class="panel-body">
+      <table class="table table-admin">
+        <tbody>
+          <% @topics.each do |topic| %>
+            <tr>
+              <td class="col-md-10"><%= topic.name %></td>
+              <td class="col-md-1"><%= link_to "Show", "#" %></td>
+              <td class="col-md-1"><%= link_to "Block", "#" %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <%= link_to "More users...", admin_categories_path %>
+    </div>
+  </div>
+</div>

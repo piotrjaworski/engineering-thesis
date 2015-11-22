@@ -10,9 +10,9 @@ class PostsController < ApplicationController
   def create
     @post = @topic.build_post(current_user, post_params)
     if @post.save
-      redirect_with_message(topic_path(@topic, page: @topic.last_page), "Your reply has been posted.", "success")
+      redirect_to topic_path(@topic, page: @topic.last_page), notice: "Your reply has been posted"
     else
-      redirect_with_message(@topic, @post.errors.messages.map { |k, v| "#{k.to_s.capitalize} #{v.join('')}" }.join(''), "error")
+      redirect_to @topic, alert: @post.errors.messages.map { |k, v| "#{k.to_s.capitalize} #{v.join('')}" }.join('')
     end
   end
 

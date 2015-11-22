@@ -1,7 +1,8 @@
 class Admin::DashboardController < Admin::AdminController
   def index
-    @categories = Category.all.take(5)
-    @users = User.all.take(5)
-    @topics = Topic.all.take(5)
+    @categories = Category.take(5)
+    @users = User.take(5)
+    @topics = Topic.take(5)
+    @posts = Post.take(5)
   end
 end
