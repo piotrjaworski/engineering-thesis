@@ -1,0 +1,58 @@
+<div class="row">
+  <h1 class="text-center">Users list</h1>
+
+  <div class="col-md-4">
+    <%= link_to "Back to dashboard", admin_path, class: "btn btn-primary" %>
+  </div>
+
+  <div class="col-md-4">
+    <%= form_tag search_admin_users_path, method: :get do %>
+      <div class="input-group">
+        <%= text_field_tag :query, params[:query], class: "form-control" %>
+        <span class="input-group-btn">
+          <%= submit_tag "Search", class: "btn btn-default" %>
+        </span>
+      </div>
+    <% end %>
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-md-12">
+
+    <%= render partial: "shared/flash_messages" %>
+
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th class="col-md-2">Name</th>
+          <th class="col-md-2">Login</th>
+          <th class="col-md-2">Email</th>
+          <th class="col-md-3">Joined</th>
+          <th class="col-md-3"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @users.each do |user| %>
+          <tr>
+            <td class="col-md-2"><%= user.full_name %></td>
+            <td class="col-md-2"><%= user.username %></td>
+            <td class="col-md-2"><%= user.email %></td>
+            <td class="col-md-3"><%= user.created_at %></td>
+            <td class="col-md-3">
+              <%= link_to "Show", admin_user_path(user.id), class: "btn btn-success btn-sm", remote: true %>
+              <% if user != current_user && !user.blocked %>
+                <%= link_to "Block", admin_user_block_path(user.id), class: "btn btn-danger btn-sm", method: :post, data: { confirm: "Are you sure?" } %>
+              <% elsif user != current_user && user.blocked %>
+                <%= link_to "Unblock", admin_user_unblock_path(user.id), class: "btn btn-warning btn-sm", method: :post, data: { confirm: "Are you sure?" } %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <div class="text-center">
+      <p><%= will_paginate @users, renderer: BootstrapPagination::Rails %></p>
+    </div>
+  </div>
+</div>

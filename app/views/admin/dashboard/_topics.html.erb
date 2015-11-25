@@ -9,8 +9,14 @@
           <% @topics.each do |topic| %>
             <tr>
               <td class="col-md-10"><%= topic.name %></td>
-              <td class="col-md-1"><%= link_to "Show", "#" %></td>
-              <td class="col-md-1"><%= link_to "Block", "#" %></td>
+              <td class="col-md-1"><%= link_to "Edit", "#" %></td>
+              <td class="col-md-1">
+                <% if topic.closed? %>
+                  <%= link_to "Open", "#" %>
+                <% else %>
+                  <%= link_to "Close", "#" %>
+                <% end %>
+              </td>
             </tr>
           <% end %>
         </tbody>

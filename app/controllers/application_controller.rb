@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
+  before_filter :blocked?
   helper_method :logged_in?
 
   rescue_from CanCan::AccessDenied do
@@ -11,6 +12,13 @@ class ApplicationController < ActionController::Base
   end
 
   private
+
+  def blocked?
+    if user_signed_in? && current_user.blocked?
+      sign_out current_user
+      redirect_to root_path, alert: "This account has been blocked"
+    end
+  end
 
   def logged_in?
     current_user

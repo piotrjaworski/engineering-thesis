@@ -4,19 +4,22 @@
       <h3 class="panel-title">Users</h3>
     </div>
     <div class="panel-body">
-      <%= link_to "Add a new user", new_admin_category_path, class: 'btn btn-success' %>
+      <%= link_to "All users", admin_users_path, class: "btn btn-success" %>
       <table class="table table-admin">
         <tbody>
           <% @users.each do |user| %>
             <tr>
               <td class="col-md-10"><%= user.full_name %></td>
               <td class="col-md-1"><%= link_to "Show", "#" %></td>
-              <td class="col-md-1"><%= link_to "Block", "#" %></td>
+              <% if user != current_user && !user.blocked %>
+                <td class="col-md-1"><%= link_to "Block", admin_user_block_path(user.id), method: :post, data: { confirm: "Are you sure?" } %></td>
+              <% elsif user != current_user && user.blocked %>
+                <td class="col-md-1"><%= link_to "Unblock", admin_user_unblock_path(user.id), method: :post, data: { confirm: "Are you sure?" } %></td>
+              <% end %>
             </tr>
           <% end %>
         </tbody>
       </table>
-      <%= link_to "More users...", admin_categories_path %>
     </div>
   </div>
 </div>

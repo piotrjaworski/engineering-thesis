@@ -3,7 +3,7 @@ require 'sidekiq/web'
 Rails.application.routes.draw do
   devise_for :users, path: '',
     path_names: { sign_in: 'login', sign_out: 'logout', sign_up: 'register', edit: 'profile/edit' },
-    controllers: { registrations: :registrations, omniauth_callbacks: 'users/omniauth_callbacks' }
+    controllers: { sessions: :sessions, registrations: :registrations, omniauth_callbacks: 'users/omniauth_callbacks' }
   root 'home#index'
 
   # page
@@ -52,6 +52,11 @@ Rails.application.routes.draw do
     get '/', to: 'dashboard#index'
     get :dashboard, to: 'dashboard#index', as: :dashboard
     resources :categories
+    resources :users, only: [:index, :show] do
+      get :search, on: :collection
+      post :block
+      post :unblock
+    end
 
     check_admin = lambda { |request| request.env["warden"].authenticate? and (request.env['warden'].user.admin?) }
     constraints check_admin do

@@ -4,6 +4,12 @@
 <p><%= link_to "Back to forum", root_path, class: "btn btn-primary" %></p>
 
 <div class="row">
+  <div class="col-md-12 flash-messages">
+    <%= render partial: "shared/flash_messages" %>
+  </div>
+</div>
+
+<div class="row">
   <%= render partial: "users" %>
   <%= render partial: "categories" %>
 </div>

@@ -1,0 +1,36 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <h4 class="modal-title"><%= @user.full_name %></h4>
+    </div>
+    <div class="modal-body">
+      <p>
+        <p class="text-center">
+          <%= image_tag(@user.avatar(:medium), class: 'round-image profile-image') %>
+        </p>
+        <hr>
+        <strong>Username: </strong><%= @user.username %>
+        <br>
+        <hr>
+        <strong>Full name: </strong><%= @user.full_name %>
+        <br>
+        <hr>
+        <strong>Email: </strong><%= @user.email %>
+        <br>
+        <hr>
+        <strong>Joined: </strong><%= @user.created_at.strftime("%d %B %Y at %H:%M") %>
+        <br>
+        <hr>
+        <strong>Last post: </strong><%= @user.posts.last.created_at.strftime("%d %B %Y at %H:%M") rescue "Not posted yet" %>
+        <br>
+        <hr>
+        <strong>Seen: </strong><%= @user.last_sign_in_at.strftime("%d %B %Y at %H:%M") rescue "Not logged yet" %>
+        <br>
+      </p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    </div>
+  </div>
+</div>

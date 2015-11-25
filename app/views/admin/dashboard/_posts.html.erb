@@ -8,9 +8,8 @@
         <tbody>
           <% @posts.each do |post| %>
             <tr>
-              <td class="col-md-10"><%= post.content.truncate(120) %></td>
-              <td class="col-md-1"><%= link_to "Show", "#" %></td>
-              <td class="col-md-1"><%= link_to "Block", "#" %></td>
+              <td class="col-md-11"><%= post.content.truncate(120) %></td>
+              <td class="col-md-1"><%= link_to "Edit", "#" %></td>
             </tr>
           <% end %>
         </tbody>

@@ -2,6 +2,8 @@ class Topic < ActiveRecord::Base
   include PgSearch
   multisearchable against: [:name, :description]
 
+  self.per_page = 30
+
   is_impressionable counter_cache: true, column_name: :views
 
   belongs_to :category

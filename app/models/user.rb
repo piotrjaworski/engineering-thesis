@@ -2,6 +2,8 @@ class User < ActiveRecord::Base
   extend FriendlyId
   friendly_id :username, use: :slugged
 
+  self.per_page = 20
+
   delegate :location, :about_me, :signature, :webpage, :post_notifications, :message_notifications, to: :profile
 
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable, :omniauthable, omniauth_providers: [:google_oauth2]
@@ -41,6 +43,11 @@ class User < ActiveRecord::Base
     end
     user.update_attributes(provider: "google", uid: response[:uid]) if user.provider != "google"
     user
+  end
+
+  def self.search(params)
+    User.where("lower(username) LIKE ? OR lower(full_name) LIKE ? OR lower(email) LIKE ?",
+                "%#{params.downcase}%", "%#{params.downcase}%", "%#{params.downcase}%")
   end
 
   def avatar_from_url(url)
@@ -99,6 +106,20 @@ class User < ActiveRecord::Base
 
   def user?
     role == 3
+  end
+
+  def blocked?
+    blocked
+  end
+
+  def block
+    return false if blocked || admin?
+    update_attribute(:blocked, true)
+  end
+
+  def unblock
+    return false if !blocked || admin?
+    update_attribute(:blocked, false)
   end
 
   def get_avatar
