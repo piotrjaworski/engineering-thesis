@@ -45,9 +45,9 @@ class User < ActiveRecord::Base
     user
   end
 
-  def self.search(params)
+  def self.search(query)
     User.where("lower(username) LIKE ? OR lower(full_name) LIKE ? OR lower(email) LIKE ?",
-                "%#{params.downcase}%", "%#{params.downcase}%", "%#{params.downcase}%")
+               "%#{query.downcase}%", "%#{query.downcase}%", "%#{query.downcase}%")
   end
 
   def avatar_from_url(url)

@@ -21,12 +21,8 @@ class Topic < ActiveRecord::Base
     [id, name.parameterize].join("-")
   end
 
-  def new?
-    (Time.zone.parse(DateTime.now.in_time_zone.to_s) - Time.zone.parse(created_at.to_s)) / 3600 < 6 ? true : false
-  end
-
-  def assign_user(user)
-    posts.each { |p| p.user_id = user.id }
+  def self.search(query)
+    Topic.where("lower(name) LIKE ? OR lower(description) LIKE ?", "%#{query.downcase}%", "%#{query.downcase}%")
   end
 
   def self.build_new(user, params)
@@ -41,8 +37,22 @@ class Topic < ActiveRecord::Base
     post
   end
 
+  def new?
+    (Time.zone.parse(DateTime.now.in_time_zone.to_s) - Time.zone.parse(created_at.to_s)) / 3600 < 6 ? true : false
+  end
+
+  def assign_user(user)
+    posts.each { |p| p.user_id = user.id }
+  end
+
   def close
+    return false if closed?
     update_column(:blocked, true)
+  end
+
+  def open
+    return false if opened?
+    update_column(:blocked, false)
   end
 
   def closed?
@@ -51,10 +61,6 @@ class Topic < ActiveRecord::Base
 
   def opened?
     !blocked
-  end
-
-  def open
-    update_column(:blocked, false)
   end
 
   def creator

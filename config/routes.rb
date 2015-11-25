@@ -52,10 +52,17 @@ Rails.application.routes.draw do
     get '/', to: 'dashboard#index'
     get :dashboard, to: 'dashboard#index', as: :dashboard
     resources :categories
+
     resources :users, only: [:index, :show] do
       get :search, on: :collection
       post :block
       post :unblock
+    end
+
+    resources :topics, only: [:index, :update, :edit] do
+      get :search, on: :collection
+      post :open
+      post :close
     end
 
     check_admin = lambda { |request| request.env["warden"].authenticate? and (request.env['warden'].user.admin?) }

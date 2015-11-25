@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
-  before_filter :blocked?
+  before_action :blocked?
   helper_method :logged_in?
 
   rescue_from CanCan::AccessDenied do

@@ -1,0 +1,59 @@
+<div class="row">
+  <h1 class="text-center">Topics list</h1>
+
+  <div class="col-md-4">
+    <%= link_to "Back to dashboard", admin_path, class: "btn btn-primary" %>
+  </div>
+
+  <div class="col-md-4">
+    <%= form_tag search_admin_topics_path, method: :get do %>
+      <div class="input-group">
+        <%= text_field_tag :query, params[:query], class: "form-control" %>
+        <span class="input-group-btn">
+          <%= submit_tag "Search", class: "btn btn-default" %>
+        </span>
+      </div>
+    <% end %>
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-md-12">
+
+    <%= render partial: "shared/flash_messages" %>
+
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th class="col-md-4">Name</th>
+          <th class="col-md-2">Description</th>
+          <th class="col-md-2">Creator</th>
+          <th class="col-md-1">Posts</th>
+          <th class="col-md-3"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @topics.each do |topic| %>
+          <tr>
+            <td class="col-md-4"><%= topic.name %></td>
+            <td class="col-md-2"><%= topic.description %></td>
+            <td class="col-md-2"><%= topic.user.username %></td>
+            <td class="col-md-1"><%= topic.posts.count %></td>
+            <td class="col-md-3">
+              <%= link_to "Show", topic_path(topic), class: "btn btn-success btn-sm" %>
+              <%= link_to "Edit", edit_admin_topic_path(topic.id), class: "btn btn-primary btn-sm" %>
+              <% if topic.closed? %>
+                <%= link_to "Open", admin_topic_open_path(topic.id), class: "btn btn-danger btn-sm", method: :post, data: { confirm: "Are you sure?" } %>
+              <% else %>
+                <%= link_to "Close", admin_topic_close_path(topic.id), class: "btn btn-warning btn-sm", method: :post, data: { confirm: "Are you sure?" } %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <div class="text-center">
+      <p><%= will_paginate @topics, renderer: BootstrapPagination::Rails %></p>
+    </div>
+  </div>
+</div>

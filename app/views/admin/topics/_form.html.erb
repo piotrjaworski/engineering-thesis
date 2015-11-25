@@ -1,0 +1,19 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <h4 class="modal-title"><%= topic.name %></h4>
+    </div>
+    <%= simple_form_for topic, url: admin_topic_path(topic.id), method: :put do |f| %>
+    <div class="modal-body">
+      <%= f.input :name, input_html: { required: true } %>
+      <%= f.input :category_id, collection: Category.all, prompt: "Select a category...", required: true %>
+      <%= f.input :description %>
+    </div>
+    <div class="modal-footer">
+      <%= f.submit "Save", class: 'btn btn-success' %>
+      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    </div>
+     <% end %>
+  </div>
+</div>

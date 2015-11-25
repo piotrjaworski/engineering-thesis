@@ -1,5 +1,5 @@
 class Admin::UsersController < Admin::AdminController
-  before_filter :set_user, only: [:block, :unblock, :show]
+  before_action :set_user, only: [:block, :unblock, :show]
 
   def index
     @users = User.paginate(page: params[:page])
@@ -35,5 +35,4 @@ class Admin::UsersController < Admin::AdminController
     params[:id] ||= params[:user_id]
     @user = User.find(params[:id])
   end
-
 end
