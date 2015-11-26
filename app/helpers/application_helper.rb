@@ -41,4 +41,8 @@ module ApplicationHelper
   def fa_icon_with_text(text, icon)
     "#{text} #{fa_icon icon}".html_safe
   end
+
+  def category_box(category)
+    "<div style='margin-top: 3px; width: 12px; height: 12px; background-color:#{category.color};'></div>".html_safe
+  end
 end

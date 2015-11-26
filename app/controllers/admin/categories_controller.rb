@@ -1,6 +1,10 @@
 class Admin::CategoriesController < Admin::AdminController
   before_action :set_category, only: [:edit, :show, :update, :destroy]
 
+  def index
+    @categories = Category.paginate(page: params[:page])
+  end
+
   def new
     @category = Category.new
   end
@@ -8,7 +12,7 @@ class Admin::CategoriesController < Admin::AdminController
   def create
     @category = Category.new(category_attributes)
     if @category.save
-      redirect_to admin_dashboard_path
+      redirect_to admin_categories_path
       flash[:success] = "New category has beed added!"
     else
       render :new
@@ -23,7 +27,7 @@ class Admin::CategoriesController < Admin::AdminController
 
   def update
     if @category.update(category_attributes)
-      redirect_to admin_dashboard_path
+      redirect_to admin_categories_path
       flash[:success] = "Category has beed updated!"
     else
       render :edit
@@ -32,11 +36,16 @@ class Admin::CategoriesController < Admin::AdminController
 
   def destroy
     if @category.destroy
-      redirect_to admin_dashboard_path
+      redirect_to admin_categories_path
       flash[:success] = "Category has beed deleted!"
     else
       flash[:error] = "Category cannot be deleted!"
     end
+  end
+
+  def search
+    @categories = Category.search(params[:query]).paginate(page: params[:page])
+    render :index
   end
 
   private

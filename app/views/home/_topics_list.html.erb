@@ -7,7 +7,16 @@
       <% end %>
       <%= fa_icon("lock", class: "pull-right") if t.closed? %>
     </td>
-    <td class="col-md-2"><%= t.category.name %></td>
+    <td class="col-md-2">
+      <div class="row">
+        <div class="col-md-2">
+          <%= category_box(t.category) %>
+        </div>
+        <div class="col-md-10">
+          <%= t.category.name %>
+        </div>
+      </div>
+    </td>
     <td class="col-md-2">
       <ul class="users-list">
         <% t.users.each do |user| %>

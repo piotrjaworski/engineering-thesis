@@ -18,6 +18,10 @@ class Post < ActiveRecord::Base
 
   default_scope { order("created_at ASC") }
 
+  def self.search(query)
+    Post.where("lower(content) LIKE ?", "%#{query.downcase}%")
+  end
+
   def increase_edited_count
     self.edited_count += 1 unless new_record?
   end

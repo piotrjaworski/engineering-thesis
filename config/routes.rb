@@ -51,7 +51,10 @@ Rails.application.routes.draw do
   namespace :admin do
     get '/', to: 'dashboard#index'
     get :dashboard, to: 'dashboard#index', as: :dashboard
-    resources :categories
+
+    resources :categories do
+      get :search, on: :collection
+    end
 
     resources :users, only: [:index, :show] do
       get :search, on: :collection
@@ -63,6 +66,10 @@ Rails.application.routes.draw do
       get :search, on: :collection
       post :open
       post :close
+    end
+
+    resources :posts, only: [:index, :update, :edit, :show] do
+      get :search, on: :collection
     end
 
     check_admin = lambda { |request| request.env["warden"].authenticate? and (request.env['warden'].user.admin?) }

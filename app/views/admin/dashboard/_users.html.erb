@@ -11,11 +11,13 @@
             <tr>
               <td class="col-md-10"><%= user.full_name %></td>
               <td class="col-md-1"><%= link_to "Show", admin_user_path(user.id), class: "btn btn-success btn-sm", remote: true %></td>
-              <% if user != current_user && !user.blocked %>
-                <td class="col-md-1"><%= link_to "Block", admin_user_block_path(user.id), class: "btn btn-danger btn-sm", method: :post, data: { confirm: "Are you sure?" } %></td>
-              <% elsif user != current_user && user.blocked %>
-                <td class="col-md-1"><%= link_to "Unblock", admin_user_unblock_path(user.id), class: "btn btn-warning btn-sm", method: :post, data: { confirm: "Are you sure?" } %></td>
-              <% end %>
+              <td class="col-md-1">
+                <% if user != current_user && !user.blocked %>
+                  <%= link_to "Block", admin_user_block_path(user.id), class: "btn btn-danger btn-sm", method: :post, data: { confirm: "Are you sure?" } %>
+                <% elsif user != current_user && user.blocked %>
+                  <%= link_to "Unblock", admin_user_unblock_path(user.id), class: "btn btn-warning btn-sm", method: :post, data: { confirm: "Are you sure?" } %>
+                <% end %>
+              </td>
             </tr>
           <% end %>
         </tbody>

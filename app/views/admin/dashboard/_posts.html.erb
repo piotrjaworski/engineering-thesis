@@ -4,17 +4,18 @@
       <h3 class="panel-title">Posts</h3>
     </div>
     <div class="panel-body">
+      <%= link_to "All posts", admin_posts_path, class: "btn btn-success" %>
       <table class="table table-admin">
         <tbody>
           <% @posts.each do |post| %>
             <tr>
-              <td class="col-md-11"><%= post.content.truncate(120) %></td>
-              <td class="col-md-1"><%= link_to "Edit", "#" %></td>
+              <td class="col-md-10"><%= post.content.truncate(120) %></td>
+              <td class="col-md-1"><%= link_to "Edit", edit_admin_post_path(post), class: "btn btn-primary btn-sm", remote: true %></td>
+              <td class="col-md-1"><%= link_to "Show", admin_post_path(post), class: "btn btn-success btn-sm", remote: true %></td>
             </tr>
           <% end %>
         </tbody>
       </table>
-      <%= link_to "More users...", admin_categories_path %>
     </div>
   </div>
 </div>
