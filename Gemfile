@@ -36,18 +36,25 @@ gem 'friendly_id', '~> 5.1.0'
 gem 'bootstrap3_autocomplete_input'
 gem 'therubyracer', platforms: :ruby
 gem 'faker'
+gem 'exception_notification'
 
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'rubocop', require: false
-  #gem 'capistrano-rails'
+  gem 'quiet_assets'
+  # gem 'capistrano-rails'
 end
 
-gem 'codeclimate-test-reporter', group: :test, require: nil
+group :test do
+  gem 'shoulda-matchers', '~> 3.0'
+  gem 'factory_girl_rails'
+  gem 'database_cleaner'
+  gem 'codeclimate-test-reporter', require: nil
+  gem 'rspec-rails', '~> 3.0'
+  gem 'capybara'
+end
 
 group :development, :test do
   gem 'pry'
-  gem 'rspec-rails', '~> 3.0'
-  gem 'capybara'
 end

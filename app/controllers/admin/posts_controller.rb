@@ -33,5 +33,4 @@ class Admin::PostsController < Admin::AdminController
   def post_attributes
     params.require(:post).permit(:content)
   end
-
 end
