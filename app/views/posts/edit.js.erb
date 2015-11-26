@@ -1,2 +1,6 @@
+if ($("#new-post-reply").is(":visible")) {
+  $("#new-post-reply").slideUp();
+}
+
 $("#edit-post").html("<%= j(render partial: 'posts/form') %>");
 $("#edit-post").slideDown();
