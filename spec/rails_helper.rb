@@ -3,6 +3,8 @@ require File.expand_path('../../config/environment', __FILE__)
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'spec_helper'
 require 'rspec/rails'
+require 'shoulda/matchers'
+require 'database_cleaner'
 
 # Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 
@@ -34,8 +36,7 @@ RSpec.configure do |config|
 
   config.include FactoryGirl::Syntax::Methods
   config.include Devise::TestHelpers, type: :controller
-  config.include Shoulda::Matchers::ActiveModel, type: :model
-  config.include Shoulda::Matchers::ActiveRecord, type: :model
+  config.include Shoulda::Matchers
 
   config.infer_spec_type_from_file_location!
 end

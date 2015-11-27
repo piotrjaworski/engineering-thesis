@@ -4,7 +4,7 @@ class Message < ActiveRecord::Base
   belongs_to :message_thread, touch: true
   has_one :notification, as: :notificationable
 
-  after_create :send_notification
+  after_create :send_notification, unless: :skip_callbacks
 
   def users
     User.find([addressee_id, sender_id])
@@ -16,12 +16,17 @@ class Message < ActiveRecord::Base
   end
 
   def mark_as_read
-    update_column(:unread, false) if unread
+    return false if !unread
+    update_column(:unread, false)
   end
 
   private
 
   def send_notification
     NotificationsWorker.perform_async(addressee.id, class: "Message", id: id) if addressee.want_message_notifications?
+  end
+
+  def skip_callbacks
+    Rails.env == "test"
   end
 end

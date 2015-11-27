@@ -47,7 +47,7 @@ group :development do
 end
 
 group :test do
-  gem 'shoulda-matchers', '~> 3.0'
+  gem 'shoulda-matchers', require: false
   gem 'factory_girl_rails'
   gem 'database_cleaner'
   gem 'codeclimate-test-reporter', require: nil

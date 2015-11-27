@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
   has_one :profile, dependent: :destroy
 
   before_create :create_profile
-  after_create :add_avatar_to_queue
+  after_create :add_avatar_to_queue, unless: :skip_callbacks
 
   validates :full_name, :username, presence: true
   validates :username, uniqueness: true
@@ -147,5 +147,9 @@ class User < ActiveRecord::Base
 
   def add_avatar_to_queue
     AvatarsWorker.perform_async(id)
+  end
+
+  def skip_callbacks
+    Rails.env == "test"
   end
 end

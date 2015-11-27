@@ -146,7 +146,7 @@ GEM
     mime-types (2.6.1)
     mimemagic (0.3.0)
     mini_portile (0.6.2)
-    minitest (5.7.0)
+    minitest (5.8.3)
     multi_json (1.11.2)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
@@ -265,8 +265,8 @@ GEM
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
-    shoulda-matchers (3.0.1)
-      activesupport (>= 4.0.0)
+    shoulda-matchers (2.8.0)
+      activesupport (>= 3.0.0)
     sidekiq (3.5.1)
       celluloid (~> 0.17.2)
       connection_pool (~> 2.2, >= 2.2.0)
@@ -348,7 +348,7 @@ DEPENDENCIES
   rubocop
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
-  shoulda-matchers (~> 3.0)
+  shoulda-matchers
   sidekiq
   simple_form
   sinatra
