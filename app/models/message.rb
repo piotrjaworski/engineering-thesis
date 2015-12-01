@@ -15,8 +15,16 @@ class Message < ActiveRecord::Base
     User.find(user_id)
   end
 
+  def unread?
+    unread
+  end
+
+  def read?
+    !unread
+  end
+
   def mark_as_read
-    return false if !unread
+    return false if read?
     update_column(:unread, false)
   end
 

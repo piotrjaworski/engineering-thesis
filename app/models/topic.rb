@@ -79,6 +79,14 @@ class Topic < ActiveRecord::Base
     posts.pluck(:user_id).uniq.reverse.take(4)
   end
 
+  def can_delete?
+    if posts.count < 2
+      true
+    else
+      false
+    end
+  end
+
   def last_page
     last_post = Post.unscoped do
       posts.order(number: :desc).limit(1).first

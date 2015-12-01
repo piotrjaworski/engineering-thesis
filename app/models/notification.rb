@@ -7,8 +7,6 @@ class Notification < ActiveRecord::Base
   default_scope { order(updated_at: :desc) }
   scope :unread,    -> { where(read: false) }
   scope :read,      -> { where(read: true) }
-  scope :opened,    -> { where(opened: true) }
-  scope :unopened,  -> { where(opened: false) }
 
   def object
     notificationable_type.constantize.find(notificationable_id)

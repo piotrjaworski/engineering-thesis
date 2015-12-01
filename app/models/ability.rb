@@ -13,28 +13,26 @@ class Ability
   end
 
   def admin_abilities(user)
-    can :edit, Post
-    can :update, Post
+    can :manage, Topic
+    can :manage, Post
     can :show, MessageThread, addressee_id: user.id
     can :show, MessageThread, sender_id: user.id
     can :reply, MessageThread, addressee_id: user.id
     can :reply, MessageThread, sender_id: user.id
-    can :close, Topic
-    can :open, Topic
   end
 
   def moderator_abilities(user)
-    can :edit, Post
-    can :update, Post
+    can :manage, Topic
+    can :manage, Post
     can :show, MessageThread, addressee_id: user.id
     can :show, MessageThread, sender_id: user.id
     can :reply, MessageThread, addressee_id: user.id
     can :reply, MessageThread, sender_id: user.id
-    can :close, Topic
-    can :open, Topic
   end
 
   def user_abilities(user)
+    can :edit, Topic, creator_id: user.id
+    can :destroy, Topic, creator_id: user.id
     can :edit, Post, user_id: user.id
     can :update, Post, user_id: user.id
     can :show, MessageThread, addressee_id: user.id

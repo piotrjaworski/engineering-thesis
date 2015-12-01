@@ -12,7 +12,7 @@ RSpec.describe Category, type: :model do
   end
 
   describe 'validations' do
-    it { should have_many (:topics) }
+    it { should have_many(:topics) }
     it { should validate_presence_of(:name) }
     it { should validate_uniqueness_of(:name) }
   end

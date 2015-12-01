@@ -42,6 +42,7 @@
             <td class="col-md-3">
               <%= link_to "Show", topic_path(topic), class: "btn btn-success btn-sm" %>
               <%= link_to "Edit", edit_admin_topic_path(topic.id), class: "btn btn-primary btn-sm" %>
+              <%= link_to "Destroy", admin_topic_path(topic.id), method: :delete, class: "btn btn-danger btn-sm" if topic.can_delete? %>
               <% if topic.closed? %>
                 <%= link_to "Open", admin_topic_open_path(topic.id), class: "btn btn-danger btn-sm", method: :post, data: { confirm: "Are you sure?" } %>
               <% else %>

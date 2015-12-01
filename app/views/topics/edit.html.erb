@@ -1,0 +1,12 @@
+<div class='row'>
+  <div class='col-md-12'>
+    <h1>Edit <%= @topic.name %> topic:</h1>
+    <%= form_for @topic do |f| %>
+      <div class='form-group'>
+        <%= f.label :name %>
+        <%= f.text_field :name, class: 'form-control' %>
+      </div>
+      <%= f.submit 'Update', class: 'btn btn-success' %>
+    <% end %>
+  </div>
+</div>

@@ -7,11 +7,11 @@ class Post < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :topic, touch: true
-  has_one :notification, as: :notificationable
+  has_many :notifications, as: :notificationable
 
   before_update :increase_edited_count
   before_save :set_post_number
-  after_create :notify_users
+  after_create :notify_users, unless: :skip_callbacks
 
   validates :content, length: { minimum: 4, allow_blank: false }
   validate :closed_topic
@@ -53,5 +53,9 @@ class Post < ActiveRecord::Base
         NotificationsWorker.perform_async(u.id, class: "Post", id: id)
       end
     end
+  end
+
+  def skip_callbacks
+    Rails.env == "test"
   end
 end

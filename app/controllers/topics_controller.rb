@@ -1,6 +1,6 @@
 class TopicsController < ApplicationController
   before_action :authenticate_user!, except: [:show]
-  before_action :set_topic, only: [:show]
+  before_action :set_topic, only: [:show, :edit, :update, :destroy]
   impressionist actions: [:show]
 
   def new
@@ -20,6 +20,28 @@ class TopicsController < ApplicationController
       render :hide_form
     else
       redirect_to root_path, alert: "Please fill all required fields"
+    end
+  end
+
+  def edit
+    return unless check_topic
+  end
+
+  def update
+    return unless check_topic
+    if @topic.update(topic_params)
+      redirect_to @topic, notice: "Topic has been saved"
+    else
+      render :edit
+    end
+  end
+
+  def destroy
+    return unless check_topic
+    if @topic.destroy
+      redirect_to root_path, notice: "Topic has been removed"
+    else
+      redirect_to root_path, alert: "Cannot destroy topic"
     end
   end
 
@@ -51,5 +73,15 @@ class TopicsController < ApplicationController
   def set_topic
     @topic = Topic.find(params[:id])
     @posts = @topic.posts.paginate(page: params[:page])
+  end
+
+  def check_topic
+    authorize! params[:action].to_sym, @topic
+    if !@topic.can_delete?
+      flash[:error] = "Cannot #{params[:action]} Topic"
+      redirect_to @topic and return false
+    else
+      return true
+    end
   end
 end

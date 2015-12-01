@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   # page
   get :topic_filter, to: "home#topic_filter"
   get :category_filter, to: "home#category_filter"
-  resources :topics, except: [:index, :update, :destroy, :edit] do
+  resources :topics, except: [:index] do
     resources :posts, only: [:new, :edit, :create, :update]
     post :close
     post :open
@@ -62,7 +62,7 @@ Rails.application.routes.draw do
       post :unblock
     end
 
-    resources :topics, only: [:index, :update, :edit] do
+    resources :topics, only: [:index, :update, :edit, :destroy] do
       get :search, on: :collection
       post :open
       post :close

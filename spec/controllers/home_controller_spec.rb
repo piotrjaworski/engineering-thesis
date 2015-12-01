@@ -5,7 +5,7 @@ RSpec.describe HomeController, type: :controller do
 
   describe "GET #index" do
     it "returns http success" do
-      get :index, { page: 2 }
+      get :index, page: 2
       expect(response).to have_http_status(:success)
     end
   end
