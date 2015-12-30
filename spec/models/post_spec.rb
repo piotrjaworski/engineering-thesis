@@ -20,7 +20,7 @@ RSpec.describe Post, type: :model do
 
   describe 'callbacks' do
     it "shouldn't update post if topic is closed" do
-      topic.close
+      post.topic.close
       expect(post.update_attribute(:content, "new cont")).to eq(false)
       expect(post.errors.present?).to eq(true)
       expect(post.errors.first.last).to eq("is blocked. Cannot edit/update post.")

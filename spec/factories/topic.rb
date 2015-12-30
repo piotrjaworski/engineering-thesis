@@ -4,9 +4,9 @@ FactoryGirl.define do
     description "Desc"
     association :category
     association :user
-    after(:create) do |t|
+    before(:create) do |t|
       user = create(:user)
-      t.posts.create(content: "content", user_id: user.id)
+      t.posts.new(content: "content", user_id: user.id)
     end
   end
 end
