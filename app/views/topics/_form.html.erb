@@ -2,6 +2,9 @@
   <div class="col-md-12">
     <%= simple_form_for topic, remote: true do |f| %>
       <a class="close-button pull-right">&times;</a>
+      <div class="alert alert-danger" style="display: none;" id="topic_errors_box">
+        <div id="new_topic_errors"></div>
+      </div>
       <h2 class="modal-title">Create a New Topic:</h2>
 
       <%= f.input :name, input_html: { required: true } %>

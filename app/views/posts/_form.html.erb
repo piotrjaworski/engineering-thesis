@@ -1,7 +1,7 @@
 <%= simple_form_for [@topic, @post] do |p| %>
   <div class="hidden-reply">
     <a class="pull-right close-button">&times;</a>
-    <%= p.input :content, as: :text, as: :text %>
+    <%= p.input :content, as: :text, as: :text, input_html: { rows: "10" } %>
     <%= p.submit "Save", class: "btn btn-success", id: "post-edit-button" %>
   </div>
 <% end %>

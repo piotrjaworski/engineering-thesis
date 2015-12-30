@@ -207,15 +207,13 @@ ul.users-list {
   padding-bottom: 10px;
 }
 
-#new-post-reply, #edit-post, #new-topic {
+#new-topic, #new-post-reply, #edit-post {
   width: 100%;
-  margin-left: -15px;
-  padding-left: 15px;
-  padding-top: 20px;
-}
-
-#new-topic {
-  width: 70%;
+  left: 0;
+  padding-left: 15%;
+  padding-right: 15%;
+  background-color: white !important;
+  right: 0;
 }
 
 #post-reply-box {
@@ -305,11 +303,7 @@ ul.users-list {
   position: fixed;
   bottom: 0;
   padding-bottom: 10px;
-  background-color: white;
-}
-
-.hidden-reply {
-  width: 750px;
+  padding-top: 10px;
 }
 
 .close-button {

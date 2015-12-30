@@ -1,6 +1,8 @@
-if ($("#new-post-reply").is(":visible")) {
+if ($("#edit-post").is(":visible")) {
+  $("#edit-post").slideUp();
+}
+else {
+  $("#edit-post").html("<%= j(render partial: 'posts/form') %>");
+  $("#edit-post").slideDown();
   $("#new-post-reply").slideUp();
 }
-
-$("#edit-post").html("<%= j(render partial: 'posts/form') %>");
-$("#edit-post").slideDown();

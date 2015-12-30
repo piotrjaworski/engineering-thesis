@@ -55,12 +55,10 @@
     <% if !@topic.blocked && can?(:close, @topic) %>
       <%= link_to fa_icon_with_text("Close", "lock"), topic_close_path(@topic), method: :post, class: "btn btn-warning" %>
     <% end %>
-
-    <div id="new-post-reply" style="display: none;">
-    </div>
-    <div id="edit-post" style="display: none;">
-    </div>
   <% else %>
     <%= link_to "Login to Add Post", new_topic_post_path(@topic), class: "btn btn-success" %>
   <% end %>
 </div>
+
+<div id="new-post-reply" style="display: none;"></div>
+<div id="edit-post" style="display: none;"></div>

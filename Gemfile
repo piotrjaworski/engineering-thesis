@@ -9,6 +9,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # database
 gem 'pg'
 gem 'pg_search'
+gem 'rails-erd'
 
 # user authentication
 gem 'devise'
@@ -20,6 +21,7 @@ gem 'sass-rails', '~> 5.0'
 gem 'bootstrap-sass', '~> 3.3.5'
 gem 'jquery-rails'
 gem 'font-awesome-rails'
+gem 'bootstrap3_autocomplete_input'
 
 # queue system
 gem 'sidekiq'
@@ -33,8 +35,6 @@ gem 'paperclip', '~> 4.3'
 gem 'figaro'
 gem 'newrelic_rpm'
 gem 'friendly_id', '~> 5.1.0'
-gem 'bootstrap3_autocomplete_input'
-gem 'therubyracer', platforms: :ruby
 gem 'faker'
 gem 'exception_notification'
 
@@ -48,13 +48,14 @@ end
 
 group :test do
   gem 'shoulda-matchers', require: false
-  gem 'factory_girl_rails'
   gem 'database_cleaner'
   gem 'codeclimate-test-reporter', require: nil
-  gem 'rspec-rails', '~> 3.0'
   gem 'capybara'
+  gem 'simplecov', require: false
 end
 
 group :development, :test do
   gem 'pry'
+  gem 'rspec-rails', '~> 3.0'
+  gem 'factory_girl_rails'
 end

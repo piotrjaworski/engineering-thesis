@@ -9,12 +9,12 @@ class Post < ActiveRecord::Base
   belongs_to :topic, touch: true
   has_many :notifications, as: :notificationable
 
-  before_update :increase_edited_count
   before_save :set_post_number
+  before_save :check_closed_topic
+  before_update :increase_edited_count
   after_create :notify_users, unless: :skip_callbacks
 
   validates :content, length: { minimum: 4, allow_blank: false }
-  validate :closed_topic
 
   default_scope { order("created_at ASC") }
 
@@ -41,9 +41,10 @@ class Post < ActiveRecord::Base
 
   private
 
-  def closed_topic
-    if topic && topic.blocked
-      return errors.add(:topic, "is blocked. Cannot edit/update post.")
+  def check_closed_topic
+    if topic && topic.closed?
+      errors.add(:topic, "is blocked. Cannot edit/update post.")
+      return false
     end
   end
 

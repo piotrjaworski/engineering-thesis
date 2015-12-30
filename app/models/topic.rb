@@ -13,6 +13,8 @@ class Topic < ActiveRecord::Base
 
   validates :name, :category, presence: true
 
+  before_create :check_topic_existance
+
   default_scope { order("updated_at DESC") }
   scope :top_records, -> { unscope(:order).order("views DESC") }
   scope :new_records, -> { where("created_at >= ?", Time.zone.now - 6.hours) }
@@ -93,5 +95,14 @@ class Topic < ActiveRecord::Base
     end
     page = last_post.number.to_f / Post.per_page
     page > page.to_i ? page.to_i + 1 : page.to_i
+  end
+
+  private
+
+  def check_topic_existance
+    unless posts.present?
+      errors.add(:base, "Please fill the post content")
+      return false
+    end
   end
 end

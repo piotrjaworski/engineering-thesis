@@ -10,6 +10,10 @@ class RegistrationsController < Devise::RegistrationsController
     end
   end
 
+  def destroy
+    redirect_to root_path, alert: "Cannot destroy your account"
+  end
+
   private
 
   def user_params

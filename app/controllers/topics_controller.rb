@@ -3,6 +3,8 @@ class TopicsController < ApplicationController
   before_action :set_topic, only: [:show, :edit, :update, :destroy]
   impressionist actions: [:show]
 
+  rescue_from ActiveRecord::RecordNotFound, with: :not_found
+
   def new
     @topic = Topic.new
     @topic.posts.build
@@ -19,7 +21,7 @@ class TopicsController < ApplicationController
     if @topic.save
       render :hide_form
     else
-      redirect_to root_path, alert: "Please fill all required fields"
+      render :show_errors, layout: false
     end
   end
 
@@ -83,5 +85,9 @@ class TopicsController < ApplicationController
     else
       return true
     end
+  end
+
+  def not_found
+    redirect_to root_path, alert: "This topic doesn't exist"
   end
 end
