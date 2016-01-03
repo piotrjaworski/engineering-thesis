@@ -1,0 +1,6 @@
+<%= simple_form_for([:admin, @user], url: admin_user_path(@user.id)) do |f| %>
+  <div class="form-group">
+    <%= f.select :role, User::ROLES.map { |hash| [hash.last.to_s.capitalize, hash.first] }, {}, { class: "form-control" } %>
+  </div>
+  <%= f.submit "Save", class: "btn btn-success" %>
+<% end %>

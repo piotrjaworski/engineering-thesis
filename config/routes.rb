@@ -56,10 +56,12 @@ Rails.application.routes.draw do
       get :search, on: :collection
     end
 
-    resources :users, only: [:index, :show] do
+    resources :users, only: [:index, :show, :edit, :update] do
       get :search, on: :collection
-      post :block
-      post :unblock
+      member do
+        post :block
+        post :unblock
+      end
     end
 
     resources :topics, only: [:index, :update, :edit, :destroy] do

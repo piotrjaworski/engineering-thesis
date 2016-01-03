@@ -1,8 +1,20 @@
 class Admin::UsersController < Admin::AdminController
-  before_action :set_user, only: [:block, :unblock, :show]
+  before_action :set_user, only: [:block, :unblock, :show, :edit, :update]
 
   def index
     @users = User.paginate(page: params[:page])
+  end
+
+  def edit
+  end
+
+  def update
+    redirect_to admin_users_path and return if @user == current_user
+    if @user.update(user_attributes)
+      redirect_to admin_users_path, notice: "User has ben successfuly updated"
+    else
+      redirect_to admin_users_path, alert: "Cannot update the user"
+    end
   end
 
   def show
@@ -31,8 +43,11 @@ class Admin::UsersController < Admin::AdminController
 
   private
 
+  def user_attributes
+    params.require(:user).permit(:role)
+  end
+
   def set_user
-    params[:id] ||= params[:user_id]
     @user = User.find(params[:id])
   end
 end

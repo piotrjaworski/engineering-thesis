@@ -28,8 +28,9 @@
           <th class="col-md-2">Name</th>
           <th class="col-md-2">Login</th>
           <th class="col-md-2">Email</th>
+          <th class="col-md-1">Role</th>
           <th class="col-md-3">Joined</th>
-          <th class="col-md-3"></th>
+          <th class="col-md-2"></th>
         </tr>
       </thead>
       <tbody>
@@ -38,13 +39,15 @@
             <td class="col-md-2"><%= user.full_name %></td>
             <td class="col-md-2"><%= user.username %></td>
             <td class="col-md-2"><%= user.email %></td>
+            <td class="col-md-1"><%= user.role? %></td>
             <td class="col-md-3"><%= user.created_at %></td>
-            <td class="col-md-3">
-              <%= link_to "Show", admin_user_path(user.id), class: "btn btn-success btn-sm", remote: true %>
+            <td class="col-md-2">
+              <%= link_to "Show", admin_user_path(user.id), class: "btn btn-success btn-xs", remote: true %>
+              <%= link_to "Edit", edit_admin_user_path(user.id), class: "btn btn-primary btn-xs" %>
               <% if user != current_user && !user.blocked %>
-                <%= link_to "Block", admin_user_block_path(user.id), class: "btn btn-danger btn-sm", method: :post, data: { confirm: "Are you sure?" } %>
+                <%= link_to "Block", block_admin_user_path(user.id), class: "btn btn-danger btn-xs", method: :post, data: { confirm: "Are you sure?" } %>
               <% elsif user != current_user && user.blocked %>
-                <%= link_to "Unblock", admin_user_unblock_path(user.id), class: "btn btn-warning btn-sm", method: :post, data: { confirm: "Are you sure?" } %>
+                <%= link_to "Unblock", unblock_admin_user_path(user.id), class: "btn btn-warning btn-xs", method: :post, data: { confirm: "Are you sure?" } %>
               <% end %>
             </td>
           </tr>

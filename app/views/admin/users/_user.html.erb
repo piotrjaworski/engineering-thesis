@@ -27,6 +27,9 @@
         <hr>
         <strong>Seen: </strong><%= @user.last_sign_in_at.strftime("%d %B %Y at %H:%M") rescue "Not logged yet" %>
         <br>
+        <hr>
+        <strong>Role: </strong><%= @user.role? %>
+        <br>
       </p>
     </div>
     <div class="modal-footer">
