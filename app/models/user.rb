@@ -108,6 +108,10 @@ class User < ActiveRecord::Base
     role == 3
   end
 
+  def superuser?
+    admin? || moderator?
+  end
+
   def blocked?
     blocked
   end

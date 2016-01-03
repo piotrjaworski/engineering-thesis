@@ -27,6 +27,12 @@ class Topic < ActiveRecord::Base
     Topic.where("lower(name) LIKE ? OR lower(description) LIKE ?", "%#{query.downcase}%", "%#{query.downcase}%")
   end
 
+  def recount_posts
+    posts.each_with_index do |post, index|
+      post.update_column(:number, index + 1)
+    end
+  end
+
   def self.build_new(user, params)
     topic = user.topics.new(params)
     topic.assign_user(user)

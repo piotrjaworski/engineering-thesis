@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   get :topic_filter, to: "home#topic_filter"
   get :category_filter, to: "home#category_filter"
   resources :topics, except: [:index] do
-    resources :posts, only: [:new, :edit, :create, :update]
+    resources :posts, only: [:new, :edit, :create, :update, :destroy]
     post :close
     post :open
   end
@@ -68,7 +68,7 @@ Rails.application.routes.draw do
       post :close
     end
 
-    resources :posts, only: [:index, :update, :edit, :show] do
+    resources :posts, only: [:index, :update, :edit, :show, :destroy] do
       get :search, on: :collection
     end
 

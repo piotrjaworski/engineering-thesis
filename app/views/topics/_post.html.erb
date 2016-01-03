@@ -9,7 +9,7 @@
     </div>
     <br>
     <div class="row">
-      <div class="col-md-12"><%=raw post.content %></div>
+      <div class="col-md-12"><%= raw post.content %></div>
     </div>
     <div class="row">
       <div class="col-md-12">
@@ -18,8 +18,13 @@
             This post has been edited <%= post.edited_count %> <%= 'time'.pluralize(post.edited_count) %>. Last at <%= post.updated_at %>.
           </p>
         <% end %>
-        <% if can?(:edit, post) && !@topic.blocked %>
-          <%= link_to fa_icon("edit"), edit_topic_post_path(post, topic_id: post.topic_id), class: "pull-right edit-post", remote: true %>
+        <% unless @topic.blocked %>
+          <% if can?(:edit, post) %>
+            <%= link_to fa_icon("edit"), edit_topic_post_path(post, topic_id: post.topic_id), class: "pull-right edit-post", remote: true %>
+          <% end %>
+          <% if can?(:destroy, post) %>
+            <%= link_to fa_icon("trash-o"), topic_post_path(post, topic_id: post.topic_id), class: "pull-right edit-post", method: :delete, data: { confirm: "Are you sure?" } %>
+          <% end %>
         <% end %>
       </div>
     </div>

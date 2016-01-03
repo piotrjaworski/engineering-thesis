@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
 
   rescue_from CanCan::AccessDenied do
     if @topic.present?
-      redirect_to topic_path(@topic), alert: "You can't edit edit this post"
+      redirect_to topic_path(@topic), alert: "You are not able to change this post"
     else
       redirect_to root_path, alert: "You are not authorized to access this page"
     end

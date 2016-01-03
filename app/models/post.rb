@@ -5,14 +5,17 @@ class Post < ActiveRecord::Base
 
   multisearchable against: [:content]
 
+  attr_accessor :who_deletes
+
   belongs_to :user
-  belongs_to :topic, touch: true
-  has_many :notifications, as: :notificationable
+  belongs_to :topic
+  has_many :notifications, as: :notificationable, dependent: :destroy
 
   before_save :set_post_number
   before_save :check_closed_topic
-  before_update :increase_edited_count
   after_create :notify_users, unless: :skip_callbacks
+  before_update :increase_edited_count
+  before_destroy :can_be_removed
 
   validates :content, length: { minimum: 4, allow_blank: false }
 
@@ -39,7 +42,24 @@ class Post < ActiveRecord::Base
     end
   end
 
+  def new?
+  end
+
+  def last?
+    self == topic.posts.last ? true : false
+  end
+
   private
+
+  def can_be_removed
+    if last? || who_deletes.superuser?
+      topic = self.topic
+      self.delete
+      topic.recount_posts unless last?
+    else
+      return false
+    end
+  end
 
   def check_closed_topic
     if topic && topic.closed?
