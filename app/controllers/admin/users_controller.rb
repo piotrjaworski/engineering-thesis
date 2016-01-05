@@ -11,9 +11,9 @@ class Admin::UsersController < Admin::AdminController
   def update
     redirect_to admin_users_path and return if @user == current_user
     if @user.update(user_attributes)
-      redirect_to admin_users_path, notice: "User has ben successfuly updated"
+      redirect_to admin_users_path, notice: 'User has ben successfuly updated'
     else
-      redirect_to admin_users_path, alert: "Cannot update the user"
+      redirect_to admin_users_path, alert: 'Cannot update the user'
     end
   end
 
@@ -22,17 +22,17 @@ class Admin::UsersController < Admin::AdminController
 
   def block
     if @user.block && @user != current_user
-      redirect_to admin_users_path, notice: "User has been blocked"
+      redirect_to admin_users_path, notice: 'User has been blocked'
     else
-      redirect_to admin_users_path, alert: "Cannot block a blocked user"
+      redirect_to admin_users_path, alert: 'Cannot block a blocked user'
     end
   end
 
   def unblock
     if @user.unblock && @user != current_user
-      redirect_to admin_users_path, notice: "User has been unblocked"
+      redirect_to admin_users_path, notice: 'User has been unblocked'
     else
-      redirect_to admin_users_path, alert: "Cannot unblock a unblocked user"
+      redirect_to admin_users_path, alert: 'Cannot unblock a unblocked user'
     end
   end
 

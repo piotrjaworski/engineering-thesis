@@ -5,6 +5,6 @@ class Admin::AdminController < ApplicationController
   private
 
   def admin_assets
-    "admin"
+    'admin'
   end
 end

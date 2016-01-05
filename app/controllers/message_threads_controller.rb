@@ -8,13 +8,13 @@ class MessageThreadsController < ApplicationController
   def index
     @message_threads = if params[:type].nil? or params[:type] == "all"
                          current_user.message_threads.paginate(page: params[:page])
-                       elsif params[:type] == "mine"
+                       elsif params[:type] == 'mine'
                          current_user.message_threads_sent.paginate(page: params[:page])
-                       elsif params[:type] == "unread"
+                       elsif params[:type] == 'unread'
                          current_user.unread_message_threads.paginate(page: params[:page])
                        else
                          redirect_to user_message_threads_path(current_user) and return
-                         flash[:error] = "Wrong message sort type"
+                         flash[:error] = 'Wrong message sort type'
                        end
     @message_threads_count = current_user.message_threads.count
     @started_threads_count = current_user.message_threads_sent.count

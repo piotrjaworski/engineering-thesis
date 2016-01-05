@@ -66,8 +66,10 @@ Rails.application.routes.draw do
 
     resources :topics, only: [:index, :update, :edit, :destroy] do
       get :search, on: :collection
-      post :open
-      post :close
+      member do
+        post :open
+        post :close
+      end
     end
 
     resources :posts, only: [:index, :update, :edit, :show, :destroy] do

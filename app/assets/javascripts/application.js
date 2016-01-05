@@ -7,8 +7,8 @@
 
 $(document).ready(function() {
   header_scroll();
-  infinity_scroll_main_page("#main-pagination");
-  infinity_scroll_main_page("#messages-pagination");
+  infinity_scroll_main_page('#main-pagination');
+  infinity_scroll_main_page('#messages-pagination');
   clickable_link();
   redirectToNotification();
   topics_filter();

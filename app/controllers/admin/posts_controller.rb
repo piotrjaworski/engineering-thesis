@@ -10,9 +10,9 @@ class Admin::PostsController < Admin::AdminController
 
   def update
     if @post.update(post_attributes)
-      redirect_to admin_posts_path, notice: "Post has been updated"
+      redirect_to admin_posts_path, notice: 'Post has been updated'
     else
-      redirect_to admin_posts_path, alert: "Post cannot been updated"
+      redirect_to admin_posts_path, alert: 'Post cannot been updated'
     end
   end
 
@@ -22,9 +22,9 @@ class Admin::PostsController < Admin::AdminController
   def destroy
     @post.who_deletes = current_user
     if @post.destroy
-      redirect_to admin_posts_path, sucess: "Post has been successfuly removed"
+      redirect_to admin_posts_path, sucess: 'Post has been successfuly removed'
     else
-      redirect_to admin_posts_path, alert: "Cannot destroy the post"
+      redirect_to admin_posts_path, alert: 'Cannot destroy the post'
     end
   end
 

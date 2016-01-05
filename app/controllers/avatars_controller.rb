@@ -10,8 +10,7 @@ class AvatarsController < ApplicationController
 
   def update
     current_user.update(avatar_params)
-    redirect_to edit_user_registration_path
-    flash.now[:success] = "Avatar has been updated"
+    redirect_to edit_user_registration_path, notice: 'Avatar has been updated'
   end
 
   private

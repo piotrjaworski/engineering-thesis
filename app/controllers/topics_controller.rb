@@ -32,7 +32,7 @@ class TopicsController < ApplicationController
   def update
     return unless check_topic
     if @topic.update(topic_params)
-      redirect_to @topic, notice: "Topic has been saved"
+      redirect_to @topic, notice: 'Topic has been saved'
     else
       render :edit
     end
@@ -41,9 +41,9 @@ class TopicsController < ApplicationController
   def destroy
     return unless check_topic
     if @topic.destroy
-      redirect_to root_path, notice: "Topic has been removed"
+      redirect_to root_path, notice: 'Topic has been removed'
     else
-      redirect_to root_path, alert: "Cannot destroy topic"
+      redirect_to root_path, alert: 'Cannot destroy topic'
     end
   end
 
@@ -56,14 +56,14 @@ class TopicsController < ApplicationController
     @topic = Topic.find(params[:topic_id])
     authorize! :close, @topic
     @topic.close
-    redirect_to @topic, notice: "Topic has been successfully closed"
+    redirect_to @topic, notice: 'Topic has been successfully closed'
   end
 
   def open
     @topic = Topic.find(params[:topic_id])
     authorize! :open, @topic
     @topic.open
-    redirect_to @topic, notice: "Topic has been successfully opened"
+    redirect_to @topic, notice: 'Topic has been successfully opened'
   end
 
   private

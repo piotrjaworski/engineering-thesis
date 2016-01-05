@@ -5,9 +5,9 @@ class ApplicationController < ActionController::Base
 
   rescue_from CanCan::AccessDenied do
     if @topic.present?
-      redirect_to topic_path(@topic), alert: "You are not able to change this post"
+      redirect_to topic_path(@topic), alert: 'You are not able to change this post'
     else
-      redirect_to root_path, alert: "You are not authorized to access this page"
+      redirect_to root_path, alert: 'You are not authorized to access this page'
     end
   end
 
@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
   def blocked?
     if user_signed_in? && current_user.blocked?
       sign_out current_user
-      redirect_to root_path, alert: "This account has been blocked"
+      redirect_to root_path, alert: 'This account has been blocked'
     end
   end
 

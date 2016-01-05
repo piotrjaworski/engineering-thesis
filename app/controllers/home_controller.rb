@@ -11,9 +11,9 @@ class HomeController < ApplicationController
 
   def topic_filter
     type = params[:type]
-    @topics = if type == "top"
+    @topics = if type == 'top'
                 Topic.top_records.paginate(page: params[:page])
-              elsif type == "new"
+              elsif type == 'new'
                 Topic.new_records.paginate(page: params[:page])
               else
                 Topic.paginate(page: params[:page])

@@ -12,8 +12,7 @@ class Admin::CategoriesController < Admin::AdminController
   def create
     @category = Category.new(category_attributes)
     if @category.save
-      redirect_to admin_categories_path
-      flash[:success] = "New category has beed added!"
+      redirect_to admin_categories_path, notice: 'New category has beed added'
     else
       render :new
     end
@@ -27,8 +26,7 @@ class Admin::CategoriesController < Admin::AdminController
 
   def update
     if @category.update(category_attributes)
-      redirect_to admin_categories_path
-      flash[:success] = "Category has beed updated!"
+      redirect_to admin_categories_path, notice: 'Category has beed updated'
     else
       render :edit
     end
@@ -36,10 +34,9 @@ class Admin::CategoriesController < Admin::AdminController
 
   def destroy
     if @category.destroy
-      redirect_to admin_categories_path
-      flash[:success] = "Category has beed deleted!"
+      redirect_to admin_categories_path, notice: 'Category has beed deleted'
     else
-      flash[:error] = "Category cannot be deleted!"
+      redirect_to admin_categories_path, alert: 'Category cannot be deleted'
     end
   end
 

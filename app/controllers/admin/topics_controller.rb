@@ -11,33 +11,33 @@ class Admin::TopicsController < Admin::AdminController
   def destroy
     redirect_to admin_topics_path and return unless @topic.can_delete?
     if @topic.destroy
-      redirect_to admin_topics_path, notice: "Topic has been destroyed"
+      redirect_to admin_topics_path, notice: 'Topic has been destroyed'
     else
-      redirect_to admin_topics_path, alert: "Cannot destroy topic"
+      redirect_to admin_topics_path, alert: 'Cannot destroy topic'
     end
   end
 
   def update
     if @topic.update(topic_attributes)
-      redirect_to admin_topics_path, notice: "Topic has been updated"
+      redirect_to admin_topics_path, notice: 'Topic has been updated'
     else
-      redirect_to admin_topics_path, alert: "Cannot update topic"
+      redirect_to admin_topics_path, alert: 'Cannot update topic'
     end
   end
 
   def close
     if @topic.close
-      redirect_to admin_topics_path, notice: "Topic has been closed"
+      redirect_to admin_topics_path, notice: 'Topic has been closed'
     else
-      redirect_to admin_topics_path, alert: "Cannot close a closed topic"
+      redirect_to admin_topics_path, alert: 'Cannot close a closed topic'
     end
   end
 
   def open
     if @topic.open
-      redirect_to admin_topics_path, notice: "Topic has been opend"
+      redirect_to admin_topics_path, notice: 'Topic has been opend'
     else
-      redirect_to admin_topics_path, alert: "Cannot open a closed topic"
+      redirect_to admin_topics_path, alert: 'Cannot open a closed topic'
     end
   end
 
@@ -53,7 +53,6 @@ class Admin::TopicsController < Admin::AdminController
   end
 
   def set_topic
-    params[:id] ||= params[:topic_id]
     @topic = Topic.find(params[:id])
   end
 end

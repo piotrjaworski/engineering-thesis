@@ -39,6 +39,7 @@ gem 'faker'
 gem 'exception_notification'
 
 group :development do
+  gem 'puma'
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'rubocop', require: false

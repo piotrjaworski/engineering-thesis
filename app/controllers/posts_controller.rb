@@ -11,9 +11,9 @@ class PostsController < ApplicationController
     @post = @topic.build_post(current_user, post_params)
     if @post.save
       @post.topic.touch
-      redirect_to topic_path(@topic, page: @topic.last_page), notice: "Your reply has been posted"
+      redirect_to topic_path(@topic, page: @topic.last_page), notice: 'Your reply has been posted'
     else
-      redirect_to @topic, alert: @post.errors.messages.map { |k, v| "#{k.to_s.capitalize} #{v.join('')}" }.join('')
+      redirect_to @topic, alert: show_errors
     end
   end
 
@@ -27,9 +27,9 @@ class PostsController < ApplicationController
     authorize! :update, @post
     if @post.update(post_params)
       @post.topic.touch
-      redirect_to @topic, notice: "Post has been successfuly updated"
+      redirect_to @topic, notice: 'Post has been successfuly updated'
     else
-      redirect_to @topic, alert: "@post.errors.messages.map { |k, v| '#{k.to_s.capitalize} #{v.join('')}' }.join('')"
+      redirect_to @topic, alert: show_errors
     end
   end
 
@@ -37,9 +37,9 @@ class PostsController < ApplicationController
     authorize! :destroy, @post
     @post.who_deletes = current_user
     if @post.destroy
-      redirect_to @topic, notice: "Post has been successfuly removed"
+      redirect_to @topic, notice: 'Post has been successfuly removed'
     else
-      redirect_to @topic, alert: "Cannot destroy the post"
+      redirect_to @topic, alert: 'Cannot destroy requested post'
     end
   end
 
@@ -56,4 +56,9 @@ class PostsController < ApplicationController
   def post_params
     params.require(:post).permit(:content)
   end
+
+  def show_errors
+    @post.errors.messages.map { |k, v| "#{k.to_s.capitalize} #{v.join('')}" }.join('')
+  end
+
 end

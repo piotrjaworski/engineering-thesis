@@ -4,7 +4,7 @@ class ProfilesController < ApplicationController
   def update
     if current_user.update_attributes(user_params.except(:webpage, :signature, :location)) &&
        current_user.profile.update_attributes(user_params.except(:full_name, :username))
-      redirect_to edit_user_registration_path, notice: "Your profile has been updated"
+      redirect_to edit_user_registration_path, notice: 'Your profile has been updated'
     else
       redirect_to edit_user_registration_path, alert: current_user.user_errors
     end
@@ -12,9 +12,9 @@ class ProfilesController < ApplicationController
 
   def preferences
     if current_user.profile.update_attributes(user_params)
-      redirect_to edit_user_registration_path + "#info", notice: "Preferences updated"
+      redirect_to edit_user_registration_path + '#info', notice: 'Preferences updated'
     else
-      redirect_to edit_user_registration_path + "#info", alert: "Cannot update preferences"
+      redirect_to edit_user_registration_path + '#info', alert: 'Cannot update preferences'
     end
   end
 
