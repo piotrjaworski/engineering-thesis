@@ -13,9 +13,9 @@ function infinity_scroll_main_page(selector) {
 function infinity_scroll_notifiaction(selector) {
   if ($(selector + ' .pagination').length) {
     $('#notifications-list').scroll(function() {
-      var url = $('.pagination .next_page').attr('href');
+      var url = $(selector + ' .pagination .next_page').attr('href');
       if (url && $('#notifications-list').scrollTop() > $('#notifiactions-list').height() - $('#notifications-list').height() - 50) {
-        $('.pagination').html('<img src="/assets/loading.gif" alt="Loading..." title="Loading..." />');
+        $(selector + ' .pagination').html('<img src="/assets/loading.gif" alt="Loading..." title="Loading..." />');
         return $.getScript(url);
       }
     });
