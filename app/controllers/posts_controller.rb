@@ -5,6 +5,12 @@ class PostsController < ApplicationController
 
   def new
     @post = @topic.posts.new
+    respond_to do |format|
+      format.js
+      format.html do
+        redirect_to root_path
+      end
+    end
   end
 
   def create

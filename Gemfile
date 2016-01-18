@@ -45,6 +45,7 @@ group :development do
   gem 'rubocop', require: false
   gem 'quiet_assets'
   # gem 'capistrano-rails'
+  gem 'brakeman', require: false
 end
 
 group :test do

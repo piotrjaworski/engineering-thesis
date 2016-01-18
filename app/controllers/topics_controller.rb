@@ -13,6 +13,9 @@ class TopicsController < ApplicationController
       format.js do
         render :new, layout: false
       end
+      format.html do
+        redirect_to root_path
+      end
     end
   end
 
